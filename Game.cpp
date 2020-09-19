@@ -60,6 +60,21 @@ void Game::Fight()
 
 }
 
+bool Game::isEnd() const
+{
+    bool end = false;
+
+    for (auto player : players){
+        if(player->getHP()<=0){
+            end = true;
+        }
+    }
+    return end;
+
+
+
+}
+
 std::string Game::toString()
 {
     std::string status = "";
