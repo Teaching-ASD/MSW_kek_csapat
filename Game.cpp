@@ -29,3 +29,15 @@ Game::~Game()
     }
  
 }
+
+
+std::string Game::toString()
+{
+    std::string status = "";
+
+    for(auto player : players){
+        status += player->toString() + "\n";
+    }
+
+    return status;
+}
