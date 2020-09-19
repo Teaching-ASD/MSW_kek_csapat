@@ -86,3 +86,22 @@ std::string Game::toString()
     return status;
 }
 
+std::string Game::getResoult()
+{
+    
+    std::string resoult = "";
+
+
+    if(players[0]->getHP()>players[1]->getHP()){
+        resoult = players[1]->getName() + " died. " + players[0]->getName() + " win.\n";
+    }
+    else if(players[0]->getHP()<players[1]->getHP()){
+        resoult = players[0]->getName() + " died. " + players[1]->getName() + " win.\n";
+    }
+    else {
+        resoult = "draw.";
+    }
+
+    return resoult;
+
+}
