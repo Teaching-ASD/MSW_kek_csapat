@@ -1,9 +1,10 @@
 #include <iostream>
+#include "Game.h"
 
 int main(int argc, char** argv)
 {
     if (argc == 1) {
-        std::cerr << "Nem adott meg parametert.!" << std::endl;
+        std::cerr << "Nem adott meg parametert!" << std::endl;
     }
 
     else if (argc < 7) {
@@ -12,7 +13,9 @@ int main(int argc, char** argv)
 
     else {
 
-    
+        Game* game = new Game(argv);
+        game->Fight();
+        delete game;
         
     }
 }
