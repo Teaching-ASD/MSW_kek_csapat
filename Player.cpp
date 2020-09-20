@@ -21,4 +21,19 @@ void Player::setHP(short newHP){
 unsigned short Player::getDMG() const{
     return dmg;
 }
-  
+
+void Player::DMG(Player* enemy) {
+    short dmgHp=enemy->getHP()-dmg; 
+    enemy->setHP(dmgHp);
+    if (enemy->getHP()<0){
+        enemy->setHP(0);
+    }
+}   
+
+
+
+std::string Player::toString() 
+{
+	return name + ": HP:" + std::to_string(hp) + ", DMG: " + std::to_string(dmg);
+}
+
