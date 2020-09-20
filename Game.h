@@ -17,7 +17,7 @@ public:
 private:
     bool isEnd() const;
     std::string toString();
-    std::string getResoult();
+    std::string getResult();
 
 };
 #endif

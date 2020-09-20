@@ -43,20 +43,20 @@ void Game::Fight()
         {
         case true:
             std::cout << players[0]->getName() << "->" << players[1]->getName() << std::endl;
-            players[0]->DMG(players[1]);
+            players[1]->DMG(players[0]);
             round = false;
             break;
         
         case false: 
             std::cout << players[1]->getName() << "->" << players[0]->getName() << std::endl;
-            players[1]->DMG(players[0]);
+            players[0]->DMG(players[1]);
             round = true;
             break;
         }
     }
 
     std::cout << toString();
-    std::cout << getResoult();
+    std::cout << getResult();
 
 }
 
@@ -86,22 +86,22 @@ std::string Game::toString()
     return status;
 }
 
-std::string Game::getResoult()
+std::string Game::getResult()
 {
     
-    std::string resoult = "";
+    std::string result = "";
 
 
     if(players[0]->getHP()>players[1]->getHP()){
-        resoult = players[1]->getName() + " died. " + players[0]->getName() + " win.\n";
+        result = players[1]->getName() + " died. " + players[0]->getName() + " win.\n";
     }
     else if(players[0]->getHP()<players[1]->getHP()){
-        resoult = players[0]->getName() + " died. " + players[1]->getName() + " win.\n";
+        result = players[0]->getName() + " died. " + players[1]->getName() + " win.\n";
     }
     else {
-        resoult = "draw.";
+        result = "draw.";
     }
 
-    return resoult;
+    return result;
 
 }

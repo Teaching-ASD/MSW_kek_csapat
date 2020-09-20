@@ -14,7 +14,6 @@ public:
 	Player(std::string name, short hp, unsigned short dmg);
     std::string getName() const;
     short getHP() const;
-    void setHP(short newHP);
     unsigned short getDMG() const;
     void DMG(Player* enemy);
     std::string toString();

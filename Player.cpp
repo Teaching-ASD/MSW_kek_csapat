@@ -13,20 +13,14 @@ short Player::getHP() const {
   return hp; 
 }
 
-void Player::setHP(short newHP){
-    hp=newHP;
-}
-    
-
 unsigned short Player::getDMG() const{
     return dmg;
 }
 
 void Player::DMG(Player* enemy) {
-    short dmgHp=enemy->getHP()-dmg; 
-    enemy->setHP(dmgHp);
-    if (enemy->getHP()<0){
-        enemy->setHP(0);
+    hp-=enemy->getDMG(); 
+    if (hp<0){
+        hp=0;
     }
 }   
 
