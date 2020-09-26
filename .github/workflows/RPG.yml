@@ -1,4 +1,4 @@
-name: RPG workflow
+name: Rpg workflow
 
 on:
   push:
@@ -10,5 +10,5 @@ jobs:
     steps:
       -uses: actions/checkout@v2
       -run: g++ -std=c++17 *.cpp
-       run: ./run_fight.sh
+      -run: ./run_fight.sh
       
