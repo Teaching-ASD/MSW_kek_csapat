@@ -1,5 +1,4 @@
 #!/bin/bash
-
 IFS=$'\n'
 
 rm winner.txt
