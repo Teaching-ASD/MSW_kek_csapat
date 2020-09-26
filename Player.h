@@ -6,18 +6,24 @@
 
 class Player
 {
-	const std::string name;
-	short hp;
-	const unsigned short dmg;
+	
+    const std::string name;
+    int hp, dmg;
 
 public:
-	Player(std::string name, short hp, unsigned short dmg);
+	Player(std::string name, int hp, int dmg);
+    
+    //Getters
     std::string getName() const;
     short getHP() const;
     unsigned short getDMG() const;
+    
+    //Functions
     void DMG(Player* enemy);
     std::string toString();
 
+    //Static 
+    static Player* parseUnit(std::string fileName);
 
 };
 
