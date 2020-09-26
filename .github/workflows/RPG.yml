@@ -1,4 +1,4 @@
-name: Rog workflow
+name: Rpg workflow
 
 on:
   push:
