@@ -14,4 +14,4 @@ Elfogadott formátum:<br/>
     "dmg" : 10
 }
 ```
-4. ```./a.out argumentumlista``` a két játékost az argumentumlistában lehet megadni késöbb nem pl: ```./a.out ```
+4. ```./a.out argumentumlista``` a két játékost az argumentumlistában lehet megadni késöbb nem pl: ```./a.out player1.txt player2.txt```
