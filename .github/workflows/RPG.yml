@@ -1,0 +1,14 @@
+name: RPG workflow
+
+on:
+  push:
+     branches: [init] 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      -uses: actions/checkout@v2
+      -run: g++ -std=c++17 *.cpp
+      -run: ./run_fight.sh
+      
