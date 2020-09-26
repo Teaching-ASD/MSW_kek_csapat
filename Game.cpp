@@ -2,22 +2,10 @@
 #include <sstream>
 #include <iostream>
 
-Game::Game(char** argv)
+Game::Game(Player* p1, Player* p2)
 {
-    std::stringstream ss;
-    std::string p1, p2;
-    short hp1, hp2, dmg1, dmg2;
-
-    for (argv++; *argv != NULL; ++argv) {
-        ss << *argv << '\n';
-    }
-
-    ss >> p1 >> hp1 >> dmg1;
-    ss >> p2 >> hp2 >> dmg2;
-
-    players.push_back(new Player(p1, hp1, dmg1));
-    players.push_back(new Player(p2, hp2, dmg2));
-
+    players.push_back(p1);
+    players.push_back(p2);
 }
 
 Game::~Game()
