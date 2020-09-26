@@ -20,31 +20,26 @@ Game::~Game()
 
 void Game::Fight()
 {
+
     bool round=true;
 
-
     while(!isEnd()){
-
-        std::cout << toString();
 
         switch (round)
         {
         case true:
-            std::cout << players[0]->getName() << "->" << players[1]->getName() << std::endl;
-            players[1]->DMG(players[0]);
-            round = false;
+               players[1]->DMG(players[0]);
+               round=false;
             break;
         
-        case false: 
-            std::cout << players[1]->getName() << "->" << players[0]->getName() << std::endl;
-            players[0]->DMG(players[1]);
-            round = true;
+        case false:
+               players[0]->DMG(players[1]);
+               round=true;
             break;
         }
     }
 
-    std::cout << toString();
-    std::cout << getResult();
+    std::cout << getResult() << std::endl;
 
 }
 
@@ -58,9 +53,6 @@ bool Game::isEnd() const
         }
     }
     return end;
-
-
-
 }
 
 std::string Game::toString()
