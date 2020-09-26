@@ -1,8 +1,8 @@
-name: Rpg workflow
+name: Rog workflow
 
 on:
-  push:
-     branches: [init] 
+  push
+    
 
 jobs:
   build:
