@@ -77,17 +77,13 @@ std::string Game::toString()
 std::string Game::getResult()
 {
     
-    std::string result = "";
-
-
-    if(players[0]->getHP()>players[1]->getHP()){
-        result = players[1]->getName() + " died. " + players[0]->getName() + " win.\n";
-    }
-    else if(players[0]->getHP()<players[1]->getHP()){
-        result = players[0]->getName() + " died. " + players[1]->getName() + " win.\n";
+    std::string result;
+    
+    if(players[0]->getHP() > 0 ){
+        result = players[0]->getName() + " win. Remain hp: " + std::to_string(players[0]->getHP()); 
     }
     else {
-        result = "draw.";
+        result = players[1]->getName() + " win. Remain hp: " + std::to_string(players[1]->getHP()); 
     }
 
     return result;
