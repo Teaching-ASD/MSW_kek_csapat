@@ -15,5 +15,5 @@ jobs:
         run: chmod +x ./run_fight.sh
       - name: Run input-output tests
         run: ./run_fight.sh rpg generated_output.txt
-      -name: Check resoult of input output tets
+      - name: Check resoult of input output tets
         run: diff -w -B generated_output.txt good_output.txt 
