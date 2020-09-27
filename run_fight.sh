@@ -1,7 +1,7 @@
 #!/bin/bash
 IFS=$'\n'
 
-rm winner.txt
+rm output.txt
 
 for i in player1 player2 player3
 do
@@ -9,7 +9,7 @@ do
     do
     if [ $i != $j ]
     then
-         ./$1 Units/$i.json Units/$j.json >> winner.txt
+         ./$1 Units/$i.json Units/$j.json >> $2
     fi
     done
 done
