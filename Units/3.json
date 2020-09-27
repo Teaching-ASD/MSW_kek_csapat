@@ -1,7 +1,7 @@
 {
-    "name" : "Jozsi",
+    "name" : "Pista",
   
-    "hp" : 300,
+    "hp" : 5000,
   
-    "dmg" : 10
+    "dmg" : 500
 }
