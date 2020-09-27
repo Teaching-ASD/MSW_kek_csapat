@@ -11,7 +11,7 @@ class Game
 	std::vector<Player*> players;
 
 public:
-	Game(char** argv);
+	Game(Player* p1, Player* p2);
 	~Game();
     void Fight();
 private:

@@ -2,22 +2,10 @@
 #include <sstream>
 #include <iostream>
 
-Game::Game(char** argv)
+Game::Game(Player* p1, Player* p2)
 {
-    std::stringstream ss;
-    std::string p1, p2;
-    short hp1, hp2, dmg1, dmg2;
-
-    for (argv++; *argv != NULL; ++argv) {
-        ss << *argv << '\n';
-    }
-
-    ss >> p1 >> hp1 >> dmg1;
-    ss >> p2 >> hp2 >> dmg2;
-
-    players.push_back(new Player(p1, hp1, dmg1));
-    players.push_back(new Player(p2, hp2, dmg2));
-
+    players.push_back(p1);
+    players.push_back(p2);
 }
 
 Game::~Game()
@@ -32,31 +20,26 @@ Game::~Game()
 
 void Game::Fight()
 {
+
     bool round=true;
 
-
     while(!isEnd()){
-
-        std::cout << toString();
 
         switch (round)
         {
         case true:
-            std::cout << players[0]->getName() << "->" << players[1]->getName() << std::endl;
-            players[1]->DMG(players[0]);
-            round = false;
+               players[1]->DMG(players[0]);
+               round=false;
             break;
         
-        case false: 
-            std::cout << players[1]->getName() << "->" << players[0]->getName() << std::endl;
-            players[0]->DMG(players[1]);
-            round = true;
+        case false:
+               players[0]->DMG(players[1]);
+               round=true;
             break;
         }
     }
 
-    std::cout << toString();
-    std::cout << getResult();
+    std::cout << getResult() << std::endl;
 
 }
 
@@ -70,9 +53,6 @@ bool Game::isEnd() const
         }
     }
     return end;
-
-
-
 }
 
 std::string Game::toString()
@@ -89,17 +69,13 @@ std::string Game::toString()
 std::string Game::getResult()
 {
     
-    std::string result = "";
-
-
-    if(players[0]->getHP()>players[1]->getHP()){
-        result = players[1]->getName() + " died. " + players[0]->getName() + " win.\n";
-    }
-    else if(players[0]->getHP()<players[1]->getHP()){
-        result = players[0]->getName() + " died. " + players[1]->getName() + " win.\n";
+    std::string result;
+    
+    if(players[0]->getHP() > 0 ){
+        result = players[0]->getName() + " win. Remain hp: " + std::to_string(players[0]->getHP()); 
     }
     else {
-        result = "draw.";
+        result = players[1]->getName() + " win. Remain hp: " + std::to_string(players[1]->getHP()); 
     }
 
     return result;
