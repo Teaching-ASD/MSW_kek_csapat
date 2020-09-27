@@ -2,5 +2,5 @@
 *.vscode
 bin/
 winner.txt
-*o
+*.o
 fig
