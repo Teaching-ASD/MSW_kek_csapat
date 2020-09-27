@@ -9,6 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: g++ -std=c++17 *.cpp
-      - run: ./run_fight.sh
+      - run: g++ -std=c++17 *.cpp -o
+      - run: ./run_fight.sh a.out winner.txt
       
