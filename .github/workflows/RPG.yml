@@ -5,10 +5,11 @@ on:
     branch: [init]
     
 jobs:
-  build:
+  build_and_test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: g++ -std=c++17 *.cpp -o fig
-      - run: ./run_fight.sh fig
-      
+      - name: Build the application
+        run: g++ -std=c++17 *.cpp -o rpg
+      - name: Run input-output tests
+        run: ./run_fight.sh rpg generated_output.txt
