@@ -9,7 +9,7 @@ do
     do
     if [ $i != $j ]
     then
-         ./a.out Units/$i.json Units/$j.json >> winner.txt
+         ./a.out $1 Units/$i.json Units/$j.json >> winner.txt
     fi
     done
 done
