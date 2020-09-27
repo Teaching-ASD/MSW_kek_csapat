@@ -3,9 +3,9 @@ IFS=$'\n'
 
 rm $2
 
-for i in player1 player2 player3
+for i in 1 2 3 
 do
-    for j in player1 player2 player3
+    for j in 1 2 3 
     do
     if [ $i != $j ]
     then
