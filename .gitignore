@@ -2,3 +2,4 @@
 *.vscode
 bin/
 winner.txt
+*o
