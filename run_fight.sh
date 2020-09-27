@@ -1,4 +1,5 @@
 #!/bin/bash
+
 IFS=$'\n'
 
 rm $2
