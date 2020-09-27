@@ -1,7 +1,7 @@
 #!/bin/bash
 IFS=$'\n'
 
-rm output.txt
+rm $2
 
 for i in player1 player2 player3
 do
