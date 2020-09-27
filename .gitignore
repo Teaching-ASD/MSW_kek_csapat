@@ -1,6 +1,6 @@
 *.out
 *.vscode
 bin/
-winner.txt
+output.txt
 *.o
-fig
+rpg
