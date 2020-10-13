@@ -1,3 +1,20 @@
+/**
+ * \class Player
+ * 
+ * \ingroup Example package
+ *  
+ * \brief Player class
+ * 
+ * This is a Player class. Player have name, health, damage, and cooldown.Every player has got own cooldown so it can change the fight end.
+ * @author smauzerrichard (smauzer.richard47@gmail.com)
+ * @brief 
+ * @version 1.0
+ * @date 2020-10-13
+ * 
+ */
+
+
+
 #ifndef PLAYER_H
 #define PLAYER_H
 
@@ -11,19 +28,32 @@ class Player
     double atksp;
 
 public:
-	Player(std::string name, int hp, int dmg, double atksp);
+    ///This is a constuctor for Player
+	Player(std::string name /**[in] this is a name parameter*/, int hp/**[in] this is a hp parameter*/, int dmg/**[in] this is a dmg parameter*/, double atksp/**[in] this is a cooldown parameter*/);
     
-    //Getters
+    ///This is a simple getters for getting the players name, hp, dmg, cooldown 
+    /**
+     * \return The Hero's name
+    */
     std::string getName() const;
+    /**
+     * \return The Hero's hp
+    */
     short getHP() const;
+    /**
+    * \return The Hero's dmg
+    */
     unsigned short getDMG() const;
+    /**
+    * \return The Hero's cooldown
+    */
     double getAtksp() const;
-    //Functions
-    void DMG(Player* enemy);
+    
+    void DMG(Player* enemy/**< [in] The enemy Hero as parameter */);
     std::string toString();
 
-    //Static 
-    static Player* parseUnit(std::string fileName);
+    
+    static Player* parseUnit(std::string fileName/**< [in] Name of the file */);
 
 };
 
