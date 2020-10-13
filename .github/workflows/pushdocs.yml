@@ -11,7 +11,7 @@ jobs:
     name: Deploy to github pages
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@attackspeed
+    - uses: actions/checkout@v2
 
 
     - run: sudo apt-get install doxygen
