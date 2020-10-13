@@ -1,7 +1,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-
 #include <string>
 
 class Player
@@ -9,16 +8,16 @@ class Player
 	
     const std::string name;
     int hp, dmg;
-    float atksp;
+    double atksp;
 
 public:
-	Player(std::string name, int hp, int dmg, float atksp);
+	Player(std::string name, int hp, int dmg, double atksp);
     
     //Getters
     std::string getName() const;
     short getHP() const;
     unsigned short getDMG() const;
-    float getAtksp() const;
+    double getAtksp() const;
     //Functions
     void DMG(Player* enemy);
     std::string toString();
