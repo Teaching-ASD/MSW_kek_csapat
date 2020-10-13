@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - attackspeed
-      - gh-pagess
+      - gh-pages
 
 jobs:
   deploy:
@@ -23,6 +23,6 @@ jobs:
 
     env:
       REPO: self
-      BRANCH: gh-pagess
+      BRANCH: gh-pages
       FOLDER: DOCS/html
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
