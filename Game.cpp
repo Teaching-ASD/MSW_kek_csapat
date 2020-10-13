@@ -21,42 +21,49 @@ Game::~Game()
 void Game::Fight()
 {
 
-    bool round=true;
-
-    while(!isEnd()){
-        //*Frist Round*//
-        switch (round)
-        {
-        case true:
-                std::cout << players[0]->getName() << "->" << players[1]->getName() << std::endl;
-               players[1]->DMG(players[0]);
-               round=false;
-            break;
         
-        case false:
-                std::cout << players[1]->getName() << "->" << players[0]->getName() << std::endl;
-               players[0]->DMG(players[1]);
-               round=true;
-            break;
+
+   float pl1=players[0]->getAtksp();
+   float pl2=players[1]->getAtksp();
+   bool firstRound = true;
+    while(!isEnd()){
+        if(firstRound){
+            
+        players[1]->DMG(players[0]);
+        if(players[1]->getHP()<=0){
+                    continue;
         }
-    //*Secound Round
-    //Ha a Player 1 atksp nagyobb mint a player 2 
-        if(players[0]->atksp > player[1]->atksp){
-            //kivonom a player 0 nak az atakspeedjeből a player 1 atakspedjet
-            //majd a kivont értéket megkapja a player 0 és uj értéket kap a player1
-            std::cout << players[0]->getName() << "->" << players[1]->getName() << std::endl;
-            players[1]->DMG(players[0]);
-        }return
+        players[0]->DMG(players[1]);
+        firstRound=false;
+        }
         else{
-            std::cout << players[1]->getName() << "->" << players[0]->getName() << std::endl;
-            players[0]->DMG(players[1]);
-
-        }return
-
+            if(pl1==pl2){
+                players[1]->DMG(players[0]);
+                if(players[1]->getHP()<=0){
+                    continue;
+                }
+                players[0]->DMG(players[1]);
+                
+                pl1=players[0]->getAtksp();
+                pl2=players[1]->getAtksp();          
+            }
+            if(pl1<pl2){
+                pl2-=pl1;
+                players[1]->DMG(players[0]);
+                
+                pl1=players[0]->getAtksp();
+                }
+            else if(pl2<pl1){
+                pl1-=pl2;
+                players[0]->DMG(players[1]);
+                
+                pl2=players[1]->getAtksp();
+            }
+        }
     }
-    std::cout << toString() << std::endl;
-    std::cout << getResult() << std::endl;
 
+    std::cout << getResult() << std::endl;
+    
 }
 
 bool Game::isEnd() const
@@ -73,6 +80,7 @@ bool Game::isEnd() const
 
 std::string Game::toString()
 {
+    
     std::string status = "";
 
     for(auto player : players){
