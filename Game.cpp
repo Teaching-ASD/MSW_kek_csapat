@@ -20,51 +20,38 @@ Game::~Game()
 
 void Game::Fight()
 {
-
+    players[1]->DMG(players[0]);
+    players[0]->DMG(players[1]);
         
 
    float pl1=players[0]->getAtksp();
    float pl2=players[1]->getAtksp();
-   bool firstRound = true;
+  
     while(!isEnd()){
-        if(firstRound){
+           
+        if(pl1==pl2){
+            players[1]->DMG(players[0]);
+            players[0]->DMG(players[1]);
             
-        players[1]->DMG(players[0]);
-        if(players[1]->getHP()<=0){
-                    continue;
+            pl1=players[0]->getAtksp();
+            pl2=players[1]->getAtksp();          
         }
-        players[0]->DMG(players[1]);
-        firstRound=false;
-        }
-        else{
-            if(pl1==pl2){
-                players[1]->DMG(players[0]);
-                if(players[1]->getHP()<=0){
-                    continue;
-                }
-                players[0]->DMG(players[1]);
-                
-                pl1=players[0]->getAtksp();
-                pl2=players[1]->getAtksp();          
+        if(pl1<pl2){
+            pl2-=pl1;
+            players[1]->DMG(players[0]);
+            
+            pl1=players[0]->getAtksp();
             }
-            if(pl1<pl2){
-                pl2-=pl1;
-                players[1]->DMG(players[0]);
-                
-                pl1=players[0]->getAtksp();
-                }
-            else if(pl2<pl1){
-                pl1-=pl2;
-                players[0]->DMG(players[1]);
-                
-                pl2=players[1]->getAtksp();
-            }
+        else if(pl2<pl1){
+            pl1-=pl2;
+            players[0]->DMG(players[1]);
+            
+            pl2=players[1]->getAtksp();
         }
-    }
-
+    }   
     std::cout << getResult() << std::endl;
-    
 }
+
 
 bool Game::isEnd() const
 {
