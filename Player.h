@@ -6,10 +6,10 @@
  * \brief Player class
  * 
  * This is a Player class. Player have name, health, damage, and cooldown.Every player has got own cooldown so it can change the fight end.
- * @author smauzerrichard (smauzer.richard47@gmail.com)
- * @brief 
- * @version 1.0
- * @date 2020-10-13
+ * \author smauzerrichard (smauzer.richard47@gmail.com)
+ * \brief 
+ * \version 1.0
+ * \date 2020-10-13
  * 
  */
 
