@@ -1,8 +1,8 @@
 var indexSectionsWithContent =
 {
-  0: "dgmp",
+  0: "gmp",
   1: "gp",
-  2: "dgp",
+  2: "gp",
   3: "m"
 };
 
