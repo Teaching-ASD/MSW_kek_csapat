@@ -7,13 +7,10 @@
  * 
  * This is a Player class. Player have name, health, damage, and cooldown.Every player has got own cooldown so it can change the fight end.
  * \author smauzerrichard (smauzer.richard47@gmail.com)
- * \brief 
  * \version 1.0
  * \date 2020-10-13
  * 
  */
-
-
 
 #ifndef PLAYER_H
 #define PLAYER_H
@@ -23,9 +20,9 @@
 class Player
 {
 	
-    const std::string name;
-    int hp, dmg;
-    double atksp;
+    const std::string name; ///< This is the player name this is string variable
+    int hp, dmg; ///< This is the player hp and dammage this is int variable
+    double atksp;  ///< This is the player cooldown this is double variable
 
 public:
     ///This is a constuctor for Player
