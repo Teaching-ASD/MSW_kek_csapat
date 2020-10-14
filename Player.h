@@ -43,10 +43,7 @@ public:
     * \return The Hero's cooldown
     */
     double getAtksp() const;
-    
-    
     static Player* parseUnit(std::string fileName/**< [in] Name of the file */);
-private:
     void takeDammage(Player* enemy/**< [in] The enemy Player as parameter */);
 };
 
