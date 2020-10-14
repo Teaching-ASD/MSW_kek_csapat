@@ -23,12 +23,12 @@ double Player::getAtksp() const{
 }
 
 
-void Player::DMG(Player* enemy) {
+void Player::takeDammage(Player* enemy) {
     this->hp-=enemy->getDMG(); 
     if (hp<0){
         hp=0;
     }
-} 
+}
 
 Player* Player::parseUnit(std::string fileName){
 

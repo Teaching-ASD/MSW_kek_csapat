@@ -20,8 +20,8 @@ Game::~Game()
 
 void Game::Fight()
 {
-    players[1]->DMG(players[0]);
-    players[0]->DMG(players[1]);
+    players[1]->takeDammage(players[0]);
+    players[0]->takeDammage(players[1]);
         
 
    float pl1=players[0]->getAtksp();
@@ -30,21 +30,21 @@ void Game::Fight()
     while(!isEnd()){
            
         if(pl1==pl2){
-            players[1]->DMG(players[0]);
-            players[0]->DMG(players[1]);
+            players[1]->takeDammage(players[0]);
+            players[0]->takeDammage(players[1]);
             
             pl1=players[0]->getAtksp();
             pl2=players[1]->getAtksp();          
         }
         if(pl1<pl2){
             pl2-=pl1;
-            players[1]->DMG(players[0]);
+            players[1]->takeDammage(players[0]);
             
             pl1=players[0]->getAtksp();
             }
         else if(pl2<pl1){
             pl1-=pl2;
-            players[0]->DMG(players[1]);
+            players[0]->takeDammage(players[1]);
             
             pl2=players[1]->getAtksp();
         }

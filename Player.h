@@ -19,11 +19,9 @@
 
 class Player
 {
-	
     const std::string name; ///< This is the player name this is string variable
     int hp, dmg; ///< This is the player hp and dammage this is int variable
     double atksp;  ///< This is the player cooldown this is double variable
-
 public:
     ///This is a constuctor for Player
 	Player(std::string name /**[in] this is a name parameter*/, int hp/**[in] this is a hp parameter*/, int dmg/**[in] this is a dmg parameter*/, double atksp/**[in] this is a cooldown parameter*/);
@@ -46,13 +44,10 @@ public:
     */
     double getAtksp() const;
     
-    void DMG(Player* enemy/**< [in] The enemy Hero as parameter */);
-    
-    
-
     
     static Player* parseUnit(std::string fileName/**< [in] Name of the file */);
-
+private:
+    void takeDammage(Player* enemy/**< [in] The enemy Player as parameter */);
 };
 
 #endif
