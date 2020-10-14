@@ -65,18 +65,6 @@ bool Game::isEnd() const
     return end;
 }
 
-std::string Game::toString()
-{
-    
-    std::string status = "";
-
-    for(auto player : players){
-        status += player->toString() + "\n";
-    }
-
-    return status;
-}
-
 std::string Game::getResult()
 {
     

@@ -28,13 +28,7 @@ void Player::DMG(Player* enemy) {
     if (hp<0){
         hp=0;
     }
-}   
-//add attackspeed
-std::string Player::toString() 
-{
-	return name + ": HP:" + std::to_string(hp) + ", DMG: " + std::to_string(dmg)+ ", Atksp: " + std::to_string(atksp);
-}
-
+} 
 
 Player* Player::parseUnit(std::string fileName){
 

@@ -16,7 +16,6 @@ public:
     void Fight();
 private:
     bool isEnd() const;
-    std::string toString();
     std::string getResult();
 
 };

@@ -47,7 +47,8 @@ public:
     double getAtksp() const;
     
     void DMG(Player* enemy/**< [in] The enemy Hero as parameter */);
-    std::string toString();
+    
+    
 
     
     static Player* parseUnit(std::string fileName/**< [in] Name of the file */);
