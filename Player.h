@@ -12,19 +12,21 @@ class Player
 
 public:
 	Player(std::string name, int hp, int dmg);
-    
-    //Getters
+ 
     std::string getName() const;
-    short getHP() const;
-    unsigned short getDMG() const;
+    int getHP() const;
+    int getDMG() const;
     
-    //Functions
+
     void DMG(Player* enemy);
     std::string toString();
 
-    //Static 
-    static Player* parseUnit(std::string fileName);
+    static Player* parseUnit(std::string input);
+    static Player* parseUnit(std::istream& inputStream);
 
+    
 };
+
+
 
 #endif
