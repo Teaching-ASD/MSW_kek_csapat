@@ -1,8 +1,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-
 #include <string>
+#include <any>
+#include <map>
 
 class Player
 {
@@ -26,6 +27,9 @@ public:
 
      friend bool operator==(const Player& p1, const Player& p2);
     
+private:
+    static Player* parseHelper(std::map<std::string, std::any>& jdm);
+
 };
 
 inline bool operator==(const Player& p1, const Player& p2) {

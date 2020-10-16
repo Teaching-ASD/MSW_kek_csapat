@@ -2,8 +2,6 @@
 #include "Json.h"
 #include <vector>
 #include <stdexcept>
-#include <any>
-#include <map>
 
 
 
@@ -40,33 +38,20 @@ Player* Player::parseUnit(std::string input){
 
    std::map<std::string, std::any> jdm = Json::JsonParser(input);
 
-   std::vector<std::string> PlayerData {"name", "hp", "dmg"};
-   for (int i = 0; i < PlayerData.size(); i++)
-   {
-        if (jdm.find(PlayerData[i]) == jdm.end())
-        {
-            throw std::invalid_argument("Json does not contain all data for the Player initialization.");
-        }
-    }
+   return Player::parseHelper(jdm);
 
-    std::string name = std::any_cast<std::string>(jdm["name"]);
-    int hp = std::any_cast<int>(jdm["hp"]);
-    int dmg = std::any_cast<int>(jdm["dmg"]);
-
-    Player* player = new Player(name,hp,dmg);
-
-    return player;
-
-   
 }
 
+Player* Player::parseUnit(std::istream& input){
 
-Player* Player::parseUnit(std::istream& inputStream){
+   std::map<std::string, std::any> jdm = Json::JsonParser(input);
 
-   std::map<std::string, std::any> jdm = Json::JsonParser(inputStream);
+   return Player::parseHelper(jdm);
+}
 
+Player* Player::parseHelper(std::map<std::string, std::any>& jdm){
+     
    std::vector<std::string> PlayerData {"name", "hp", "dmg"};
-
    for (int i = 0; i < PlayerData.size(); i++)
    {
         if (jdm.find(PlayerData[i]) == jdm.end())
@@ -82,6 +67,4 @@ Player* Player::parseUnit(std::istream& inputStream){
     Player* player = new Player(name,hp,dmg);
 
     return player;
-
-   
 }

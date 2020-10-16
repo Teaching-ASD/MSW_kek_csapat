@@ -18,7 +18,7 @@ ASSERT_EQ(p1,p2);
 
 TEST(PlayerParseUnitTest, fileNameInput) {
 
-Player p1("Kakarott", 3000, 400);
+ Player p1("Kakarott", 3000, 400);
 
 Player p2 = *(Player::parseUnit("../Units/player1.json"));
 
@@ -35,7 +35,7 @@ std::ifstream file ("../Units/player1.json");
 
 Player p2 = *(Player::parseUnit(file));
 
-ASSERT_EQ(p1,p2);
+ASSERT_EQ(p1, p2);
 
 }
 
@@ -59,18 +59,6 @@ TEST(JsonTest, CastException) {
 
     ASSERT_NO_THROW(std::any_cast<float>(jdm["float"]));
     ASSERT_EQ(std::any_cast<float>(jdm["float"]), 400.0);
-
-}
-
-TEST(FullSystemTest, Result) {
-
- Game game("../Units/player1.json", "../Units/player2.json");   
-
- const char* expected = "Kakarott win. Remain hp: 3000";
-
- std::string output = testing::internal::GetCapturedStdout();
-
- ASSERT_STREQ(expected, output.c_str());
 
 }
 
