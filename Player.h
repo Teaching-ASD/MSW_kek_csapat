@@ -24,9 +24,12 @@ public:
     static Player* parseUnit(std::string input);
     static Player* parseUnit(std::istream& inputStream);
 
+     friend bool operator==(const Player& p1, const Player& p2);
     
 };
 
-
+inline bool operator==(const Player& p1, const Player& p2) {
+    return (p1.name==p2.name && p1.hp==p2.hp && p1.dmg==p2.dmg);
+}
 
 #endif
