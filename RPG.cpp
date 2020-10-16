@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Game.h"
-#include "ReadError.h"
+#include "ReadFileError.h"
 #include <any>
 
 
@@ -29,7 +29,7 @@ int main(int argc, char** argv)
          game->Fight();
          delete game;
       }
-      catch (const ReadError& re) {
+      catch (const ReadFileError& re) {
          delete game;
          return 1;
       } 
