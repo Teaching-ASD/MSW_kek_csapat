@@ -20,50 +20,12 @@ Game::~Game()
 
 void Game::Fight()
 {
-    players[1]->takeDammage(players[0]);
-    players[0]->takeDammage(players[1]);
-        
 
-   float pl1=players[0]->getAtksp();
-   float pl2=players[1]->getAtksp();
-  
-    while(!isEnd()){
+    while(!players[0]->Combat(players[1]));
            
-        if(pl1==pl2){
-            players[1]->takeDammage(players[0]);
-            players[0]->takeDammage(players[1]);
-            
-            pl1=players[0]->getAtksp();
-            pl2=players[1]->getAtksp();          
-        }
-        if(pl1<pl2){
-            pl2-=pl1;
-            players[1]->takeDammage(players[0]);
-            
-            pl1=players[0]->getAtksp();
-            }
-        else if(pl2<pl1){
-            pl1-=pl2;
-            players[0]->takeDammage(players[1]);
-            
-            pl2=players[1]->getAtksp();
-        }
-    }   
     std::cout << getResult() << std::endl;
 }
 
-
-bool Game::isEnd() const
-{
-    bool end = false;
-
-    for (auto player : players){
-        if(player->getHP()<=0){
-            end = true;
-        }
-    }
-    return end;
-}
 
 std::string Game::getResult()
 {
