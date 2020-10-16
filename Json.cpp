@@ -1,8 +1,8 @@
-#include "json.h"
+#include "Json.h"
 #include "ReadFileError.h"
 
 #include <fstream>
-#include <iostream>
+
 
 std::map<std::string, std::any>  Json::JsonParser(std::string fileOrString)
 {
