@@ -1,0 +1,47 @@
+name: LevelUp 
+
+on:
+  push:
+    branch: [levelup]
+    
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Getting dependencies  
+        run: |
+              sudo apt-get install cppcheck
+              sudo apt-get install valgrind
+
+      - name: Run Static Code Analysis
+        run: |
+          cppcheck --enable=warning --error-exitcode=1 *.cpp
+          cppcheck --enable=performance,style --output-file=cppcheck_report.txt *.cpp
+    
+      - name: Creating cppcheck artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: cppcheck_report
+          path: cppcheck_report.txt
+
+      - name: Build with sanitizer
+        run: g++ -std=c++17 *cpp -Wall -Wextra -g -fsanitize=address -O
+      - name: Run sanitizer 
+        run:  ./a.out Units/player1.json Units/player2.json
+
+      - name: Build for valgrind and callgrind
+        run: g++ -std=c++17 *cpp -Wall -Wextra -g
+      - name: Run valgrind 
+        run:  valgrind --leak-check=full --error-exitcode=1 ./a.out Units/player1.json Units/player2.json 
+      - name: Run callgrind
+        name: valgrind --tool=callgrind --leak-check=full --error-exitcode=1 ./a.out Units/player1.json Units/player2.json
+
+
+      - name: Make ./run_fight.sh executable
+        run: chmod +x ./run_fight.sh
+      - name: Run test
+        name: ./run_fight.sh a.out output.txt
+      - name: Check resoult of input output tets
+        run: diff -w -B generated_output.txt good_output.txt 
+ 
