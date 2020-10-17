@@ -38,10 +38,5 @@ jobs:
         name: valgrind --tool=callgrind --leak-check=full --error-exitcode=1 ./a.out Units/player1.json Units/player2.json
 
 
-      - name: Make ./run_fight.sh executable
-        run: chmod +x ./run_fight.sh
-      - name: Run test
-        name: ./run_fight.sh a.out output.txt
-      - name: Check resoult of input output tets
-        run: diff -w -B generated_output.txt good_output.txt 
+ 
  
