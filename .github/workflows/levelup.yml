@@ -35,7 +35,7 @@ jobs:
       - name: Run valgrind 
         run:  valgrind --leak-check=full --error-exitcode=1 ./a.out Units/player1.json Units/player2.json 
       - name: Run callgrind
-        name: valgrind --tool=callgrind --leak-check=full --error-exitcode=1 ./a.out Units/player1.json Units/player2.json
+        run: valgrind --tool=callgrind --leak-check=full --error-exitcode=1 ./a.out Units/player1.json Units/player2.json
 
 
  
