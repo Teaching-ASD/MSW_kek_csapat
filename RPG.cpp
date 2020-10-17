@@ -1,52 +1,52 @@
 #include <iostream>
 #include "Game.h"
+#include "ReadFileError.h"
+#include <any>
+
+
 
 int main(int argc, char** argv)
 {
-    
-    if(argc==1){
-      std::cerr << "Nem adott meg parametert!" << std::endl;
-   }
-
-   else if (argc < 3){
-      std::cerr << "Nem adott meg eleg! Ket fajl neve kell!" << std::endl;
-   }
-   else if(argc > 3) {
-        std::cerr << "Tul sok input! Nem csinalok semmit! Ket fajl neve kell!" << std::endl;
-   }
+   
+   if(argc!=3 && argc!=1){
+      std::cerr << "BadRun Error:\nExcpected run:\n[1] ./auto example1.json example2.json\n" 
+      << "[2] ./auto {\\\"name\\\":\\\"Kakarott\\\"\\\"hp\\\":10\\\"dmg\\\":5}" 
+      << "{\\\"name\\\":\\\"pista\\\"\\\"hp\\\":20\\\"dmg\\\":2}" << std::endl;
+      return 1;
+   }   
    else {
-
-      Player* p1;
-      Player* p2;
-   
-
+          Game* game;
       try{
-  
-         //Fiel read, data parse, return Player*
-         p1 = Player::parseUnit(*(argv+1));
-         p2 = Player::parseUnit(*(argv+2));
-
-
-         if(p1!=nullptr && p2!=nullptr){
-            //Initialize game, fight and free memorye
-            Game* game = new Game(p1,p2); 
-            game->Fight();
-            delete game;
+     
+         if(argc==1){
+            std::cout << "You don't add file or string to command line argument.\nYou can type the json now.\nWhen you finished one json hit enter after Crtl+Z.\n";
+            game = new Game(std::cin);
          }
-   
+         else{
+            game = new Game(argv);
+         }
+    
+         game->Fight();
+         delete game;
       }
-      catch (const std::exception& e) {
-         
-         std::cerr << "File dosnt exist!" << std::endl;
-         std::cerr << "Error: " << e.what() << std::endl;
-       
-         if(p1!=nullptr) delete p1;
+      catch (const ReadFileError& re) {
+         delete game;
+         return 1;
       } 
+      catch (const std::bad_any_cast& bac){
+         std::cout << bac.what() << std::endl;
+         delete game;
+         return 1;
+      }
+      catch(const std::exception& ex){
+         std::cout << ex.what() << std::endl;
+         delete game;
+         return 1;
+      }
     
      
    }
 
-   
    return 0;
 
 }

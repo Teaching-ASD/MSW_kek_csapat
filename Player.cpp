@@ -1,6 +1,9 @@
 #include "Player.h"
-#include <fstream>
-#include <sstream>
+#include "Json.h"
+#include <vector>
+#include <stdexcept>
+
+
 
 
 Player::Player(std::string name, int hp, int dmg, double atksp): name(name), hp(hp), dmg(dmg), atksp(atksp) {
@@ -11,11 +14,11 @@ std::string Player::getName() const {
     return name;
 }  
 
-short Player::getHP() const {
+int Player::getHP() const {
   return hp; 
 }
 
-unsigned short Player::getDMG() const{
+int Player::getDMG() const{
     return dmg;
 }
 
@@ -68,56 +71,39 @@ bool Player::isEnd(Player* p2) const
 {
     return (hp==0 || p2->getHP()==0);
 
+
+Player* Player::parseUnit(std::string input){
+
+
+   std::map<std::string, std::any> jdm = Json::JsonParser(input);
+
+   return Player::parseHelper(jdm);
 }
-Player* Player::parseUnit(std::string fileName){
 
+Player* Player::parseUnit(std::istream& input){
 
-    std::ifstream inf;
-    inf.exceptions(std::ifstream::failbit);
-    inf.open(fileName);
-    std::stringstream ss;
+   std::map<std::string, std::any> jdm = Json::JsonParser(input);
 
-    char start_end;
-    char sep;
+   return Player::parseHelper(jdm);
+}
 
-    std::string type;
-
-    std::string name, sHp, sDmg, sAtksp;
-    int hp, dmg;
-    double atksp;
-
-
-    if (inf.is_open()) {
-      
-      ss << inf.rdbuf();
-      inf.close();
-
-      ss >> start_end;
-      //Read String
-      ss >> type >> sep >> name;
-      name.erase(name.begin(), name.begin()+1);
-      name.erase(name.end()-2, name.end());
-   
-
-      //Read Integer
-      ss >> type >> sep >> sHp;
-      sHp.erase(sHp.end()-1);
-      ss >> type >> sep >> sDmg;
-      //Floating point number
-      ss >> type >> sep >> sAtksp;
-      
-
-      hp = std::stoi(sHp);
-      dmg = std::stoi(sDmg);
-      atksp = std::stod(sAtksp);
-
-      Player* p = new Player(name,hp,dmg,atksp);
-      return p;
-
-
-    }
-    else {
-        return nullptr;
+Player* Player::parseHelper(std::map<std::string, std::any>& jdm){
+     
+   std::vector<std::string> PlayerData {"name", "hp", "dmg" ,"atksp"};
+   for (int i = 0; i < PlayerData.size(); i++)
+   {
+        if (jdm.find(PlayerData[i]) == jdm.end())
+        {
+            throw std::invalid_argument("Json does not contain all data for the Player initialization.");
+        }
     }
 
+    std::string name = std::any_cast<std::string>(jdm["name"]);
+    int hp = std::any_cast<int>(jdm["hp"]);
+    int dmg = std::any_cast<int>(jdm["dmg"]);
+    float atksp= std::any_cast<float>(jmd["atksp"]);
+  
+    Player* player = new Player(name,hp,dmg,atksp);
+
+    return player;
 }

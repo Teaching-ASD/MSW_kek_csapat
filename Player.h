@@ -16,6 +16,8 @@
 #define PLAYER_H
 
 #include <string>
+#include <any>
+#include <map>
 
 class Player
 {
@@ -50,8 +52,19 @@ public:
     bool Combat(Player* p2/**< [in] The p2 as combat parameter */);
     bool isEnd(Player* p2/**< [in] The p2 as isEnd parameter */)const;
 
+    static Player* parseUnit(std::string input);
+    static Player* parseUnit(std::istream& inputStream);
+
+    friend bool operator==(const Player& p1, const Player& p2);
+
 private:
+  
     void sufferDammage(Player* enemy/**< [in] The enemy Player as parameter ,This is private parameter*/);
+    static Player* parseHelper(std::map<std::string, std::any>& jdm);
 };
+
+inline bool operator==(const Player& p1, const Player& p2) {
+    return (p1.name==p2.name && p1.hp==p2.hp && p1.dmg==p2.dmg);
+}
 
 #endif

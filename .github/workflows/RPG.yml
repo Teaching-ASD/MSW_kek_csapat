@@ -1,9 +1,8 @@
 name: Attackspeed workflow
 
 on:
-  push:
-    branch: [attackspeed]
-    
+  push
+  
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
