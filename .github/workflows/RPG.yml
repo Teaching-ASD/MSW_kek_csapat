@@ -2,7 +2,7 @@ name: Rpg workflow
 
 on:
   push:
-    branch: [init]
+    branch: [levelup]
     
 jobs:
   build_and_test:
