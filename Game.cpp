@@ -2,10 +2,10 @@
 #include <sstream>
 #include <iostream>
 
-Game::Game(Player* p1, Player* p2)
+Game::Game(Player* c1, Player* c2)
 {
-    players.push_back(p1);
-    players.push_back(p2);
+    players.push_back(c1);
+    players.push_back(c2);
 }
 
 Game::~Game()
@@ -29,11 +29,15 @@ void Game::Fight()
         {
         case true:
                players[1]->DMG(players[0]);
+               players[0]->increaseXP();
+               players[1]->increaseXP();
                round=false;
             break;
         
         case false:
                players[0]->DMG(players[1]);
+               players[1]->increaseXP();
+               players[0]->increaseXP();
                round=true;
             break;
         }
@@ -73,9 +77,11 @@ std::string Game::getResult()
     
     if(players[0]->getHP() > 0 ){
         result = players[0]->getName() + " win. Remain hp: " + std::to_string(players[0]->getHP()); 
+        players[0]->increaseXP();
     }
     else {
         result = players[1]->getName() + " win. Remain hp: " + std::to_string(players[1]->getHP()); 
+        players[1]->increaseXP();
     }
 
     return result;

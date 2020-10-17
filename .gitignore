@@ -1,6 +1,8 @@
 *.out
 *.vscode
 bin/
-output.txt
 *.o
 rpg
+*.txt
+!good_output.txt
+callgrind.*

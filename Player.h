@@ -1,29 +1,22 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-
+#include "Character.h"
 #include <string>
 
-class Player
-{
-	
-    const std::string name;
-    int hp, dmg;
+#define LEVELUPBOUNDARY 100
+
+class Player : public Character {
+    
+    int XP = 0;
+    int maxHp;
 
 public:
-	Player(std::string name, int hp, int dmg);
-    
-    //Getters
-    std::string getName() const;
-    short getHP() const;
-    unsigned short getDMG() const;
-    
-    //Functions
-    void DMG(Player* enemy);
+    Player(std::string name, short hp, int dmg);
+    void increaseXP();
     std::string toString();
-
-    //Static 
-    static Player* parseUnit(std::string fileName);
+private:
+    void levelUp();
 
 };
 

@@ -6,6 +6,7 @@ if test -f $2; then
     rm $2 
 fi
 
+
 for i in player1 player2 player3
 do
     for j in player1 player2 player3 
@@ -17,3 +18,10 @@ do
     done
 
 done
+
+
+
+
+
+
+
