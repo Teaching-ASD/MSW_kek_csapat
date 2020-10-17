@@ -67,13 +67,14 @@ bool Player::Combat(Player* p2){
     }
     return true;
 }
+
+
 bool Player::isEnd(Player* p2) const
 {
     return (hp==0 || p2->getHP()==0);
-
+}
 
 Player* Player::parseUnit(std::string input){
-
 
    std::map<std::string, std::any> jdm = Json::JsonParser(input);
 
@@ -101,7 +102,7 @@ Player* Player::parseHelper(std::map<std::string, std::any>& jdm){
     std::string name = std::any_cast<std::string>(jdm["name"]);
     int hp = std::any_cast<int>(jdm["hp"]);
     int dmg = std::any_cast<int>(jdm["dmg"]);
-    float atksp= std::any_cast<float>(jmd["atksp"]);
+    double atksp= std::any_cast<double>(jdm["atksp"]);
   
     Player* player = new Player(name,hp,dmg,atksp);
 

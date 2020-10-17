@@ -38,17 +38,16 @@ public:
     /**
      * \return The Hero's hp
     */
-    short getHP() const;
+    int getHP() const;
     /**
     * \return The Hero's dmg
     */
-    unsigned short getDMG() const;
+    int getDMG() const;
     /**
     * \return The Hero's cooldown
     */
     double getAtksp() const;
    
-    static Player* parseUnit(std::string fileName/**< [in] Name of the file */);
     bool Combat(Player* p2/**< [in] The p2 as combat parameter */);
     bool isEnd(Player* p2/**< [in] The p2 as isEnd parameter */)const;
 

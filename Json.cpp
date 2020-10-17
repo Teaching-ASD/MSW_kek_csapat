@@ -2,6 +2,7 @@
 #include "ReadFileError.h"
 
 #include <fstream>
+#include <iostream>
 
 
 std::map<std::string, std::any>  Json::JsonParser(std::string fileOrString)
@@ -56,7 +57,7 @@ std::map<std::string, std::any> Json::Parser(std::string json) {
               jdm[matches.str(1)] = matches.str(2);
               break;
             case floatr:
-                jdm[matches.str(1)] = stof(matches.str(2));
+                jdm[matches.str(1)] = stod(matches.str(2));
                 break;
             case intr:
                 jdm[matches.str(1)] = stoi(matches.str(2));

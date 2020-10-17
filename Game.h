@@ -11,7 +11,7 @@ class Game
 	std::vector<Player*> players;
 
 public:
-	Game(char** argv);
+	Game(char** argv);  
     Game(std::istream& s);
     Game(std::string, std::string);
 	~Game();
