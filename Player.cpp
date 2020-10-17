@@ -1,6 +1,9 @@
 #include "Player.h"
-#include <fstream>
-#include <sstream>
+#include "Json.h"
+#include <vector>
+#include <stdexcept>
+
+
 
 Player::Player(std::string name, int hp, int dmg): name(name), hp(hp), dmg(dmg) {
 
@@ -10,11 +13,11 @@ std::string Player::getName() const {
     return name;
 }  
 
-short Player::getHP() const {
+int Player::getHP() const {
   return hp; 
 }
 
-unsigned short Player::getDMG() const{
+int Player::getDMG() const{
     return dmg;
 }
 
@@ -31,48 +34,37 @@ std::string Player::toString()
 }
 
 
-Player* Player::parseUnit(std::string fileName){
+Player* Player::parseUnit(std::string input){
 
+   std::map<std::string, std::any> jdm = Json::JsonParser(input);
 
-    std::ifstream inf;
-    inf.exceptions(std::ifstream::failbit);
-    inf.open(fileName);
-    std::stringstream ss;
+   return Player::parseHelper(jdm);
 
-    char start_end;
-    char sep;
+}
 
-    std::string type;
+Player* Player::parseUnit(std::istream& input){
 
-    std::string name, sHp, sDmg;
-    int hp, dmg;
+   std::map<std::string, std::any> jdm = Json::JsonParser(input);
 
-    if (inf.is_open()) {
-      
-      ss << inf.rdbuf();
-      inf.close();
+   return Player::parseHelper(jdm);
+}
 
-      ss >> start_end;
-      //Read String
-      ss >> type >> sep >> name;
-      name.erase(name.begin(), name.begin()+1);
-      name.erase(name.end()-2, name.end());
-   
-
-      //Read Integer
-      ss >> type >> sep >> sHp;
-      sHp.erase(sHp.end()-1);
-      ss >> type >> sep >> sDmg;
-
-      hp = std::stoi(sHp);
-      dmg = std::stoi(sDmg);
-
-      Player* p = new Player(name,hp,dmg);
-      return p; 
-
-    }
-    else {
-        return nullptr;
+Player* Player::parseHelper(std::map<std::string, std::any>& jdm){
+     
+   std::vector<std::string> PlayerData {"name", "hp", "dmg"};
+   for (int i = 0; i < PlayerData.size(); i++)
+   {
+        if (jdm.find(PlayerData[i]) == jdm.end())
+        {
+            throw std::invalid_argument("Json does not contain all data for the Player initialization.");
+        }
     }
 
+    std::string name = std::any_cast<std::string>(jdm["name"]);
+    int hp = std::any_cast<int>(jdm["hp"]);
+    int dmg = std::any_cast<int>(jdm["dmg"]);
+
+    Player* player = new Player(name,hp,dmg);
+
+    return player;
 }

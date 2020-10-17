@@ -1,6 +1,18 @@
+#gcc
 *.out
+#VSCode
 *.vscode
+#IOTest
+*.sh
 bin/
 output.txt
 *.o
 rpg
+
+# Unitest
+CMakeFiles/
+*.cmake
+*.txt
+Makefile
+runTests
+!CMakeLists.txt
