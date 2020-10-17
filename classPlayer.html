@@ -83,9 +83,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a73e4ff2d70e62ca7e3be1d9b4ad9de85"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayer.html#a73e4ff2d70e62ca7e3be1d9b4ad9de85">getName</a> () const</td></tr>
 <tr class="memdesc:a73e4ff2d70e62ca7e3be1d9b4ad9de85"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is a simple getters for getting the players name, hp, dmg, cooldown.  <a href="#a73e4ff2d70e62ca7e3be1d9b4ad9de85">More...</a><br /></td></tr>
 <tr class="separator:a73e4ff2d70e62ca7e3be1d9b4ad9de85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27d7b8bebd9805deafb389d26e2e1790"><td class="memItemLeft" align="right" valign="top">short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayer.html#a27d7b8bebd9805deafb389d26e2e1790">getHP</a> () const</td></tr>
+<tr class="memitem:a27d7b8bebd9805deafb389d26e2e1790"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayer.html#a27d7b8bebd9805deafb389d26e2e1790">getHP</a> () const</td></tr>
 <tr class="separator:a27d7b8bebd9805deafb389d26e2e1790"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33bb2286cc8ae5441ed9acbafd1d3343"><td class="memItemLeft" align="right" valign="top">unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayer.html#a33bb2286cc8ae5441ed9acbafd1d3343">getDMG</a> () const</td></tr>
+<tr class="memitem:a33bb2286cc8ae5441ed9acbafd1d3343"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayer.html#a33bb2286cc8ae5441ed9acbafd1d3343">getDMG</a> () const</td></tr>
 <tr class="separator:a33bb2286cc8ae5441ed9acbafd1d3343"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e4e0ca5d697e98dc007e2980780eb4b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayer.html#a9e4e0ca5d697e98dc007e2980780eb4b">getAtksp</a> () const</td></tr>
 <tr class="separator:a9e4e0ca5d697e98dc007e2980780eb4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -96,14 +96,12 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a9ca6b7e2a03049efb87536872bf254e2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classPlayer.html">Player</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayer.html#a9ca6b7e2a03049efb87536872bf254e2">parseUnit</a> (std::string fileName)</td></tr>
-<tr class="separator:a9ca6b7e2a03049efb87536872bf254e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8db32b4865bf1df13486e91fc34e9647"><td class="memItemLeft" align="right" valign="top"><a id="a8db32b4865bf1df13486e91fc34e9647"></a>
+<tr class="memitem:ad6a99c7a7531298da373d4dd35280f90"><td class="memItemLeft" align="right" valign="top"><a id="ad6a99c7a7531298da373d4dd35280f90"></a>
 static <a class="el" href="classPlayer.html">Player</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>parseUnit</b> (std::string input)</td></tr>
-<tr class="separator:a8db32b4865bf1df13486e91fc34e9647"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4fcf81c57b0f1da8e5683cf8c7601ce"><td class="memItemLeft" align="right" valign="top"><a id="ad4fcf81c57b0f1da8e5683cf8c7601ce"></a>
+<tr class="separator:ad6a99c7a7531298da373d4dd35280f90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8eee07e74cceb73c593a9fa1d1b62d63"><td class="memItemLeft" align="right" valign="top"><a id="a8eee07e74cceb73c593a9fa1d1b62d63"></a>
 static <a class="el" href="classPlayer.html">Player</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>parseUnit</b> (std::istream &amp;inputStream)</td></tr>
-<tr class="separator:ad4fcf81c57b0f1da8e5683cf8c7601ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a8eee07e74cceb73c593a9fa1d1b62d63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
@@ -285,38 +283,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (const
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">p2</td><td>The p2 as isEnd parameter </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a9ca6b7e2a03049efb87536872bf254e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9ca6b7e2a03049efb87536872bf254e2">&#9670;&nbsp;</a></span>parseUnit()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="classPlayer.html">Player</a>* Player::parseUnit </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>fileName</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">fileName</td><td>Name of the file </td></tr>
   </table>
   </dd>
 </dl>
