@@ -20,7 +20,7 @@ Game::~Game()
 
 void Game::Fight()
 {
-
+  
     while(!players[0]->Combat(players[1]));
            
     std::cout << getResult() << std::endl;

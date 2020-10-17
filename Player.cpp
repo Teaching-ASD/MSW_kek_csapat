@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 
+
 Player::Player(std::string name, int hp, int dmg, double atksp): name(name), hp(hp), dmg(dmg), atksp(atksp) {
 
 }
@@ -17,10 +18,12 @@ short Player::getHP() const {
 unsigned short Player::getDMG() const{
     return dmg;
 }
+
 //add attackspeed getters
 double Player::getAtksp() const{
     return atksp;
 }
+
 
 void Player::sufferDammage(Player* enemy) {
     this->hp-=enemy->getDMG(); 
@@ -83,6 +86,7 @@ Player* Player::parseUnit(std::string fileName){
     int hp, dmg;
     double atksp;
 
+
     if (inf.is_open()) {
       
       ss << inf.rdbuf();
@@ -109,6 +113,7 @@ Player* Player::parseUnit(std::string fileName){
 
       Player* p = new Player(name,hp,dmg,atksp);
       return p;
+
 
     }
     else {
