@@ -5,7 +5,6 @@
 #IOTest
 *.sh
 bin/
-output.txt
 *.o
 rpg
 #Doxigen
@@ -18,4 +17,8 @@ CMakeFiles/
 Makefile
 runTests
 !CMakeLists.txt
+!good_output.txt
+
+#CA
+callgrind.*
 

@@ -39,24 +39,35 @@ void Game::Fight()
 {
   
     while(!players[0]->Combat(players[1]));
+    printResult();
            
-    std::cout << getResult() << std::endl;
 }
 
+bool Game::isEnd() const
+{
+    bool end = false;
 
-std::string Game::getResult()
+    for (auto player : players){
+        if(player->getHP()<=0){
+            end = true;
+        }
+    }
+    return end;
+}
+
+void Game::printResult() const
 {
     
-    std::string result;
-    
     if(players[0]->getHP() > 0 ){
-        result = players[0]->getName() + " win. Remain hp: " + std::to_string(players[0]->getHP()); 
+        std::cout << players[0]->getWinString();
+        
     }
     else {
-        result = players[1]->getName() + " win. Remain hp: " + std::to_string(players[1]->getHP()); 
+        std::cout << players[1]->getWinString(); 
+     
     }
-
-    return result;
-
 }
+
+
+
 

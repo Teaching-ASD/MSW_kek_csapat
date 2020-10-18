@@ -1,13 +1,12 @@
-#include <iostream>
 #include "Game.h"
+#include "Player.h"
 #include "ReadFileError.h"
 #include <any>
-
+#include <iostream>
 
 
 int main(int argc, char** argv)
 {
-   
    if(argc!=3 && argc!=1){
       std::cerr << "BadRun Error:\nExcpected run:\n[1] ./auto example1.json example2.json\n" 
       << "[2] ./auto {\\\"name\\\":\\\"Kakarott\\\"\\\"hp\\\":10\\\"dmg\\\":5}" 
@@ -16,8 +15,7 @@ int main(int argc, char** argv)
    }   
    else {
           Game* game;
-      try{
-     
+      try{     
          if(argc==1){
             std::cout << "You don't add file or string to command line argument.\nYou can type the json now.\nWhen you finished one json hit enter after Crtl+Z.\n";
             game = new Game(std::cin);
