@@ -1,3 +1,20 @@
+/**
+ * \class Character
+ * 
+ * \ingroup Example package
+ *  
+ * \brief Character class
+ * 
+ * This is a Charater class. Character have name, health, damage, and cooldown.
+ * Character is base class for RPG fight.
+ * They can fight but they can't take experience.
+ * More complex game features in the Player child class.
+ * 
+ * \author smauzerrichard (smauzer.richard47@gmail.com)
+ * \version 1.0
+ * \date 2020-10-13
+ * 
+ */
 
 #ifndef CHARACTER_H
 #define CHARACTER_H
@@ -16,19 +33,19 @@ public:
 
     ///This is a simple getters for getting the players name, hp, dmg, cooldown 
     /**
-     * \return The Hero's name
+     * \return The Character name
     */
     std::string getName() const;
     /**
-     * \return The Hero's hp
+     * \return The Character hp
     */
     int getHP() const;
     /**
-    * \return The Hero's dmg
+    * \return The Character dmg
     */
     int getDMG() const;
     /**
-    * \return The Hero's cooldown
+    * \return The Character cooldown
     */
     double getAtksp() const;
 
