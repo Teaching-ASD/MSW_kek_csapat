@@ -1,7 +1,9 @@
 {
     "name" : "Kakarott",
   
-    "hp" : 500,
-  
-    "dmg" : 100
+    "hp" : 400,
+
+    "dmg" : 10,
+
+    "atksp" : 3.2
 }

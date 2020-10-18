@@ -1,10 +1,29 @@
 #include "Game.h"
 #include <iostream>
 
-Game::Game(Player* p1, Player* p2)
+Game::Game(char** argv)
 {
-    players.push_back(p1);
-    players.push_back(p2);
+   for(argv++; *argv!=NULL; argv++) {
+   players.push_back(Player::parseUnit(*argv));
+   }
+}
+
+Game::Game(std::istream& s)
+{
+
+    int i = 0;
+    while (i < PLAYER_NUMBER) {
+            std::cout << i+1 << ".Json: ";
+            players.push_back(Player::parseUnit(s));
+            s.clear();
+            i++;
+        }
+}
+
+Game::Game(std::string s1, std::string s2)
+{
+      players.push_back(Player::parseUnit(s1));
+      players.push_back(Player::parseUnit(s2));
 }
 
 Game::~Game()
@@ -16,31 +35,12 @@ Game::~Game()
     }
  
 }
-
 void Game::Fight()
 {
-
-    bool round=true;
-
-    while(!isEnd()){
-        switch (round)
-        {
-        case true:
-               players[1]->DMG(players[0]);
-               players[0]->increaseXP(players[1]->getDMG());
-               round=false;
-            break;
-        
-        case false:
-               players[0]->DMG(players[1]);
-               players[1]->increaseXP(players[0]->getDMG());
-               round=true;
-            break;
-        }
-    }
-
+  
+    while(!players[0]->Combat(players[1]));
     printResult();
-
+           
 }
 
 bool Game::isEnd() const
@@ -67,3 +67,7 @@ void Game::printResult() const
      
     }
 }
+
+
+
+

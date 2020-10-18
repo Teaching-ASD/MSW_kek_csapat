@@ -1,14 +1,73 @@
 #include "Player.h"
 #include <math.h>
-#include <sstream>
-#include <iostream>
 #include <fstream>
+#include "Json.h"
+#include <vector>
+#include <stdexcept>
 
 
 
-Player::Player(std::string name, int hp, int dmg) : Character(name, hp, dmg), maxHp(hp) {
 
-} 
+Player::Player(std::string name, int hp, int dmg, double atksp) : Character(name, hp, dmg, atksp), maxHp(hp) {
+
+}
+
+bool Player::Combat(Player* enemy){
+
+        enemy->sufferDammage(this);
+        increaseXP(enemy->getHP());
+
+        sufferDammage(enemy);
+        enemy->increaseXP(hp);       
+
+        double CD1=atksp;
+        double CD2=enemy->getAtksp();
+
+    while(!isEnd(enemy)){
+        if(CD1==CD2){
+            
+            enemy->sufferDammage(this);
+            increaseXP(enemy->getHP());
+            
+            sufferDammage(enemy);
+            enemy->increaseXP(hp);
+            
+            CD1=atksp;
+            CD2=enemy->getAtksp();          
+        }
+        if(CD1<CD2){
+            CD2-=CD1;
+            enemy->sufferDammage(this);
+            increaseXP(enemy->getHP());
+            
+            
+            CD1=atksp;
+            }
+        else if(CD2<CD1){
+            CD1-=CD2;
+            sufferDammage(enemy);
+            enemy->increaseXP(hp);
+            
+            CD2=enemy->getAtksp();
+        }
+    }
+    return true;
+}
+
+void Player::sufferDammage(Player* enemy) {
+    hp-=enemy->getDMG();
+    if (hp<0){
+        hp=0;
+    }
+}
+
+
+bool Player::isEnd(Player* enemy) const
+{
+    return (hp==0 || enemy->getHP()==0);
+}
+
+
 
 void Player::increaseXP(int enemyHp){
     
@@ -21,7 +80,10 @@ void Player::increaseXP(int enemyHp){
 }
 
 std::string Player::getWinString(){
-    return name + " wins. Remaining HP: " + std::to_string(hp) + ", current level: " + std::to_string(level) + ", current experience: " + std::to_string(XP) + '\n';
+    return name + " wins. Remaining HP: " + std::to_string(hp) 
+    + ", current level: " + std::to_string(level) 
+    + ", current experience: " + std::to_string(XP) 
+    + ", current attack speed: " + std::to_string(atksp) +'\n';
 }
 
 
@@ -33,50 +95,43 @@ void Player::levelUp(){
         hp = (int) round(maxHp * 1.1);
         maxHp = hp;
         dmg = (int) round(dmg*1.1);
+        atksp = (double) (atksp*0.9);
     } 
 }
 
-Player* Player::parseUnit(std::string fileName){
+Player* Player::parseUnit(std::string input){
 
-    std::ifstream inf;
-    inf.exceptions(std::ifstream::failbit);
-    inf.open(fileName);
-    std::stringstream ss;
+   std::map<std::string, std::any> jdm = Json::JsonParser(input);
 
-    char start_end;
-    char sep;
+   return Player::parseHelper(jdm);
+}
 
-    std::string type;
+Player* Player::parseUnit(std::istream& input){
 
-    std::string name, sHp, sDmg;
-    int hp, dmg;
+   std::map<std::string, std::any> jdm = Json::JsonParser(input);
+   return Player::parseHelper(jdm);
+}
 
-    if (inf.is_open()) {
-      
-      ss << inf.rdbuf();
-      inf.close();
 
-      ss >> start_end;
-      //Read String
-      ss >> type >> sep >> name;
-      name.erase(name.begin(), name.begin()+1);
-      name.erase(name.end()-2, name.end());
-   
-
-      //Read Integer
-      ss >> type >> sep >> sHp;
-      sHp.erase(sHp.end()-1);
-      ss >> type >> sep >> sDmg;
-
-      hp = std::stoi(sHp);
-      dmg = std::stoi(sDmg);
-
-      Player* p = new Player(name,hp,dmg); 
-      return p; 
-
+Player* Player::parseHelper(std::map<std::string, std::any>& jdm){
+     
+   std::vector<std::string> PlayerData {"name", "hp", "dmg" ,"atksp"};
+   std::vector<std::string>::size_type i;
+   for (i = 0; i < PlayerData.size(); i++)
+   {
+        if (jdm.find(PlayerData[i]) == jdm.end())
+        {
+            throw std::invalid_argument("Json does not contain all data for the Player initialization.");
+        }
     }
-    else {
-        return nullptr;
-    }
+
+    std::string name = std::any_cast<std::string>(jdm["name"]);
+    int hp = std::any_cast<int>(jdm["hp"]);
+    int dmg = std::any_cast<int>(jdm["dmg"]);
+    double atksp= std::any_cast<double>(jdm["atksp"]);
+  
+    Player* player = new Player(name,hp,dmg,atksp);
+
+    return player;
 
 }

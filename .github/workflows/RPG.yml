@@ -1,9 +1,8 @@
-name: Rpg workflow
+name: Attackspeed workflow
 
 on:
-  push:
-    branch: [levelup]
-    
+  push
+  
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
@@ -11,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build the application
         run: g++ -std=c++17 *.cpp -o rpg
-      - name: Make ./run_fight.sh executable
+      - name: Make executable
         run: chmod +x ./run_fight.sh
       - name: Run input-output tests
         run: ./run_fight.sh rpg generated_output.txt

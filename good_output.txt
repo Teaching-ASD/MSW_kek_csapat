@@ -1,6 +1,6 @@
-Jozsi wins. Remaining HP: 315855, current level: 70, current experience: 46
-Kakarott wins. Remaining HP: 81315, current level: 67, current experience: 78
-Jozsi wins. Remaining HP: 323091, current level: 70, current experience: 46
-Pista wins. Remaining HP: 495, current level: 1, current experience: 60
-Kakarott wins. Remaining HP: 59736, current level: 67, current experience: 78
-Pista wins. Remaining HP: 550, current level: 1, current experience: 0
+Jozsi wins. Remaining HP: 283, current level: 2, current experience: 79, current attack speed: 3.402000
+Pista wins. Remaining HP: 91, current level: 2, current experience: 79, current attack speed: 4.860000
+Jozsi wins. Remaining HP: 283, current level: 2, current experience: 79, current attack speed: 3.402000
+Jozsi wins. Remaining HP: 40, current level: 0, current experience: 10, current attack speed: 4.200000
+Pista wins. Remaining HP: 91, current level: 2, current experience: 79, current attack speed: 4.860000
+Jozsi wins. Remaining HP: 150, current level: 0, current experience: 10, current attack speed: 4.200000
