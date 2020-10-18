@@ -8,11 +8,14 @@ bin/
 output.txt
 *.o
 rpg
+#Doxigen
+/DOCS
 
-# Unitest
+#Unitest
 CMakeFiles/
 *.cmake
 *.txt
 Makefile
 runTests
 !CMakeLists.txt
+

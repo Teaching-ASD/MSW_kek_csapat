@@ -35,54 +35,14 @@ Game::~Game()
     }
  
 }
-
 void Game::Fight()
 {
-
-    bool round=true;
-
-    while(!isEnd()){
-
-        switch (round)
-        {
-        case true:
-               players[1]->DMG(players[0]);
-               round=false;
-            break;
-        
-        case false:
-               players[0]->DMG(players[1]);
-               round=true;
-            break;
-        }
-    }
-
+  
+    while(!players[0]->Combat(players[1]));
+           
     std::cout << getResult() << std::endl;
-
 }
 
-bool Game::isEnd() const
-{
-    bool end = false;
-
-    for (auto player : players){
-        if(player->getHP()<=0){
-            end = true;
-        }
-    }
-    return end;
-}
-
-std::string Game::toString()
-{
-    std::string status = "";
-
-    for(auto player : players){
-        status += player->toString() + "\n";
-    }
-
-    return status;
-}
 
 std::string Game::getResult()
 {
@@ -99,3 +59,4 @@ std::string Game::getResult()
     return result;
 
 }
+

@@ -5,7 +5,8 @@
 
 
 
-Player::Player(std::string name, int hp, int dmg): name(name), hp(hp), dmg(dmg) {
+
+Player::Player(std::string name, int hp, int dmg, double atksp): name(name), hp(hp), dmg(dmg), atksp(atksp) {
 
 }
 
@@ -21,25 +22,63 @@ int Player::getDMG() const{
     return dmg;
 }
 
-void Player::DMG(Player* enemy) {
-    hp-=enemy->getDMG(); 
+//add attackspeed getters
+double Player::getAtksp() const{
+    return atksp;
+}
+
+
+void Player::sufferDammage(Player* enemy) {
+    this->hp-=enemy->getDMG(); 
     if (hp<0){
         hp=0;
     }
-}   
-
-std::string Player::toString() 
-{
-	return name + ": HP:" + std::to_string(hp) + ", DMG: " + std::to_string(dmg);
 }
 
+bool Player::Combat(Player* p2){
+
+        p2->sufferDammage(this);
+        sufferDammage(p2);
+        
+
+        float CD1=atksp;
+        float CD2=p2->getAtksp();
+
+    while(!isEnd(p2)){
+        if(CD1==CD2){
+            p2->sufferDammage(this);
+            sufferDammage(p2);
+            
+            CD1=atksp;
+            CD2=p2->getAtksp();          
+        }
+        if(CD1<CD2){
+            CD2-=CD1;
+            p2->sufferDammage(this);
+            
+            CD1=atksp;
+            }
+        else if(CD2<CD1){
+            CD1-=CD2;
+            sufferDammage(p2);
+            
+            CD2=p2->getAtksp();
+        }
+    }
+    return true;
+}
+
+
+bool Player::isEnd(Player* p2) const
+{
+    return (hp==0 || p2->getHP()==0);
+}
 
 Player* Player::parseUnit(std::string input){
 
    std::map<std::string, std::any> jdm = Json::JsonParser(input);
 
    return Player::parseHelper(jdm);
-
 }
 
 Player* Player::parseUnit(std::istream& input){
@@ -51,7 +90,7 @@ Player* Player::parseUnit(std::istream& input){
 
 Player* Player::parseHelper(std::map<std::string, std::any>& jdm){
      
-   std::vector<std::string> PlayerData {"name", "hp", "dmg"};
+   std::vector<std::string> PlayerData {"name", "hp", "dmg" ,"atksp"};
    for (int i = 0; i < PlayerData.size(); i++)
    {
         if (jdm.find(PlayerData[i]) == jdm.end())
@@ -63,8 +102,9 @@ Player* Player::parseHelper(std::map<std::string, std::any>& jdm){
     std::string name = std::any_cast<std::string>(jdm["name"]);
     int hp = std::any_cast<int>(jdm["hp"]);
     int dmg = std::any_cast<int>(jdm["dmg"]);
-
-    Player* player = new Player(name,hp,dmg);
+    double atksp= std::any_cast<double>(jdm["atksp"]);
+  
+    Player* player = new Player(name,hp,dmg,atksp);
 
     return player;
 }

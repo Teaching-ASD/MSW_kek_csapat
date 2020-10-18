@@ -1,6 +1,6 @@
-Kakarott win. Remain hp: 3000
-Pista win. Remain hp: 2600
-Kakarott win. Remain hp: 2990
-Pista win. Remain hp: 4990
-Pista win. Remain hp: 3000
-Pista win. Remain hp: 5000
+Kakarott win. Remain hp: 1700
+Pista win. Remain hp: 3500
+Kakarott win. Remain hp: 1700
+Pista win. Remain hp: 4200
+Pista win. Remain hp: 3500
+Pista win. Remain hp: 4200
