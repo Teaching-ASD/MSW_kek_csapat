@@ -24,9 +24,8 @@ int main(int argc, char** argv)
       try{
   
          //Fiel read, data parse, return Player*
-         p1 = Character::parseUnit(*(argv+1));
-         p2 = Character::parseUnit(*(argv+2));
-
+         p1 = Player::parseUnit(*(argv+1));
+         p2 = Player::parseUnit(*(argv+2));
 
          if(p1!=nullptr && p2!=nullptr){
             //Initialize game, fight and free memorye

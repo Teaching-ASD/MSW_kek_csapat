@@ -3,7 +3,6 @@
 #define CHARACTER_H
 #include <string>
 
-class Player;
 
 class Character {
    
@@ -23,9 +22,7 @@ public:
     //Functions
     void DMG(Character* enemy);
     std::string toString();
-
-    //Static 
-    static Player* parseUnit(std::string fileName);
+  
 };
 
 #endif
