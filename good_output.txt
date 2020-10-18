@@ -1,6 +1,6 @@
-Kakarott win. Remain hp: 100
-Kakarott win. Remain hp: 110
-Kakarott win. Remain hp: 110
-Pista win. Remain hp: 90
-Kakarott win. Remain hp: 463
-Pista win. Remain hp: 100
+Jozsi wins. Remaining HP: 315855, current level: 70, current experience: 46
+Kakarott wins. Remaining HP: 81315, current level: 67, current experience: 78
+Jozsi wins. Remaining HP: 323091, current level: 70, current experience: 46
+Pista wins. Remaining HP: 495, current level: 1, current experience: 60
+Kakarott wins. Remaining HP: 59736, current level: 67, current experience: 78
+Pista wins. Remaining HP: 550, current level: 1, current experience: 0
