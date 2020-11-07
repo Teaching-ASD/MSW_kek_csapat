@@ -30,15 +30,17 @@ class JSON
 
 public:
 
-    JSON(std::map<std::string, std::any> jsonData);
+    JSON(std::map<std::string/**[in] this is string parameter */, std::any/**[in] this is any parameter */> jsonData);
     bool count(std::string key) const;
     
-    template<typename T>
+    template<typename T/**[in] this is a name of T template */>
     T get(std::string key) const;
-
+    ///This is the string parser
     static JSON parseFromString(std::string str/**[in] this is string parameter */); 
-    static JSON parseFromFile(std::string file/**[in] this is isstring& parameter */);
-    static JSON parseFromIstream(std::istream& is/**[in] this is isstring& parameter */);
+    ///This is the file parser
+    static JSON parseFromFile(std::string file/**[in] this is file parameter */);
+    ///This is the istream parser
+    static JSON parseFromIstream(std::istream& is/**[in] this is istring& parameter */);
     
     struct ParseException : public std::exception {};    
 
@@ -65,4 +67,4 @@ inline T JSON::get(std::string key) const {
 
 
 
-#endif
+#endif //JSON_H

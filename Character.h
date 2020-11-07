@@ -14,7 +14,7 @@
  * \version 1.0
  * \date 2020-10-13
  * 
- */
+*/
 
 #ifndef CHARACTER_H
 #define CHARACTER_H
@@ -50,11 +50,11 @@ public:
     */
     double getAttackCoolDown() const;
 
-    bool isAlive() const;
+    bool isAlive() const;///< This isAlive metods,we can check that the enemy or hero is alive.
 
-    int sufferDammage(Character& enemy);
+    int sufferDammage(Character& enemy/**< [in] this is enemy player parameter */);
 
 
 };
 
-#endif
+#endif //Character_H
