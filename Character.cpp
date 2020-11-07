@@ -24,7 +24,18 @@ bool Character::isAlive() const{
     return hp > 0;
 }
 
-
+int Character::sufferDammage(Character& enemy) {
+    int diff = hp-enemy.getDamage();
+    if ( diff >= 0){
+        hp-=enemy.getDamage();
+        diff=enemy.getDamage();
+    }
+    else {
+        diff = hp;
+        hp=0;
+    }
+    return diff;
+}
 
 
 
