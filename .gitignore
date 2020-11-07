@@ -17,7 +17,6 @@ CMakeFiles/
 Makefile
 runTests
 !CMakeLists.txt
-!good_output.txt
 
 #CA
 callgrind.*
