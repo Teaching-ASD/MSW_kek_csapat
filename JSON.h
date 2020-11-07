@@ -67,4 +67,4 @@ inline T JSON::get(std::string key) const {
 
 
 
-#endif 
+#endif //JSON_H
