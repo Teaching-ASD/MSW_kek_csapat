@@ -8,17 +8,26 @@ std::string Character::getName() const {
     return name;
 }  
 
-int Character::getHP() const {
+int Character::getHealthPoints() const {
   return hp; 
 }
 
-int Character::getDMG() const{
+int Character::getDamage() const{
     return dmg;
 }
   
-double Character::getAtksp() const {
+double Character::getAttackCoolDown() const {
   return atksp;
 }
+
+bool Character::isAlive() const{
+    return hp > 0;
+}
+
+
+
+
+
 
 
 
