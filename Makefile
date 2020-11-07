@@ -1,20 +1,30 @@
-add: Character.o Hero.o JSON.o main.o Monster.o
-	g++ -Wall -o add Character.o Hero.o JSON.o main.o Monster.o
+
+OBJS := Character.o Hero.o JSON.o main.o Monster.o
+CFLAGS := -std=c++17
+CC := g++
+
+default: build
+
+build: $(OBJS)
+	$(CC) $(CFLAGS) -o add $(OBJS)
 
 Character.o: Character.cpp
-	g++ -Wall -c Character.cpp
+	$(CC) $(CFLAGS) -c Character.cpp
 
 Hero.o: Hero.cpp
-	g++ -Wall -c Hero.cpp
+	$(CC) $(CFLAGS) -c Hero.cpp
 
 JSON.o: JSON.cpp
-	g++ -Wall -c JSON.cpp
+	$(CC) $(CFLAGS) -c JSON.cpp
 
 main.o: main.cpp
-	g++ -Wall -c main.cpp
+	$(CC) $(CFLAGS) -c main.cpp
 
 Monster.o: Monster.cpp
-	g++ -Wall -c Monster.cpp
+	$(CC) $(CFLAGS) -c Monster.cpp
 
 doc:
 	doxygen Doxyfile
+
+clean:
+	rm -rf *.o add ./html ./latex

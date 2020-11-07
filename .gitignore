@@ -5,13 +5,12 @@
 #IOTest
 *.sh
 bin/
-*.o
 #Doxigen
 /DOCS
 
 #Unitest
 CMakeFiles/
-*.cmake
+
 *.txt
 
 runTests
