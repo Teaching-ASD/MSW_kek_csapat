@@ -1,6 +1,7 @@
+SHELL=/bin/bash
 
 OBJS := Character.o Hero.o JSON.o main.o Monster.o
-CFLAGS := -std=c++17
+CFLAGS := -std=c++17 -Wall -Wextra
 CC := g++
 
 default: build
@@ -27,4 +28,4 @@ doc:
 	doxygen Doxyfile
 
 clean:
-	rm -rf *.o add ./html ./latex
+	rm -rf $(OBJS) add ./html ./latex
