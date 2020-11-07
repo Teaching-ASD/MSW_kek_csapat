@@ -18,6 +18,7 @@
 
 #ifndef CHARACTER_H
 #define CHARACTER_H
+
 #include <string>
 
 class Character {
@@ -39,18 +40,21 @@ public:
     /**
      * \return The Character hp
     */
-    int getHP() const;
+    int getHealthPoints() const;
     /**
     * \return The Character dmg
     */
-    int getDMG() const;
+    int getDamage() const;
     /**
     * \return The Character cooldown
     */
-    double getAtksp() const;
+    double getAttackCoolDown() const;
+
+    bool isAlive() const;
+
+    int sufferDammage(Character& enemy);
 
 
-  
 };
 
 #endif
