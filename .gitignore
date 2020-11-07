@@ -6,7 +6,6 @@
 *.sh
 bin/
 *.o
-rpg
 #Doxigen
 /DOCS
 
