@@ -1,137 +1,147 @@
-#include "Player.h"
+#include "Hero.h"
+#include "JSON.h"
+
 #include <math.h>
 #include <fstream>
-#include "Json.h"
 #include <vector>
 #include <stdexcept>
+#include <iostream>
 
 
+Hero::Hero(
+    std::string name, 
+    int hp, 
+    int dmg, 
+    double atksp,
+    int xpPerLev,
+    int hpPerLev,
+    int dmgPerLev,
+    double cdPerLev): 
+    Character(name, hp, dmg, atksp),
+    xpPerLev(xpPerLev),
+    hpPerLev(hpPerLev),
+    dmgPerLev(dmgPerLev),
+    cdPerLev(cdPerLev) {
+        maxHp=hp;
+    }
 
-
-Player::Player(std::string name, int hp, int dmg, double atksp) : Character(name, hp, dmg, atksp), maxHp(hp) {
-
+int Hero::getLevel() const {
+    return level;
 }
+    
+int Hero::getMaxHealthPoints() const{
+    return maxHp;
+}
+    
+void Hero::fightTilDeath(Monster& enemy){
 
-bool Player::Combat(Player* enemy){
+        int diff = enemy.sufferDammage(*this);
+        increaseXP(diff);
 
-        enemy->sufferDammage(this);
-        increaseXP(enemy->getHP());
+        if(!enemy.isAlive()) {return;}
+    
+        sufferDammage(enemy);  
 
-        sufferDammage(enemy);
-        enemy->increaseXP(hp);       
+        double CD1 = atksp;
+        double CD2 = enemy.getAttackCoolDown();
 
-        double CD1=atksp;
-        double CD2=enemy->getAtksp();
-
-    while(!isEnd(enemy)){
+    while(isAlive() && enemy.isAlive()){
         if(CD1==CD2){
-            
-            enemy->sufferDammage(this);
-            increaseXP(enemy->getHP());
+
+            diff = enemy.sufferDammage(*this);
+            increaseXP(diff);
             
             sufferDammage(enemy);
-            enemy->increaseXP(hp);
-            
+
             CD1=atksp;
-            CD2=enemy->getAtksp();          
+            CD2=enemy.getAttackCoolDown();          
         }
         if(CD1<CD2){
             CD2-=CD1;
-            enemy->sufferDammage(this);
-            increaseXP(enemy->getHP());
             
-            
+        
+            diff = enemy.sufferDammage(*this);
+            increaseXP(diff);
+
             CD1=atksp;
-            }
+        }
         else if(CD2<CD1){
             CD1-=CD2;
-            sufferDammage(enemy);
-            enemy->increaseXP(hp);
             
-            CD2=enemy->getAtksp();
+            std::cout << enemy.getName() << " -> " <<  name << std::endl;
+            sufferDammage(enemy);
+            
+            CD2=enemy.getAttackCoolDown();
         }
+        
     }
-    return true;
-}
 
-void Player::sufferDammage(Player* enemy) {
-    hp-=enemy->getDMG();
-    if (hp<0){
-        hp=0;
-    }
-}
-
-
-bool Player::isEnd(Player* enemy) const
-{
-    return (hp==0 || enemy->getHP()==0);
 }
 
 
 
-void Player::increaseXP(int enemyHp){
-    
-    if(enemyHp < dmg){
-        XP += enemyHp;
-    }
-    else XP += dmg;
+void Hero::increaseXP(int diff){
 
-    if(XP>=LEVEL_BOUNDARY) levelUp();
-}
+    xp+=diff;
+    if(xp>=xpPerLev) levelUp();
 
-std::string Player::getWinString(){
-    return name + " wins. Remaining HP: " + std::to_string(hp) 
-    + ", current level: " + std::to_string(level) 
-    + ", current experience: " + std::to_string(XP) 
-    + ", current attack speed: " + std::to_string(atksp) +'\n';
 }
 
 
-void Player::levelUp(){
+void Hero::levelUp(){
 
-    while (XP>=LEVEL_BOUNDARY){
+    while (xp>=xpPerLev){
         level++;
-        XP-=LEVEL_BOUNDARY;
-        hp = (int) round(maxHp * 1.1);
-        maxHp = hp;
-        dmg = (int) round(dmg*1.1);
-        atksp = (double) (atksp*0.9);
+        xp-=xpPerLev;
+        maxHp += hpPerLev;
+        hp=maxHp;
+        dmg += dmgPerLev;
+        atksp = (double) (atksp*cdPerLev);
     } 
 }
 
-Player* Player::parseUnit(std::string input){
+Hero Hero::parse(std::string json){
 
-   std::map<std::string, std::any> jdm = Json::JsonParser(input);
+   JSON jdm = JSON::parseFromFile(json);
+         
+   std::vector<std::string> PlayerData {
+    "name",
+    "base_health_points",
+    "base_damage",
+    "base_attack_cooldown",
+    "experience_per_level",
+    "health_point_bonus_per_level",
+    "damage_bonus_per_level",
+    "cooldown_multiplier_per_level"
+   };
 
-   return Player::parseHelper(jdm);
-}
 
-Player* Player::parseUnit(std::istream& input){
-
-   std::map<std::string, std::any> jdm = Json::JsonParser(input);
-   return Player::parseHelper(jdm);
-}
-
-
-Player* Player::parseHelper(std::map<std::string, std::any>& jdm){
-     
-   std::vector<std::string> PlayerData {"name", "hp", "dmg" ,"atksp"};
    std::vector<std::string>::size_type i;
    for (i = 0; i < PlayerData.size(); i++)
    {
-        if (jdm.find(PlayerData[i]) == jdm.end())
-        {
-            throw std::invalid_argument("Json does not contain all data for the Player initialization.");
+        if (!jdm.count(PlayerData.at(i)) ) {
+            throw JSON::ParseException();
         }
     }
 
-    std::string name = std::any_cast<std::string>(jdm["name"]);
-    int hp = std::any_cast<int>(jdm["hp"]);
-    int dmg = std::any_cast<int>(jdm["dmg"]);
-    double atksp= std::any_cast<double>(jdm["atksp"]);
-  
-    Player* player = new Player(name,hp,dmg,atksp);
+    std::string name = jdm.get<std::string>("name");
+    int hp = jdm.get<int>("base_health_points");
+    int dmg = jdm.get<int>("base_damage");
+    double atksp= jdm.get<double>("base_attack_cooldown");
+    int xpPerLev = jdm.get<int>("experience_per_level");
+    int hpPerLev = jdm.get<int>("health_point_bonus_per_level");
+    int dmgPerLev = jdm.get<int>("damage_bonus_per_level");
+    double cdPerLev = jdm.get<double>("cooldown_multiplier_per_level");
 
+
+    Hero player(name, hp, dmg, atksp, xpPerLev, hpPerLev, dmgPerLev, cdPerLev);
     return player;
 
+}
+
+
+
+bool operator==(const Hero& p1, const Hero& p2)
+{ 
+    return (p1.name==p2.name && p1.hp==p2.hp && p1.dmg==p2.dmg);
 }
