@@ -1,55 +1,65 @@
-#include "Json.h"
-#include "ReadFileError.h"
-
+#include "JSON.h"
 #include <fstream>
-#include <iostream>
 
 
-std::map<std::string, std::any>  Json::JsonParser(std::string fileOrString)
-{
-    if (fileOrString.find_first_of("{") != std::string::npos){
-        return Json::Parser(fileOrString);
-    }
 
-    std::ifstream jsonFile(fileOrString);
+JSON::JSON(std::map<std::string, std::any> jsonData) : jsonData(jsonData){
 
-    if (jsonFile.fail()){
-        throw ReadFileError(fileOrString);
-    }
-
-    return Json::JsonParser(jsonFile);
 }
 
-std::map<std::string, std::any>  Json::JsonParser(std::istream& InputStream){
-    
-    return Json::Parser(std::string(std::istreambuf_iterator<char>(InputStream), {}));
+bool JSON::count(std::string key) const{
+    return jsonData.count(key);
 }
 
 
-std::map<std::string, std::any> Json::Parser(std::string json) {
+
+JSON JSON::parseFromString(std::string str){
+
+   return JSON::parser(str);
+
+}
+
+JSON JSON::parseFromFile(std::string file){
+
+    std::ifstream jsonFile(file);
+    return JSON::parseFromIstream(jsonFile);
+
+}
+
+
+JSON JSON::parseFromIstream(std::istream& is){
+
+    return JSON::parser(std::string(std::istreambuf_iterator<char>(is), {}));
+
+}
+
+JSON JSON::parser(std::string json) {
     
     std::smatch matches;
     std::regex objectRegex("\\{([\\s\\S]*)\\}");
     std::regex_search(json, matches, objectRegex);
     std::string oneObject = matches.str(1);
-
-    std::map<std::string, std::any>  jdm;
+    json = matches.suffix().str();
+    std::map<std::string, std::any> jdm;
    
-   std::regex floatReg("\"([^\"]*)\" *: *([-+]?\\d+\\.\\d+)");
-   std::regex strReg("\"([^\"]*)\" *: *\"([^\"]*)\"");
-   std::regex intReg("\"([^\"]*)\" *: *(\\d+)");
+    std::regex floatReg("\"([^\"]*)\" *: *([-+]?\\d+\\.\\d+)");
+    std::regex strReg("\"([^\"]*)\" *: *\"([^\"]*)\"");
+    std::regex intReg("\"([^\"]*)\" *: *(\\d+)");
 
     regexParser(matches,oneObject,jdm, strReg, Regex_Type::stringr);
     regexParser(matches,oneObject,jdm, floatReg, Regex_Type::floatr);
     regexParser(matches,oneObject,jdm, intReg, Regex_Type::intr);
 
-    return jdm;
+    JSON jsonObject(jdm);
+
+    return jsonObject;
      
  }
 
 
- void Json::regexParser(std::smatch matches, std::string s, std::map<std::string, std::any>& jdm, std::regex reg, Regex_Type rt) {
+void JSON::regexParser(std::smatch matches, std::string s, std::map<std::string, std::any>& jdm, std::regex reg, Regex_Type rt) {
  
+
     while (std::regex_search(s, matches, reg)) {
         if (!jdm[matches.str(1)].has_value()) {
             switch(rt){
