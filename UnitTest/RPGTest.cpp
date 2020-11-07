@@ -1,6 +1,6 @@
-#include "../Json.cpp"
-#include "../Player.cpp"
-#include "../Game.cpp"
+#include "../JSON.cpp"
+#include "../Hero.cpp"
+#include "../Monster.cpp"
 #include<gtest/gtest.h>
 
 
