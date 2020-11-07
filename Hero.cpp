@@ -5,7 +5,6 @@
 #include <fstream>
 #include <vector>
 #include <stdexcept>
-#include <iostream>
 
 
 Hero::Hero(
@@ -67,8 +66,7 @@ void Hero::fightTilDeath(Monster& enemy){
         }
         else if(CD2<CD1){
             CD1-=CD2;
-            
-            std::cout << enemy.getName() << " -> " <<  name << std::endl;
+        
             sufferDammage(enemy);
             
             CD2=enemy.getAttackCoolDown();
