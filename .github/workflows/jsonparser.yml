@@ -1,8 +1,7 @@
 name: JsonUnitTest
 
 on:
-  push:
-    branches: [jsonparser]
+  push
 
 jobs:
   build:

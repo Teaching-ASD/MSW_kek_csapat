@@ -1,8 +1,7 @@
 name: LevelUp 
 
 on:
-  push:
-    branch: [levelup]
+  push
     
 jobs:
   build_and_test:

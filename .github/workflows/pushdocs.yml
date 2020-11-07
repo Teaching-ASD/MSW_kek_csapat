@@ -2,10 +2,7 @@ name: Pushdocumentation
 
 
 on:
-  push:
-    branches:
-      - attackspeed
-      - gh-pages
+  push
 
 jobs:
   deploy:
