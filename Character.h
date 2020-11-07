@@ -50,9 +50,9 @@ public:
     */
     double getAttackCoolDown() const;
 
-    bool isAlive() const;///< This isAlive metods,we can check that the enemy or hero is alive.
+    bool isAlive() const;///< This isAlive metods, we can check that the opject is alive.
 
-    int sufferDammage(Character& enemy/**< [in] this is enemy player parameter */);
+    int sufferDammage(Character& enemy/**< [in] this return integer,what player have dammage to enemy */);
 
 
 };

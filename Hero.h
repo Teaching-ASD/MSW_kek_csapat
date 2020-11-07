@@ -44,7 +44,7 @@ public:
     double cdPerLev/**[in] this is a cooldown/level parameter*/);
 
 
-    void increaseXP(int diff);///<Hero increase xp while attack the another player.
+    void increaseXP(int diff/**< [in] This is the number how many xp get player */);///<Hero increase xp while attack the another player.
 
     friend bool operator==(const Hero& p1/**[in] this is First Hero reference*/, const Hero& p2/**[in] this is Secound Hero reference*/); ///<Comparsion operator.
 

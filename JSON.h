@@ -34,7 +34,10 @@ public:
     bool count(std::string key) const;
     
     template<typename T/**[in] this is a name of T template */>
-    T get(std::string key) const;
+    T get(std::string key/**[in] this is a input key, what is in the map*/) const;
+     /**
+    * \return correct type value, from json.
+    */
     ///This is the string parser
     static JSON parseFromString(std::string str/**[in] this is string parameter */); 
     ///This is the file parser
