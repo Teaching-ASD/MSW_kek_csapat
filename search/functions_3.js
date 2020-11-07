@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['player',['Player',['../classPlayer.html#a58ec2fdef9f2a6ec867e47f969510a04',1,'Player']]]
+  ['increasexp',['increaseXP',['../classHero.html#abf77e0774a1fb89fba0256891121387e',1,'Hero']]]
 ];

@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['getatksp',['getAtksp',['../classPlayer.html#a9e4e0ca5d697e98dc007e2980780eb4b',1,'Player']]],
-  ['getdmg',['getDMG',['../classPlayer.html#a33bb2286cc8ae5441ed9acbafd1d3343',1,'Player']]],
-  ['gethp',['getHP',['../classPlayer.html#a27d7b8bebd9805deafb389d26e2e1790',1,'Player']]],
-  ['getname',['getName',['../classPlayer.html#a73e4ff2d70e62ca7e3be1d9b4ad9de85',1,'Player']]]
+  ['getattackcooldown',['getAttackCoolDown',['../classCharacter.html#a44d2b7c4acb13bc0ee070b951a595ab3',1,'Character']]],
+  ['getdamage',['getDamage',['../classCharacter.html#a4b5771117324e7bcf7afd005b2aa5943',1,'Character']]],
+  ['gethealthpoints',['getHealthPoints',['../classCharacter.html#a11c7a043e31cad72a2dd090b8daac6d2',1,'Character']]],
+  ['getname',['getName',['../classCharacter.html#ad79f892fe576c7ef0804cad502d94517',1,'Character']]]
 ];
