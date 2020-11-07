@@ -14,7 +14,7 @@
  * \version 1.0
  * \date 2020-10-13
  * 
- */
+*/
 
 #ifndef MONSTER_H
 #define MONSTER_H

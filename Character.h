@@ -14,7 +14,7 @@
  * \version 1.0
  * \date 2020-10-13
  * 
- */
+*/
 
 #ifndef CHARACTER_H
 #define CHARACTER_H

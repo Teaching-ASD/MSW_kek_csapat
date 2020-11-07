@@ -10,7 +10,7 @@
  * \version 1.0
  * \date 2020-10-13
  * 
- */
+*/
 
 #ifndef HERO_H
 #define HERO_H
