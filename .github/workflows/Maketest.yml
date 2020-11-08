@@ -17,6 +17,9 @@ jobs:
         run: sudo apt-get install cppcheck && sudo apt-get install valgrind
       - name: Creating cppcheck artifacts
         uses: actions/upload-artifact@v2
+        with:
+          name: cppcheck_report
+          path: cppcheck_report.txt
       - name: Build 
         run: make test
 
