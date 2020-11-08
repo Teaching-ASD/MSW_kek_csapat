@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build the application
-        run:  g++ -std=c++17 *cpp -Wall
+        run:  g++-9 -std=c++17 *cpp -Wall
       - name: Make executable
         run: chmod +x ./run_fight.sh
       - name: Run scenario1.json
