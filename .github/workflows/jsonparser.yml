@@ -1,7 +1,9 @@
 name: JsonUnitTest
 
 on:
-  push
+  push:
+    branches: [unittests]
+
 
 jobs:
   build:
