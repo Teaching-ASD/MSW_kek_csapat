@@ -16,7 +16,7 @@ jobs:
       - name: Getting dependencies
         run: sudo apt-get install cppcheck && sudo apt-get install valgrind
       - name: Creating cppcheck artifacts
-        uses: action/upload-artifact@v2
+        uses: actions/upload-artifact@v2
         with:
           name: cppcheck_report
           path: cppcheck_report.txt
