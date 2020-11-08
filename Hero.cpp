@@ -136,5 +136,15 @@ Hero Hero::parse(std::string json){
 
 bool operator==(const Hero& p1, const Hero& p2)
 { 
-    return (p1.name==p2.name && p1.hp==p2.hp && p1.dmg==p2.dmg);
+    return (
+        p1.name==p2.name && 
+        p1.hp==p2.hp && 
+        p1.dmg==p2.dmg &&
+        p1.atksp==p2.atksp &&
+        p1.cdPerLev == p2.cdPerLev &&
+        p1.xpPerLev == p2.xpPerLev &&
+        p1.hpPerLev == p2.hpPerLev &&
+        p1.dmgPerLev == p2.dmgPerLev &&
+        p1.level == p2.level 
+        );
 }
