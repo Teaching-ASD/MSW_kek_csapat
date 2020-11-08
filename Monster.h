@@ -28,12 +28,12 @@ class Monster : public Character {
 public:
 
 	Monster(
-    std::string name,
+    const std::string& name,
     int hp, 
     int dmg, 
     double atksp) : Character(name, hp, dmg, atksp){}
 
-    static Monster parse(std::string json);
+    static Monster parse(const std::string& json);
 
   
 };

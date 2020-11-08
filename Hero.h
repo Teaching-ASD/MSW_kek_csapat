@@ -34,7 +34,7 @@ class Hero : public Character {
 public:
 ///This is a constuctor for Hero
     Hero(
-    std::string name /**[in] this is a name parameter*/, 
+    const std::string& name /**[in] this is a name parameter*/, 
     int hp/**[in] this is a hp parameter*/, 
     int dmg/**[in] this is a dmg parameter*/, 
     double atksp/**[in] this is a cooldown parameter*/,

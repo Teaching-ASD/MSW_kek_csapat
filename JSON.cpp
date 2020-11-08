@@ -3,7 +3,7 @@
 #include <iostream>
 
 
-JSON::JSON(std::map<std::string, std::any> jsonData) : jsonData(jsonData){
+JSON::JSON(const std::map<std::string, std::any>& jsonData) : jsonData(jsonData){
 
 }
 
@@ -39,7 +39,6 @@ JSON JSON::parser(std::string json) {
     std::regex objectRegex("\\{([\\s\\S]*)\\}");
     std::regex_search(json, matches, objectRegex);
     std::string oneObject = matches.str(1);
-    json = matches.suffix().str();
     std::map<std::string, std::any> jdm;
    
     std::regex floatReg("\"([^\"]*)\" *: *([-+]?\\d+\\.\\d+)");
