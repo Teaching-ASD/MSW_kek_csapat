@@ -1,0 +1,22 @@
+name: Attackspeed workflow
+
+on:
+  push
+  
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the application
+        run: g++-9 -std=c++17 *.cpp 
+      - name: Make executable
+        run: chmod +x ./run_fight.sh
+      - name: Run scenario1.json
+        run: ./run_fight.sh a.out scenario1 generated_output1.txt
+      - name: Check resoult of input output tets
+        run: diff -w -B generated_output1.txt ./GoodOutput/output1.txt 
+      - name: Run scenario2.json
+        run: ./run_fight.sh a.out scenario2 generated_output2.txt
+      - name: Check resoult of input output tets
+        run: diff -w -B generated_output2.txt ./GoodOutput/output2.txt 

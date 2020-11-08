@@ -6,7 +6,6 @@
 *.sh
 bin/
 *.o
-rpg
 #Doxigen
 /DOCS
 
@@ -17,7 +16,6 @@ CMakeFiles/
 Makefile
 runTests
 !CMakeLists.txt
-!good_output.txt
 
 #CA
 callgrind.*

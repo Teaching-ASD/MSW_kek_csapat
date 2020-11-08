@@ -14,10 +14,11 @@
  * \version 1.0
  * \date 2020-10-13
  * 
- */
+*/
 
 #ifndef CHARACTER_H
 #define CHARACTER_H
+
 #include <string>
 
 class Character {
@@ -39,18 +40,21 @@ public:
     /**
      * \return The Character hp
     */
-    int getHP() const;
+    int getHealthPoints() const;
     /**
     * \return The Character dmg
     */
-    int getDMG() const;
+    int getDamage() const;
     /**
     * \return The Character cooldown
     */
-    double getAtksp() const;
+    double getAttackCoolDown() const;
+
+    bool isAlive() const;///< This isAlive metods, we can check that the opject is alive.
+
+    int sufferDammage(Character& enemy/**< [in] this return integer,what player have dammage to enemy */);
 
 
-  
 };
 
-#endif
+#endif //Character_H

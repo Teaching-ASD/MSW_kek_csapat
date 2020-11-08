@@ -8,17 +8,37 @@ std::string Character::getName() const {
     return name;
 }  
 
-int Character::getHP() const {
+int Character::getHealthPoints() const {
   return hp; 
 }
 
-int Character::getDMG() const{
+int Character::getDamage() const{
     return dmg;
 }
   
-double Character::getAtksp() const {
+double Character::getAttackCoolDown() const {
   return atksp;
 }
+
+bool Character::isAlive() const{
+    return hp > 0;
+}
+
+int Character::sufferDammage(Character& enemy) {
+    int diff = hp-enemy.getDamage();
+    if ( diff >= 0){
+        hp-=enemy.getDamage();
+        diff=enemy.getDamage();
+    }
+    else {
+        diff = hp;
+        hp=0;
+    }
+    return diff;
+}
+
+
+
 
 
 
