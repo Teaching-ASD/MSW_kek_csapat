@@ -1,7 +1,7 @@
 OBJS := Character.o Hero.o JSON.o main.o Monster.o
 CFLAGS := -std=c++17 -Wall -Wextra -g
 FILES := Character.cpp Hero.cpp JSON.cpp main.cpp Monster.cpp
-CC := g++
+CC := g++-9
 VLG := --error-exitcode=1 --leak-check=full 
 TESTFLDR := UnitTest
 JSON := ./Scenarios/scenario1.json 
