@@ -1,7 +1,7 @@
 name: Attackspeed workflow
 
 on:
-  push:
+  push
   
 jobs:
   build_and_test:
