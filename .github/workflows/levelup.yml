@@ -25,12 +25,12 @@ jobs:
           path: cppcheck_report.txt
 
       - name: Build with sanitizer
-        run: g++ -std=c++17 *cpp -Wall -Wextra -g -fsanitize=address -O
+        run: g++-9 -std=c++17 *cpp -Wall -Wextra -g -fsanitize=address -O
       - name: Run sanitizer 
         run:  ./a.out Units/player1.json Units/player2.json
 
       - name: Build for valgrind and callgrind
-        run: g++ -std=c++17 *cpp -Wall -Wextra -g
+        run: g++-9 -std=c++17 *cpp -Wall -Wextra -g
       - name: Run valgrind 
         run:  valgrind --leak-check=full --error-exitcode=1 ./a.out Units/player1.json Units/player2.json 
       - name: Run callgrind
