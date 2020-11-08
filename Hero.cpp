@@ -56,13 +56,11 @@ void Hero::fightTilDeath(Monster& enemy){
             CD2=enemy.getAttackCoolDown();          
         }
         if(CD1<CD2){
-            CD2-=CD1;
             
-        
             diff = enemy.sufferDammage(*this);
             increaseXP(diff);
-
             CD1=atksp;
+            CD2-=CD1;    
         }
         else if(CD2<CD1){
             CD1-=CD2;
