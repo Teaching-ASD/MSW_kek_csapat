@@ -1,7 +1,8 @@
 name: JsonUnitTest
 
 on:
-  push
+  push:
+    branches: [unittests]
 
 jobs:
   build:
@@ -11,7 +12,7 @@ jobs:
       run: sudo apt-get install libgtest-dev && cd /usr/src/gtest && sudo cmake . && sudo make && sudo cp *.a /usr/lib && sudo ln -s /usr/lib/libgtest.a /usr/local/lib/libgtest.a && sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/libgtest_main.a
     - uses: actions/checkout@v2
     - name: configure
-      run: cd UnitTest && cmake .
+      run: cd UnitTest && cmake
     - name: make
       run: cd UnitTest && make
     - name: Run Test
