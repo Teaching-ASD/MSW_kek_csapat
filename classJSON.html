@@ -77,27 +77,95 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a054c13456eef1aa90bd81edfde479e7a"><td class="memItemLeft" align="right" valign="top"><a id="a054c13456eef1aa90bd81edfde479e7a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>JSON</b> (std::map&lt; std::string, std::any &gt; jsonData)</td></tr>
-<tr class="separator:a054c13456eef1aa90bd81edfde479e7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a812a62f525bcd1f0198f357246c96484"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJSON.html#a812a62f525bcd1f0198f357246c96484">JSON</a> (const std::map&lt; std::string, std::any &gt; &amp;jsonData)</td></tr>
+<tr class="separator:a812a62f525bcd1f0198f357246c96484"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adeb93dee120abb9acc4b53f323c28077"><td class="memItemLeft" align="right" valign="top"><a id="adeb93dee120abb9acc4b53f323c28077"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>count</b> (std::string key) const</td></tr>
 <tr class="separator:adeb93dee120abb9acc4b53f323c28077"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab68fc3c63148bc330dd632930d86e5e5"><td class="memTemplParams" colspan="2"><a id="ab68fc3c63148bc330dd632930d86e5e5"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ab68fc3c63148bc330dd632930d86e5e5"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><b>get</b> (std::string key) const</td></tr>
+<tr class="memitem:ab68fc3c63148bc330dd632930d86e5e5"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ab68fc3c63148bc330dd632930d86e5e5"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classJSON.html#ab68fc3c63148bc330dd632930d86e5e5">get</a> (std::string key) const</td></tr>
 <tr class="separator:ab68fc3c63148bc330dd632930d86e5e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:af461f9d9064cc49d47e0eeb1ac87b1d8"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classJSON.html">JSON</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJSON.html#af461f9d9064cc49d47e0eeb1ac87b1d8">parseFromString</a> (std::string str)</td></tr>
+<tr class="memdesc:af461f9d9064cc49d47e0eeb1ac87b1d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the string parser.  <a href="#af461f9d9064cc49d47e0eeb1ac87b1d8">More...</a><br /></td></tr>
 <tr class="separator:af461f9d9064cc49d47e0eeb1ac87b1d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09a683316632ae92e865c05f12bb0655"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classJSON.html">JSON</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJSON.html#a09a683316632ae92e865c05f12bb0655">parseFromFile</a> (std::string file)</td></tr>
+<tr class="memdesc:a09a683316632ae92e865c05f12bb0655"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the file parser.  <a href="#a09a683316632ae92e865c05f12bb0655">More...</a><br /></td></tr>
 <tr class="separator:a09a683316632ae92e865c05f12bb0655"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6508150a0bd187c18f55130ac3da872a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classJSON.html">JSON</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJSON.html#a6508150a0bd187c18f55130ac3da872a">parseFromIstream</a> (std::istream &amp;is)</td></tr>
+<tr class="memdesc:a6508150a0bd187c18f55130ac3da872a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the istream parser.  <a href="#a6508150a0bd187c18f55130ac3da872a">More...</a><br /></td></tr>
 <tr class="separator:a6508150a0bd187c18f55130ac3da872a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a812a62f525bcd1f0198f357246c96484"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a812a62f525bcd1f0198f357246c96484">&#9670;&nbsp;</a></span>JSON()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">JSON::JSON </td>
+          <td>(</td>
+          <td class="paramtype">const std::map&lt; std::string, std::any &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jsonData</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">jsonData</td><td>this is string parameter [in] this is any parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab68fc3c63148bc330dd632930d86e5e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab68fc3c63148bc330dd632930d86e5e5">&#9670;&nbsp;</a></span>get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T JSON::get </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>key</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">key</td><td>this is a input key, what is in the map </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a09a683316632ae92e865c05f12bb0655"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a09a683316632ae92e865c05f12bb0655">&#9670;&nbsp;</a></span>parseFromFile()</h2>
 
@@ -121,9 +189,11 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>This is the file parser. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">file</td><td>this is isstring&amp; parameter </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">file</td><td>this is file parameter </td></tr>
   </table>
   </dd>
 </dl>
@@ -153,9 +223,11 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>This is the istream parser. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">is</td><td>this is isstring&amp; parameter </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">is</td><td>this is istring&amp; parameter </td></tr>
   </table>
   </dd>
 </dl>
@@ -185,6 +257,9 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>This is the string parser. </p>
+<dl class="section return"><dt>Returns</dt><dd>correct type value, from json. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">str</td><td>this is string parameter </td></tr>
