@@ -58,7 +58,7 @@ public:
     */
     int getMaxHealthPoints() const;
     /**
-    * \return The Character max health points
+    * \return The Character max health points.
     */
 
 private:
