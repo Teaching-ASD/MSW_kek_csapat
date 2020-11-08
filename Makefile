@@ -1,5 +1,5 @@
 OBJS := Character.o Hero.o JSON.o main.o Monster.o
-CFLAGS := -std=c++17 -Wall -Wextra -g
+CFLAGS := -std=c++17 -lstdc++fs -Wall -Wextra -g
 FILES := Character.cpp Hero.cpp JSON.cpp main.cpp Monster.cpp
 CC := g++
 VLG := --error-exitcode=1 --leak-check=full 
