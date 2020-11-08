@@ -14,7 +14,7 @@
  * \version 1.0
  * \date 2020-10-13
  * 
- */
+*/
 
 #ifndef CHARACTER_H
 #define CHARACTER_H
@@ -50,11 +50,10 @@ public:
     */
     double getAttackCoolDown() const;
 
-    bool isAlive() const;
-
-    int sufferDammage(const Character& enemy);
+    bool isAlive() const;///< This isAlive metods, we can check that the opject is alive.
+    int sufferDammage(const Character& enemy/**< [in] this return integer,what player have dammage to enemy */)
 
 
 };
 
-#endif
+#endif //Character_H

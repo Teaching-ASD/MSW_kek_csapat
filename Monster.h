@@ -1,12 +1,12 @@
 /**
- * \class Character
+ * \class Monster
  * 
  * \ingroup Example package
  *  
- * \brief Character class
+ * \brief Monster class
  * 
- * This is a Charater class. Character have name, health, damage, and cooldown.
- * Character is base class for RPG fight.
+ * This is a Monster class. Monster have name, health, damage, and cooldown.
+ * Monster is base class for RPG fight.
  * They can fight but they can't take experience.
  * More complex game features in the Player child class.
  * 
@@ -14,7 +14,7 @@
  * \version 1.0
  * \date 2020-10-13
  * 
- */
+*/
 
 #ifndef MONSTER_H
 #define MONSTER_H
@@ -28,14 +28,15 @@ class Monster : public Character {
 public:
 
 	Monster(
-    const std::string& name,
-    int hp, 
-    int dmg, 
+
+    const std::string& name,///< This is the player name this is string variable
+    int hp, ///< This is the player hp this is int variable
+    int dmg, ///< This is the player dmg this is int variable
     double atksp) : Character(name, hp, dmg, atksp){}
 
-    static Monster parse(const std::string& json);
+    static Monster parse(const std::string& json/**< [in] Name of the json */);
 
   
 };
 
-#endif
+#endif //Monster_H

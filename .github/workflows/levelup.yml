@@ -32,7 +32,7 @@ jobs:
       - name: Build for valgrind and callgrind
         run: g++-9 -std=c++17 *cpp -Wall -Wextra -g
       - name: Run valgrind 
-        run:  valgrind --leak-check=full --error-exitcode=1 ./a.out  Scenarios/scenario1.json
+        run:  valgrind --leak-check=full --error-exitcode=1 ./a.out Scenarios/scenario1.json
       - name: Run callgrind
         run: valgrind --tool=callgrind ./a.out Scenarios/scenario1.json
 
