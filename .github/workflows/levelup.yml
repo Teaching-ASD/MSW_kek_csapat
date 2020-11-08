@@ -27,14 +27,14 @@ jobs:
       - name: Build with sanitizer
         run: g++-9 -std=c++17 *cpp -Wall -Wextra -g -fsanitize=address -O
       - name: Run sanitizer 
-        run:  ./a.out Units/player1.json Units/player2.json
+        run:  ./a.out Scenarios/scenario1.json  Scenarios/scenario2.json 
 
       - name: Build for valgrind and callgrind
         run: g++-9 -std=c++17 *cpp -Wall -Wextra -g
       - name: Run valgrind 
-        run:  valgrind --leak-check=full --error-exitcode=1 ./a.out Units/player1.json Units/player2.json 
+        run:  valgrind --leak-check=full --error-exitcode=1 ./a.out Scenarios/scenario1.json  Scenarios/scenario2.json 
       - name: Run callgrind
-        run: valgrind --tool=callgrind ./a.out Units/player1.json Units/player2.json
+        run: valgrind --tool=callgrind ./a.out Scenarios/scenario1.json  Scenarios/scenario2.json 
 
 
  
