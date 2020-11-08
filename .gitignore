@@ -12,7 +12,9 @@ bin/
 CMakeFiles/
 
 *.txt
-
+#Makefile
+*.o
+build
 runTests
 !CMakeLists.txt
 

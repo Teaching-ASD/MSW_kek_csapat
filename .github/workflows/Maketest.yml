@@ -9,5 +9,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Get test
+        run: sudo apt install valgrind cppcheck
+      - name: Install gtest manuality
+        run: sudo apt-get install libgtest-dev && cd /usr/src/gtest && sudo cmake . && sudo make && sudo cp *.a /usr/lib && sudo ln -s /usr/lib/libgtest.a /usr/local/lib/libgtest.a && sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/libgtest_main.a
+      - name: Getting dependencies
+        run: sudo apt-get install cppcheck && sudo apt-get install valgrind
+      - name: Creating cppcheck artifacts
+        uses: action/upload-artifact@v2
+        with:
+          name: cppcheck_report
+          path: cppcheck_report.txt
       - name: Build 
-        run: make build
+        run: make test
+
