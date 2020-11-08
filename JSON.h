@@ -30,6 +30,7 @@ class JSON
 
 public:
 
+    JSON()=default;
     JSON(std::map<std::string, std::any> jsonData);
     bool count(std::string key) const;
     
