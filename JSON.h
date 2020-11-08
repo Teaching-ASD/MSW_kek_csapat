@@ -29,8 +29,9 @@ class JSON
     enum Regex_Type {intr, stringr, floatr};
 
 public:
-
-    JSON(std::map<std::string/**[in] this is string parameter */, std::any/**[in] this is any parameter */> jsonData);
+  
+    JSON()=default;
+    explicit JSON(const std::map<std::string/**[in] this is string parameter */, std::any/**[in] this is any parameter */>& jsonData);
     bool count(std::string key) const;
     
     template<typename T/**[in] this is a name of T template */>

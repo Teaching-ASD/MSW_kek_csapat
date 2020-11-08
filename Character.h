@@ -30,7 +30,7 @@ protected:
     double atksp; ///< This is the player cooldown this is double variable
 
 public:
-	Character(std::string name, int hp, int dmg, double atksp);
+	Character(const std::string& name, int hp, int dmg, double atksp);
 
     ///This is a simple getters for getting the players name, hp, dmg, cooldown 
     /**
@@ -51,8 +51,7 @@ public:
     double getAttackCoolDown() const;
 
     bool isAlive() const;///< This isAlive metods, we can check that the opject is alive.
-
-    int sufferDammage(Character& enemy/**< [in] this return integer,what player have dammage to enemy */);
+    int sufferDammage(const Character& enemy/**< [in] this return integer,what player have dammage to enemy */);
 
 
 };
