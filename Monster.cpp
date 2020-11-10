@@ -3,7 +3,7 @@
 #include <vector>
 #include <stdexcept>
 
-Monster Monster::parse(std::string json){
+Monster Monster::parse(const std::string& json){
 
    JSON jdm = JSON::parseFromFile(json); 
 

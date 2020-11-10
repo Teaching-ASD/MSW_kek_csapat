@@ -11,7 +11,7 @@
  * \version 1.0
  * \date 2020-10-13
  * 
- */
+*/
 
 #ifndef JSON_H
 #define JSON_H
@@ -29,16 +29,22 @@ class JSON
     enum Regex_Type {intr, stringr, floatr};
 
 public:
-
-    JSON(std::map<std::string, std::any> jsonData);
+  
+    JSON()=default;
+    explicit JSON(const std::map<std::string/**[in] this is string parameter */, std::any/**[in] this is any parameter */>& jsonData);
     bool count(std::string key) const;
     
-    template<typename T>
-    T get(std::string key) const;
-
+    template<typename T/**[in] this is a name of T template */>
+    T get(std::string key/**[in] this is a input key, what is in the map*/) const;
+     /**
+    * \return correct type value, from json.
+    */
+    ///This is the string parser
     static JSON parseFromString(std::string str/**[in] this is string parameter */); 
-    static JSON parseFromFile(std::string file/**[in] this is isstring& parameter */);
-    static JSON parseFromIstream(std::istream& is/**[in] this is isstring& parameter */);
+    ///This is the file parser
+    static JSON parseFromFile(std::string file/**[in] this is file parameter */);
+    ///This is the istream parser
+    static JSON parseFromIstream(std::istream& is/**[in] this is istring& parameter */);
     
     struct ParseException : public std::exception {};    
 
@@ -65,4 +71,4 @@ inline T JSON::get(std::string key) const {
 
 
 
-#endif
+#endif //JSON_H
