@@ -5,15 +5,16 @@
 #IOTest
 *.sh
 bin/
-*.o
 #Doxigen
 /DOCS
 
 #Unitest
 CMakeFiles/
-*.cmake
+
 *.txt
-Makefile
+#Makefile
+*.o
+build
 runTests
 !CMakeLists.txt
 

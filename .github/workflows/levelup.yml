@@ -27,7 +27,7 @@ jobs:
       - name: Build with sanitizer
         run: g++-9 -std=c++17 *cpp -Wall -Wextra -g -fsanitize=address -O
       - name: Run sanitizer 
-        run:  ./a.out Scenarios/scenario1.json
+        run:  ./a.out Scenarios/scenario1.json 
 
       - name: Build for valgrind and callgrind
         run: g++-9 -std=c++17 *cpp -Wall -Wextra -g
