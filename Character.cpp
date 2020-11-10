@@ -1,6 +1,6 @@
 #include "Character.h"
 
-Character::Character(std::string name, int hp, int dmg, double atksp) : name(name), hp(hp), dmg(dmg), atksp(atksp) {
+Character::Character(const std::string& name, int hp, int dmg, double atksp) : name(name), hp(hp), dmg(dmg), atksp(atksp) {
 
 }
 
@@ -24,7 +24,7 @@ bool Character::isAlive() const{
     return hp > 0;
 }
 
-int Character::sufferDammage(Character& enemy) {
+int Character::sufferDammage(const Character& enemy) {
     int diff = hp-enemy.getDamage();
     if ( diff >= 0){
         hp-=enemy.getDamage();
