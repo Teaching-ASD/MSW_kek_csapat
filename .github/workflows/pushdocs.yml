@@ -8,13 +8,10 @@ jobs:
   deploy:
     name: Deploy to github pages
     runs-on: ubuntu-latest
+    container: smauzerrichard/mosze:latest
     steps:
     - uses: actions/checkout@v2
 
-
-    - run: sudo apt-get install doxygen
-    - run: sudo apt-get install graphviz 
-    - run: doxygen doxconf
 
     - name: Push git subdir as branch
       uses: s0/git-publish-subdir-action@v2.4.0

@@ -6,12 +6,10 @@ on:
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
+    container: smauzerrichard/mosze:latest
     steps:
       - uses: actions/checkout@v2
       - name: Getting dependencies  
-        run: |
-              sudo apt-get install cppcheck
-              sudo apt-get install valgrind
 
       - name: Run Static Code Analysis
         run: |
