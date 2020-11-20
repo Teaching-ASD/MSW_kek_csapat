@@ -45,4 +45,4 @@ creategoogletest:
 unittest: creategoogletest
 	$ (cd $(TESTFLDR) && ./runTests)
 
-test: valgrind callgrid doc
+test: valgrind callgrid
