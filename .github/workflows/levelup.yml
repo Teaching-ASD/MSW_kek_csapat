@@ -6,7 +6,7 @@ on:
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
-    container: smauzerrichard/mosze:latest
+    container: smauzerrichard/mosze:1.0
     steps:
       - uses: actions/checkout@v2
       - name: Getting dependencies  
