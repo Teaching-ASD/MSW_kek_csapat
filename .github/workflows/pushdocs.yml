@@ -11,8 +11,6 @@ jobs:
     container: smauzerrichard/mosze:latest
     steps:
     - uses: actions/checkout@v2
-
-
     - name: Push git subdir as branch
       uses: s0/git-publish-subdir-action@v2.4.0
 
