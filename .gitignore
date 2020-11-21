@@ -10,13 +10,16 @@ bin/
 
 #Unitest
 CMakeFiles/
+*.cmake
+Makefile
 
 #Makefile
 *.o
 build
 runTests
 !CMakeLists.txt
-
+*.txt
+!docker.txt
 #CA
 callgrind.*
 
