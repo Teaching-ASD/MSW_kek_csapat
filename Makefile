@@ -40,7 +40,7 @@ staticCodaAnalysis:
 	cppcheck $(FILES) $(STCD)
 
 creategoogletest:
-	$ (cd $(TESTFLDR) && cmake $(TESTFLDR) && make)
+	$ (cd $(TESTFLDR) && cmake CMakeList.txt && make)
 
 unittest: creategoogletest
 	$ (cd $(TESTFLDR) && ./runTests)
