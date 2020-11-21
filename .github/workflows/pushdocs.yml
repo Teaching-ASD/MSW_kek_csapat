@@ -11,6 +11,8 @@ jobs:
     container: smauzerrichard/mosze:1.0
     steps:
     - uses: actions/checkout@v2
+    - name: Create docs
+      run: make doc
     - name: Push git subdir as branch
       uses: s0/git-publish-subdir-action@v2.4.0
 
