@@ -9,4 +9,5 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   libgtest-dev \
   cppcheck \
   valgrind \
+  cmake \
 && rm -rf /var/lib/apt/lists/*

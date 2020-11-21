@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: smauzerrichard/mosze:1.0
+    container: smauzerrichard/mosze:2.0
     steps:
       - uses: actions/checkout@v2
       - name: Creating cppcheck artifacts
