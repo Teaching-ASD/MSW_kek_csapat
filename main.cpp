@@ -5,11 +5,15 @@
 #include <sstream>
 #include <algorithm>
 #include <iterator>
+#include <vector>
 #include <list>
 
 #include "JSON.h"
 #include "Hero.h"
 #include "Monster.h"
+#include "Map.h"
+#include "Game.h"
+
 
 
 
@@ -39,34 +43,73 @@ int main(int argc, char** argv){
         if (!(scenario.count("hero")&&scenario.count("monsters"))) bad_exit(3);
         else {
             hero_file=scenario.get<std::string>("hero");
-            std::istringstream monsters(scenario.get<std::string>("monsters"));
-            std::copy(std::istream_iterator<std::string>(monsters),
-                std::istream_iterator<std::string>(),
-                std::back_inserter(monster_files));
+            JSON::list monster_file_list=scenario.get<JSON::list>("monsters");
+            for(auto monster_file : monster_file_list)
+                monster_files.push_back(std::get<std::string>(monster_file));
         }
     } catch (const JSON::ParseException& e) {bad_exit(4);}
+
+    Hero* hero=nullptr;
+    std::vector<Monster*> monsters;
+    Map* map=nullptr;
 
     try { 
-        Hero hero{Hero::parse(hero_file)};
-        std::list<Monster> monsters;
+        hero = Hero::parse(hero_file);
         for (const auto& monster_file : monster_files)
             monsters.push_back(Monster::parse(monster_file));        
+        map = new Map("./Maps/Map1.txt");
 
-        while (hero.isAlive() && !monsters.empty()) {
-            std::cout 
-                << hero.getName() << "(" << hero.getLevel()<<")"
-                << " vs "
-                << monsters.front().getName()
-                <<std::endl;
-            hero.fightTilDeath(monsters.front());
-            if (!monsters.front().isAlive()) monsters.pop_front();
-        }
-        std::cout << (hero.isAlive() ? "The hero won." : "The hero died.") << std::endl;
-        std::cout << hero.getName() << ": LVL" << hero.getLevel() << std::endl
-                  << "   HP: "<<hero.getHealthPoints()<<"/"<<hero.getMaxHealthPoints()<<std::endl
-                  << "  DMG: "<<hero.getDamage()<<std::endl
-                  << "  ACD: "<<hero.getAttackCoolDown()<<std::endl
-                  ;
-    } catch (const JSON::ParseException& e) {bad_exit(4);}
+        Game game;
+
+        game.setMap(map);
+        game.putHero(hero, 1, 1);
+
+        game.putMonster(monsters[0],2,1);
+        game.putMonster(monsters[1],3,3);
+        game.putMonster(monsters[2],5,3);
+        game.putMonster(monsters[3],5,3);
+        game.putMonster(monsters[4],5,4);
+        game.putMonster(monsters[5],5,6);
+        game.putMonster(monsters[6],5,6);
+        game.putMonster(monsters[7],5,6);
+
+        game.run();
+
+    } 
+    catch (const JSON::ParseException& e) {bad_exit(4);}
+    
+    catch(const Map::WrongIndexException& me){
+        std::cout << me.what() << std::endl;
+    }
+
+    catch(const Map::FileException& me){
+        std::cout << me.what() << std::endl;
+    }
+
+    catch(const Game::AlreadyHasHeroException& ge){
+        std::cout << ge.what() << std::endl;
+    }
+
+    catch(const Game::AlreadyHasUnitsException& ge){
+        std::cout << ge.what() << std::endl;
+    }
+    
+    catch(const Game::AlreadyStartedException& ge){
+        std::cout << ge.what() << std::endl;
+    }
+      
+    catch(const Game::MonsterAlreadyContains& ge){
+        std::cout << ge.what() << std::endl;
+    }
+    
+    catch(const Game::NotInitializedException& ge){
+        std::cout << ge.what() << std::endl;
+    }
+
+    catch(const Game::OccupiedException& ge){
+        std::cout << ge.what() << std::endl;
+    }
+
+
     return 0;
 }
