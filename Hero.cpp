@@ -10,19 +10,23 @@
 Hero::Hero(
     const std::string& name, 
     int hp, 
-    int dmg, 
+    int pd,
+    int md, 
     double atksp,
+    int def,
+    int defPerLev,
     int xpPerLev,
     int hpPerLev,
     int dmgPerLev,
     double cdPerLev): 
-    Character(name, hp, dmg, atksp),
+    Character(name, hp, pd, md, atksp, def),
+    defPerLev(defPerLev),
     xpPerLev(xpPerLev),
     hpPerLev(hpPerLev),
     dmgPerLev(dmgPerLev),
-    cdPerLev(cdPerLev) {
-        maxHp=hp;
-    }
+    cdPerLev(cdPerLev),
+    maxHp(hp)
+    {}
 
 int Hero::getLevel() const {
     return level;
@@ -32,39 +36,39 @@ int Hero::getMaxHealthPoints() const{
     return maxHp;
 }
     
-void Hero::fightTilDeath(Monster& enemy){
+void Hero::fightTilDeath(Monster* enemy){
 
-        int diff = enemy.sufferDammage(*this);
+        int diff = enemy->sufferDamage(*this);
         increaseXP(diff);
 
-        if(!enemy.isAlive()) {return;}
+        if(!enemy->isAlive()) {return;}
     
-        sufferDammage(enemy);  
+        sufferDamage(*enemy);  
 
         double CD1 = atksp;
-        double CD2 = enemy.getAttackCoolDown();
+        double CD2 = enemy->getAttackCoolDown();
 
-    while(isAlive() && enemy.isAlive()){
+    while(isAlive() && enemy->isAlive()){
         if(CD1==CD2){
 
-            diff = enemy.sufferDammage(*this);
+            diff = enemy->sufferDamage(*this);
             increaseXP(diff);
             
-            sufferDammage(enemy);
+            sufferDamage(*enemy);
 
             CD1=atksp;
-            CD2=enemy.getAttackCoolDown();          
+            CD2=enemy->getAttackCoolDown();          
         }
         else if(CD1<CD2){   
-            diff = enemy.sufferDammage(*this);
+            diff = enemy->sufferDamage(*this);
             increaseXP(diff);
             CD1=atksp;
             CD2-=CD1;
         }
         else if(CD2<CD1){
             CD1-=CD2;        
-            sufferDammage(enemy);
-            CD2=enemy.getAttackCoolDown();
+            sufferDamage(*enemy);
+            CD2=enemy->getAttackCoolDown();
         }
         
     }
@@ -88,24 +92,27 @@ void Hero::levelUp(){
         xp-=xpPerLev;
         maxHp += hpPerLev;
         hp=maxHp;
-        dmg += dmgPerLev;
+        Damage pml(dmgPerLev,dmgPerLev);
+        *damage += pml;
         atksp = (double) (atksp*cdPerLev);
+        def+=defPerLev;
     } 
 }
 
-Hero Hero::parse(std::string json){
+Hero* Hero::parse(std::string json){
 
    JSON jdm = JSON::parseFromFile(json);
          
    std::vector<std::string> PlayerData {
     "name",
     "base_health_points",
-    "base_damage",
     "base_attack_cooldown",
     "experience_per_level",
     "health_point_bonus_per_level",
     "damage_bonus_per_level",
-    "cooldown_multiplier_per_level"
+    "cooldown_multiplier_per_level",
+    "defense",
+    "defense_bonus_per_level", 
    };
 
 
@@ -117,17 +124,23 @@ Hero Hero::parse(std::string json){
         }
     }
 
+    Damage d;
+
+    if(jdm.count("damage")) d.physical=jdm.get<int>("damage");
+    if(jdm.count("magical-damage")) d.magical=jdm.get<int>("magical-damage");
+
+
     std::string name = jdm.get<std::string>("name");
     int hp = jdm.get<int>("base_health_points");
-    int dmg = jdm.get<int>("base_damage");
     double atksp= jdm.get<double>("base_attack_cooldown");
     int xpPerLev = jdm.get<int>("experience_per_level");
     int hpPerLev = jdm.get<int>("health_point_bonus_per_level");
     int dmgPerLev = jdm.get<int>("damage_bonus_per_level");
     double cdPerLev = jdm.get<double>("cooldown_multiplier_per_level");
+    int def = jdm.get<int>("defense");
+    int defPerLev = jdm.get<int>("defense_bonus_per_level");
 
-
-    Hero player(name, hp, dmg, atksp, xpPerLev, hpPerLev, dmgPerLev, cdPerLev);
+    Hero* player = new Hero(name, hp,d.physical,d.magical, atksp, def, defPerLev,  xpPerLev, hpPerLev, dmgPerLev, cdPerLev);
     return player;
 
 }
@@ -139,7 +152,8 @@ bool operator==(const Hero& p1, const Hero& p2)
     return (
         p1.name==p2.name && 
         p1.hp==p2.hp && 
-        p1.dmg==p2.dmg &&
+        p1.damage->physical==p2.damage->physical &&
+        p1.damage->magical==p2.damage->magical &&
         p1.atksp==p2.atksp &&
         p1.cdPerLev == p2.cdPerLev &&
         p1.xpPerLev == p2.xpPerLev &&
