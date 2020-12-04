@@ -1,7 +1,20 @@
 #include "Character.h"
 
-Character::Character(const std::string& name, int hp, int dmg, double atksp) : name(name), hp(hp), dmg(dmg), atksp(atksp) {
 
+
+Character::Character(const std::string& name, int hp,int pd, int md, double atksp, int def) : 
+name(name), 
+hp(hp), 
+damage(new Damage(pd, md)), 
+atksp(atksp),
+def(def), 
+position(new Pos)
+{
+}
+
+Character::~Character(){
+    delete position;
+    delete damage;
 }
 
 std::string Character::getName() const {
@@ -12,9 +25,6 @@ int Character::getHealthPoints() const {
   return hp; 
 }
 
-int Character::getDamage() const{
-    return dmg;
-}
   
 double Character::getAttackCoolDown() const {
   return atksp;
@@ -24,11 +34,19 @@ bool Character::isAlive() const{
     return hp > 0;
 }
 
-int Character::sufferDammage(const Character& enemy) {
-    int diff = hp-enemy.getDamage();
+int Character::sufferDamage(const Character& enemy) {
+
+    int diff = 0;
+    int defDiff = 0;
+    int enemyPDamage = enemy.damage->physical;
+    int enemyMDamage = enemy.damage->magical;
+
+    if(enemyPDamage>=def) defDiff=enemyPDamage-def; 
+
+    diff = hp-(defDiff+enemyMDamage);
     if ( diff >= 0){
-        hp-=enemy.getDamage();
-        diff=enemy.getDamage();
+        hp-=(defDiff+enemyMDamage);
+        diff=(defDiff+enemyMDamage);
     }
     else {
         diff = hp;
@@ -37,9 +55,22 @@ int Character::sufferDammage(const Character& enemy) {
     return diff;
 }
 
+void Character::setPosition(int x, int y){
+    position->set(x,y);
+}
 
+int Character::getPositionX() const{
+    return position->getX();
+}
 
+int Character::getPositionY() const {
+    return position->getY();
+}
 
+int Character::getPhysicalDamage() const {
+    return damage->physical;
+}
 
-
-
+int Character::getMagicalDamage() const {
+    return damage->magical;
+}
