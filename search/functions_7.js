@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sufferdammage_45',['sufferDammage',['../classCharacter.html#a8fa70d758e3b80cff1d38db8c8458509',1,'Character']]]
+  ['sufferdamage',['sufferDamage',['../classCharacter.html#afa437bb9160a925da5009857da63c356',1,'Character']]]
 ];

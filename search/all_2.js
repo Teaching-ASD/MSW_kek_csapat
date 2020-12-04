@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dmg_2',['dmg',['../classCharacter.html#a1aeb2895a7857268dc1550bdb14a3d52',1,'Character']]]
+  ['damage',['Damage',['../structCharacter_1_1Damage.html',1,'Character']]]
 ];
