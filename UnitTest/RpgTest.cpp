@@ -2,17 +2,11 @@
 #include "../Hero.cpp"
 #include "../Monster.cpp"
 #include "../Character.cpp"
+#include "../Map.cpp"
+#include "../Game.cpp"
+#include "../Pos.cpp"
 #include<gtest/gtest.h>
 #include <fstream>
-
-// 1. ha whitespace-eket noveljuk 
-// 2. kulcsok sorrendjet megvaltoztatjuk, akkor ugyanazt a strukturat adja vissza.
-// 3. Character és Hero alapvető függvényinek tesztje
-    // 4. getterek setterek jók-e
-    // 5. Két hero egyenlő-e
-    // 6. Exceptionoket dobnak-e ha kell
-    // 7. levelup harc 
-//8. Teljes teszt
 
 
 class JsonTest : public ::testing::Test {
@@ -36,7 +30,6 @@ class JsonTest : public ::testing::Test {
     }
 
 };
-
 
 TEST_F(JsonTest, count) {
 
@@ -78,12 +71,185 @@ TEST_F(JsonTest, get) {
 
 TEST(HeroTest, ObjectEqualJson){
 
-    Hero hero1 ("Prince Aidan of Khanduras",30, 3, 1.1, 20, 5, 1, 0.9);
-    Hero hero2 = Hero::parse("../Dark_Wanderer.json");
+    Hero hero1 ("Prince Aidan of Khanduras",30, 3, 2, 1.1,3,1,20, 5, 1, 0.9);
+    Hero* hero2 = Hero::parse("../Dark_Wanderer.json");
 
-    EXPECT_EQ(hero1,hero2);
+    EXPECT_EQ(hero1,*hero2);
+
+    delete hero2;
 
 }
+
+
+
+class MapTest : public ::testing::Test {
+    protected:
+        Map* map;
+        void SetUp() override {
+             ASSERT_NO_THROW(map = new Map("../Maps/Map1.txt"));
+        }   
+        void TearDown() override {
+            delete map;
+        }
+};
+
+TEST_F(MapTest, MapInitialization){
+
+    Map testMap("../Maps/Map1.txt");
+
+    ASSERT_EQ(*map, testMap);
+
+    EXPECT_EQ(testMap.getHeight(), 7);
+    EXPECT_EQ(testMap.getWidth(), 14);
+}
+
+TEST_F(MapTest, getMap){
+
+    EXPECT_EQ(map->get(0,13),Map::type::Wall);
+    EXPECT_EQ(map->get(0,3),Map::type::Wall);
+    EXPECT_EQ(map->get(1,1),Map::type::Free);
+
+}
+
+TEST_F(MapTest, setMap){
+
+    EXPECT_EQ(map->get(1,1),Map::type::Free);
+    map->setBlock(Map::type::Hero, 1,1);
+    EXPECT_EQ(map->get(1,1),Map::type::Hero);
+
+}
+
+TEST_F(MapTest, Exception){
+
+    ASSERT_NO_THROW(map->get(0,13));
+    ASSERT_NO_THROW(map->setBlock(Map::type::Free,1,1));
+    
+    ASSERT_THROW(map->get(20,30), Map::WrongIndexException);
+    ASSERT_THROW(map->setBlock(Map::type::Monster,50,80), Map::WrongIndexException);
+}
+
+
+
+class GameTest : public ::testing::Test {
+    protected:
+        Game* game;
+        Hero* hero;
+        Map* map;
+        std::vector<Monster*> monsters;
+        void SetUp() override {
+            game = new Game();
+            hero = new Hero("Prince Aidan of Khanduras",30, 2, 2, 1.1,2,1,20,5, 1, 0.9);
+            monsters.push_back(new Monster("Zombie", 10, 1,0,2.8, 1));
+            monsters.push_back(new Monster("Zombie", 10, 1, 1, 2.8, 1));
+            monsters.push_back(new Monster("Fallen", 4, 2,1, 1.6, 2));
+            
+            
+            ASSERT_THROW(game->putHero(hero,1,1), Map::WrongIndexException);
+            ASSERT_THROW(game->putMonster(monsters[0],3,3), Map::WrongIndexException);                
+  
+
+            ASSERT_NO_THROW(map = new Map("../Maps/Map1.txt"));
+            ASSERT_NO_THROW(game->setMap(map));
+
+            ASSERT_THROW(game->putHero(hero, 4,4), Game::OccupiedException);
+            ASSERT_NO_THROW(game->putHero(hero, 5,3));
+            ASSERT_THROW(game->putHero(hero, 1,1), Game::AlreadyHasHeroException);
+
+            ASSERT_THROW(game->putMonster(monsters[0], 4,4), Game::OccupiedException);
+            ASSERT_NO_THROW(game->putMonster(monsters[0],3,3));
+            ASSERT_THROW(game->putMonster(monsters[1], 5,3), Game::OccupiedException);
+ 
+        }   
+        void TearDown() override {
+           delete game;
+        }
+};
+
+TEST_F(GameTest, setMap){
+
+    Game testGame;
+    Map* testMap = new Map("../Maps/Map1.txt");
+    Hero* testHero = new Hero("Prince Aidan of Khanduras",30, 2,3, 1.1,3,1,20,5, 1, 0.9);
+    Monster* testMonster= new Monster("Zombie", 10, 1, 0, 2.8, 1);
+
+    testGame.setMap(testMap);
+
+    ASSERT_NO_THROW(testGame.putHero(testHero, 5,3));
+    ASSERT_NO_THROW(testGame.putMonster(testMonster,3,3));
+    EXPECT_EQ(*game, testGame);
+
+}
+
+
+TEST_F(GameTest, putHero){
+
+    EXPECT_EQ(map->get(5,3),Map::type::Hero);
+    
+    EXPECT_EQ(hero->getPositionX(),5);
+    EXPECT_EQ(hero->getPositionY(),3);
+
+}
+
+TEST_F(GameTest, putMonster){
+   
+    EXPECT_EQ(map->get(3,3),Map::type::Monster);
+    EXPECT_EQ(monsters[0]->getPositionX(),3);
+    EXPECT_EQ(monsters[0]->getPositionY(),3);
+
+    ASSERT_NO_THROW(game->putMonster(monsters[1],3,3));
+    ASSERT_THROW(game->putMonster(monsters[1], 3,3), Game::MonsterAlreadyContains);
+
+}
+
+TEST_F(GameTest, run){
+
+    Game rawGame;
+    ASSERT_THROW(rawGame.run(), Game::NotInitializedException);
+    Map* map1 = new Map("../Maps/Map1.txt");
+    rawGame.setMap(map1);
+    ASSERT_THROW(rawGame.run(), Game::NotInitializedException);
+
+
+}
+
+class Fight : public ::testing::Test {
+
+protected:
+    Hero*  hero;
+    Monster* monster;
+    void SetUp() override {
+
+        ASSERT_NO_THROW({
+            hero = Hero::parse("../Dark_Wanderer.json");
+            monster = Monster::parse("../Zombie.json");
+        });
+        
+    }   
+    void TearDown() override {
+        delete hero;
+        delete monster;
+    }
+};
+
+TEST_F(Fight, DefenseAndMagic){
+
+
+    EXPECT_EQ(hero->getPhysicalDamage(), 3);
+    EXPECT_EQ(hero->getMagicalDamage(), 2);
+
+    EXPECT_EQ(monster->getPhysicalDamage(), 2);
+    EXPECT_EQ(monster->getMagicalDamage(), 1);
+
+    hero->sufferDamage(*monster);
+
+    EXPECT_EQ(hero->getHealthPoints(), 29);
+
+    monster->sufferDamage(*hero);
+
+    EXPECT_EQ(monster->getHealthPoints(), 6);
+    
+}
+
 
 
 int main(int argc, char **argv) {
