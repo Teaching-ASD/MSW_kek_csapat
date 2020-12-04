@@ -140,7 +140,7 @@ void Game::move(){
         gameMap->setBlock(Map::type::Hero, moveBlock->getX(),moveBlock->getY());
     }
 
-    delete moveBlock;
+
 
 
 }
@@ -161,6 +161,7 @@ void Game::fight(){
             auto it = std::find(gameMonsters.begin(), gameMonsters.end(), enemy);
             if (it != gameMonsters.end()) gameMonsters.erase(it);
             delete enemy;
+            
         }
         enemy=findeMonster();
     }
@@ -198,14 +199,62 @@ void Game::run() {
 }
 
 void Game::print() const {
+    
     std::size_t height = gameMap->getHeight();
+    std::cout<<left_TopCorner;
+    std::size_t width=gameMap->getWidth();
+    for(std::size_t i=0;i<width*2;i++)
+    {
+        std::cout<<topAndBotFrame;
+    }
+    std::cout<<right_TopCorner;
+    std::cout<<std::endl;
     for(std::size_t r =0; r<height; r++){
+        
         std::size_t lenght = gameMap->getRowLenght(r);
+        std::cout<<leftAndRightFrame;
         for(std::size_t c =0; c<lenght; c++){
-            std::cout << (char)gameMap->get(r,c);
+            
+            switch(gameMap->get(r, c))
+            {
+            case Map::type::Free:
+                std::cout<<Free;
+                std::cout<<Free;
+                break;
+            case Map::type::Wall:
+                std::cout<<Wall;
+                std::cout<<Wall;
+                break;
+            case Map::type::Hero:
+                std::cout<<hero;
+                break;
+            case Map::type::Monster:
+                std::cout<<monster;
+                std::cout<<Free;
+                break;
+            case Map::type::Monsters:
+                std::cout<<monsters;
+                break;
+            default:
+                break;
+            }
+            
         }
+        for (std::size_t i = lenght; i < width; i++)
+        {
+            std::cout<<Wall;
+            std::cout<<Wall;
+        }
+        std::cout<<leftAndRightFrame;
         std::cout << std::endl;
     }
+    std::cout<<left_BotCorner;
+    for (std::size_t i= 0; i < width*2 ;i++)
+    {
+        std::cout<<topAndBotFrame;
+    }
+
+    std::cout<<right_BotCorner;
     std::cout << std::endl;
 }
 
