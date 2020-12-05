@@ -110,6 +110,15 @@ int main(int argc, char** argv){
         std::cout << ge.what() << std::endl;
     }
 
+    
+    delete hero;
+    delete map;
+
+    if(!monsters.empty()){
+        for(auto monster : monsters){
+            delete monster;
+        }
+    }
 
     return 0;
 }
