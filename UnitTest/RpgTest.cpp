@@ -71,9 +71,9 @@ TEST_F(JsonTest, get) {
 
 TEST(HeroTest, ObjectEqualJson){
 
-    Hero hero1 ("Prince Aidan of Khanduras",30, 3, 2, 1.1,3,1,20, 5, 1, 0.9);
+    Hero hero1 ("Prince Aidan of Khanduras",30, 3, 2, 1.1, 2, 1, 20, 5, 1, 0.9);
     Hero* hero2 = Hero::parse("../Dark_Wanderer.json");
-
+    
     EXPECT_EQ(hero1,*hero2);
 
     delete hero2;
@@ -212,22 +212,84 @@ TEST_F(GameTest, run){
 
 }
 
+TEST(DamageTest, Operators){
+    
+
+    Character::Damage dmg (1,1);
+
+    dmg+=10; 
+
+    EXPECT_EQ(dmg.physical, 11);
+    EXPECT_EQ(dmg.magical, 11);
+
+    dmg*=2;
+
+    EXPECT_EQ(dmg.physical, 22);
+    EXPECT_EQ(dmg.magical, 22);
+
+    dmg=dmg+10;
+
+    EXPECT_EQ(dmg.physical, 32);
+    EXPECT_EQ(dmg.magical, 32);
+
+    Character::Damage addDmg(2,2);
+
+    dmg+=addDmg;
+
+    EXPECT_EQ(dmg.physical, 34);
+    EXPECT_EQ(dmg.magical, 34);
+
+    dmg*=addDmg;
+
+    EXPECT_EQ(dmg.physical, 68);
+    EXPECT_EQ(dmg.magical, 68);
+
+    dmg=dmg+addDmg;
+
+    EXPECT_EQ(dmg.physical, 70);
+    EXPECT_EQ(dmg.magical, 70);
+
+
+    Character::Damage* pointerDmg = new Character::Damage(1,1);
+
+    *pointerDmg+=10;
+
+    EXPECT_EQ(pointerDmg->physical, 11);
+    EXPECT_EQ(pointerDmg->magical, 11);
+
+}
+
 class Fight : public ::testing::Test {
 
 protected:
     Hero*  hero;
-    Monster* monster;
+    std::vector<Monster*> monsters;
     void SetUp() override {
 
         ASSERT_NO_THROW({
             hero = Hero::parse("../Dark_Wanderer.json");
-            monster = Monster::parse("../Zombie.json");
+            monsters.push_back(Monster::parse("../Zombie.json"));
+            monsters.push_back(Monster::parse("../Zombie.json"));
+            monsters.push_back(Monster::parse("../Fallen.json"));
+            monsters.push_back(Monster::parse("../Fallen.json"));
+            monsters.push_back(Monster::parse("../Fallen.json"));
+            monsters.push_back(Monster::parse("../Fallen.json"));
+            monsters.push_back(Monster::parse("../Fallen.json"));
+            monsters.push_back(Monster::parse("../Zombie.json"));
+            monsters.push_back(Monster::parse("../Zombie.json"));
+            monsters.push_back(Monster::parse("../Fallen.json"));
+            monsters.push_back(Monster::parse("../Fallen.json"));
+            monsters.push_back(Monster::parse("../Fallen.json"));
+            monsters.push_back(Monster::parse("../Fallen.json"));
+            monsters.push_back(Monster::parse("../Fallen.json"));
         });
         
     }   
     void TearDown() override {
         delete hero;
-        delete monster;
+        for(auto& monster : monsters){
+            delete monster;
+        }
     }
 };
 
@@ -236,18 +298,31 @@ TEST_F(Fight, DefenseAndMagic){
 
     EXPECT_EQ(hero->getPhysicalDamage(), 3);
     EXPECT_EQ(hero->getMagicalDamage(), 2);
+    EXPECT_EQ(hero->getDef(), 2);
 
-    EXPECT_EQ(monster->getPhysicalDamage(), 2);
-    EXPECT_EQ(monster->getMagicalDamage(), 1);
+    EXPECT_EQ(monsters[0]->getPhysicalDamage(), 2);
+    EXPECT_EQ(monsters[0]->getMagicalDamage(), 1);
 
-    hero->sufferDamage(*monster);
+    hero->sufferDamage(*monsters[0]);
 
     EXPECT_EQ(hero->getHealthPoints(), 29);
 
-    monster->sufferDamage(*hero);
+    monsters[0]->sufferDamage(*hero);
 
-    EXPECT_EQ(monster->getHealthPoints(), 6);
-    
+    EXPECT_EQ(monsters[0]->getHealthPoints(), 6);
+
+    for(auto monster : monsters){
+        while(monster->isAlive()){
+            int diff = monster->sufferDamage(*hero);
+            hero->increaseXP(diff);
+        }
+    }
+
+    EXPECT_EQ(hero->getPhysicalDamage(), 6);
+    EXPECT_EQ(hero->getMagicalDamage(), 5);
+    EXPECT_EQ(hero->getDef(), 5);
+    EXPECT_EQ(hero->getLevel(), 4);
+
 }
 
 
