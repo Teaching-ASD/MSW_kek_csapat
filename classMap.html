@@ -64,12 +64,21 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="classMap-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Map Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="dynheader">
+Inheritance diagram for Map:</div>
+<div class="dyncontent">
+<div class="center"><img src="classMap__inherit__graph.png" border="0" usemap="#Map_inherit__map" alt="Inheritance graph"/></div>
+<map name="Map_inherit__map" id="Map_inherit__map">
+<area shape="rect" id="node2" href="classMarkedMap.html" title="MarkedMap" alt="" coords="5,80,96,107"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -87,7 +96,9 @@ Public Types</h2></td></tr>
 <b>Hero</b> ='H', 
 <br />
 &#160;&#160;<b>Monster</b> ='m', 
-<b>Unknown</b>
+<b>Monster1</b> = '1', 
+<b>Monster2</b> = '2', 
+<b>Monster3</b> = '3'
 <br />
  }</td></tr>
 <tr class="separator:a41697b848ea9a5aad1910714e0196b7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -101,7 +112,7 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Map</b> (const std::string &amp;filename)</td></tr>
 <tr class="separator:a871049c7b391e75039ccba5a4d757dae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74d5010209ad0da6b05595a33f36fc76"><td class="memItemLeft" align="right" valign="top"><a id="a74d5010209ad0da6b05595a33f36fc76"></a>
-Map::type&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> (int x, int y) const</td></tr>
+virtual Map::type&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> (int x, int y) const</td></tr>
 <tr class="separator:a74d5010209ad0da6b05595a33f36fc76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7dd31cf45e318ef93b4d68fb63ddea8f"><td class="memItemLeft" align="right" valign="top"><a id="a7dd31cf45e318ef93b4d68fb63ddea8f"></a>
 std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getWidth</b> () const</td></tr>
@@ -113,8 +124,17 @@ std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getHeight</b> 
 std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getRowLenght</b> (int r) const</td></tr>
 <tr class="separator:ace4fe18e61a604a6e8a4e8576bc7c328"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab96ce07ed60514491aa2ece03e360ba"><td class="memItemLeft" align="right" valign="top"><a id="aab96ce07ed60514491aa2ece03e360ba"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setBlock</b> (Map::type t, int x, int y)</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setBlock</b> (Map::type t, int x, int y)</td></tr>
 <tr class="separator:aab96ce07ed60514491aa2ece03e360ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:afa82b8e84c7c313e35be2d9ee37c0b8f"><td class="memItemLeft" align="right" valign="top"><a id="afa82b8e84c7c313e35be2d9ee37c0b8f"></a>
+std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>storedGameMap</b></td></tr>
+<tr class="separator:afa82b8e84c7c313e35be2d9ee37c0b8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1049de5d6118083c582f272b477926e7"><td class="memItemLeft" align="right" valign="top"><a id="a1049de5d6118083c582f272b477926e7"></a>
+std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>width</b> =0</td></tr>
+<tr class="separator:a1049de5d6118083c582f272b477926e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
