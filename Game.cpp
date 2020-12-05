@@ -15,19 +15,7 @@ Game::Game(const std::string& mapfilename) : gameMap(new Map(mapfilename)){
 
 
 Game::~Game(){
-
-   delete gameMap;
-   delete gameHero;
    delete moveBlock;
-
-    if(!gameMonsters.empty()){
-        for(auto monster : gameMonsters){
-            delete monster;
-        }
-    }
-
-    gameMonsters.clear();
-    
 }
 
 void Game::setMap(Map* map){
@@ -140,9 +128,6 @@ void Game::move(){
         gameMap->setBlock(Map::type::Hero, moveBlock->getX(),moveBlock->getY());
     }
 
-
-
-
 }
 
 void Game::fight(){
@@ -160,8 +145,6 @@ void Game::fight(){
         if(!enemy->isAlive()) {
             auto it = std::find(gameMonsters.begin(), gameMonsters.end(), enemy);
             if (it != gameMonsters.end()) gameMonsters.erase(it);
-            delete enemy;
-            
         }
         enemy=findeMonster();
     }
@@ -240,6 +223,7 @@ void Game::print() const {
             }
             
         }
+
         for (std::size_t i = lenght; i < width; i++)
         {
             std::cout<<Wall;
@@ -248,7 +232,9 @@ void Game::print() const {
         std::cout<<leftAndRightFrame;
         std::cout << std::endl;
     }
+
     std::cout<<left_BotCorner;
+
     for (std::size_t i= 0; i < width*2 ;i++)
     {
         std::cout<<topAndBotFrame;
