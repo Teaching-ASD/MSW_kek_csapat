@@ -14,6 +14,7 @@ public:
     int getY() const;
     void IDX(bool IorD);
     void IDY(bool IorD);
+    bool isEmpty() const;
 
 
 };

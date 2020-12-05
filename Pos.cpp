@@ -29,3 +29,7 @@ void Pos::IDX(bool IorD){
 void Pos::IDY(bool IorD){
     y += IorD ? 1 : -1;
 }
+
+bool Pos::isEmpty() const{
+    return x < 0 && y < 0;
+}
