@@ -5,8 +5,10 @@
 #include "../Map.cpp"
 #include "../Game.cpp"
 #include "../Pos.cpp"
+#include "../MarkedMap.cpp"
 #include<gtest/gtest.h>
 #include <fstream>
+#include <list>
 
 
 class JsonTest : public ::testing::Test {
@@ -325,6 +327,32 @@ TEST_F(Fight, DefenseAndMagic){
 
 }
 
+
+TEST(MarkedMap, functionTest){
+
+    MarkedMap  markedMap("../Maps/MarkedMap.txt");
+
+    EXPECT_EQ(markedMap.get(0,13),Map::type::Wall);
+    EXPECT_EQ(markedMap.get(0,3),Map::type::Wall);
+    EXPECT_EQ(markedMap.get(1,1),Map::type::Free);
+    EXPECT_EQ(markedMap.get(1,2),Map::type::Hero);
+    EXPECT_EQ(markedMap.get(3,2),Map::type::Monster1);
+    EXPECT_EQ(markedMap.get(3,3),Map::type::Monster2);
+
+    Pos pos = markedMap.getHeroPosition();
+    
+    EXPECT_EQ(pos.getX(),1);
+    EXPECT_EQ(pos.getY(),2);     
+
+    std::list<Pos> monsters = markedMap.getMonsterPositions('1');
+    
+    EXPECT_EQ(monsters.size(),3);
+
+    EXPECT_EQ(monsters.back().getX(),5);
+    EXPECT_EQ(monsters.back().getY(),6);
+
+
+}
 
 
 int main(int argc, char **argv) {
