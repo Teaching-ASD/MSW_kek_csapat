@@ -26,5 +26,5 @@ callgrind.*
 
 
 #Map
-!Map1.txt
+!Maps/*
 
