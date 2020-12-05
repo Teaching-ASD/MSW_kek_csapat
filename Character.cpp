@@ -5,10 +5,10 @@
 Character::Character(const std::string& name, int hp,int pd, int md, double atksp, int def) : 
 name(name), 
 hp(hp), 
-damage(new Damage(pd, md)), 
 atksp(atksp),
 def(def), 
-position(new Pos)
+position(new Pos),
+damage(new Damage(pd, md))
 {
 }
 
@@ -73,4 +73,8 @@ int Character::getPhysicalDamage() const {
 
 int Character::getMagicalDamage() const {
     return damage->magical;
+}
+
+int Character::getDef() const {
+    return def;
 }

@@ -38,23 +38,36 @@ public:
 
         Damage(int p, int m) : physical(p), magical(m) {};
 
-        Damage operator+(const Damage& other){
-            Damage add; 
-            add.physical=physical+other.physical; 
-            add.magical=other.magical;
-            return add;
+        Damage operator+(const Damage& other){ 
+            physical+=other.physical; 
+            magical+=other.magical;
+            return *this;
         }
 
-        Damage operator+=(const Damage& other){
-            Damage add = *this+other;
-            return add;
+        void operator+=(const Damage& other){
+            physical+=other.physical; 
+            magical+=other.magical;
         }
     
-        Damage operator*=(const Damage& other){
-            Damage add; 
-            add.physical = physical * other.physical; 
-            add.magical = magical * other.magical;
-            return add;
+        void operator*=(const Damage& other){
+            physical *= other.physical; 
+            magical *= other.magical;
+        }
+
+        Damage operator+(int num){
+            physical+=num; 
+            magical+=num;
+            return *this;
+        }
+
+        void operator+=(int num){
+            physical+=num; 
+            magical+=num;
+        }
+    
+        void operator*=(int num){
+            physical *= num; 
+            magical *= num;
         }
 
     };
@@ -75,7 +88,7 @@ public:
 
 
 	Character(const std::string& name, int hp, int pd, int md, double atksp, int def);
-    virtual ~Character();
+    ~Character();
 
     ///This is a simple getters for getting the players name, hp, dmg, cooldown 
     /**
@@ -96,12 +109,16 @@ public:
     */
     double getAttackCoolDown() const;
 
+    int getDef() const;
+
     bool isAlive() const;///< This isAlive metods, we can check that the opject is alive.
     int sufferDamage(const Character& enemy/**< [in] this return integer,what player have dammage to enemy */);
     
     void setPosition(int x, int y);
     int getPositionX() const;
     int getPositionY() const;
+
+  
 
 };
 
