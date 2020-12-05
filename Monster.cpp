@@ -34,7 +34,6 @@ Monster* Monster::parse(const std::string& json){
 
     std::string name = jdm.get<std::string>("name");
     int hp = jdm.get<int>("health_points");
-    int dmg = jdm.get<int>("damage");
     double atksp = jdm.get<double>("attack_cooldown");
     int def = jdm.get<int>("defense");
     
