@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8.12)
 
 project(MOSZE_TEST)
 
@@ -17,6 +17,6 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
 add_executable(runTests RpgTest.cpp)
-set (CMAKE_CXX_STANDARD 17)
+set(POLLY_COMPILER_GCC_9_CMAKE_ 1)
 target_compile_features(runTests PRIVATE cxx_std_17)
 target_link_libraries(runTests ${GTEST_LIBRARIES} pthread)
