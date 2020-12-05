@@ -17,21 +17,23 @@ public:
 		Monsters='M',
 		Hero='H',
 		Monster='m',
-		Unknown
+		Monster1 = '1',
+		Monster2 = '2',
+		Monster3 = '3',
 	}type;
 
-private:
+protected:
 	std::vector<std::string> storedGameMap;
 	std::size_t width=0;
 
 public:
 	Map();
     Map(const std::string& filename);
-	Map::type get(int x, int y)const;
+	virtual Map::type get(int x, int y)const;
 	std::size_t getWidth() const;
 	std::size_t getHeight() const;
 	std::size_t getRowLenght(int r)const;
-	void setBlock(Map::type t, int x, int y);
+	virtual void setBlock(Map::type t, int x, int y);
 
 	class WrongIndexException : virtual public std::runtime_error {
 		public:
