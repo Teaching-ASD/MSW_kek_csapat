@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.19)
+
 project(MOSZE_TEST)
 
 find_package(GTest REQUIRED)
