@@ -1,6 +1,6 @@
-OBJS := Character.o Hero.o JSON.o main.o Monster.o Pos.o Map.o Game.o
+OBJS := Character.o Hero.o JSON.o main.o Monster.o Pos.o Map.o Game.o MarkedMap.o
 CFLAGS := -std=c++17 -Wall -Wextra -g
-FILES := Character.cpp Hero.cpp JSON.cpp main.cpp Monster.cpp Pos.cpp Map.cpp Game.cpp
+FILES := Character.cpp Hero.cpp JSON.cpp main.cpp Monster.cpp Pos.cpp Map.cpp Game.cpp MarkedMap.cpp	
 CC := g++-9
 VLG := --error-exitcode=1 --leak-check=full 
 TESTFLDR := ./UnitTest
@@ -35,6 +35,9 @@ Map.o: Map.cpp
 
 Game.o: Game.cpp
 	$(CC) $(CFLAGS) -c Game.cpp	
+
+MarkedMap.o: MarkedMap.o
+	$(CC) $(CFLAGS) -c MarkedMap.cpp	
 
 clean:
 	rm -rf $(OBJS) build ./DOCS
