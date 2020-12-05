@@ -1,4 +1,4 @@
-OBJS := Character.o Hero.o JSON.o main.o Monster.o
+OBJS := Character.o Hero.o JSON.o main.o Game.o Map.o Monster.o Pos.o
 CFLAGS := -std=c++17 -Wall -Wextra -g
 FILES := Character.cpp Hero.cpp JSON.cpp main.cpp Monster.cpp
 CC := g++-9
@@ -22,8 +22,17 @@ JSON.o: JSON.cpp
 main.o: main.cpp
 	$(CC) $(CFLAGS) -c main.cpp
 
+Game.o: Game.cpp
+	$(CC) $(CFLAGS) -c Game.cpp
+
 Monster.o: Monster.cpp
 	$(CC) $(CFLAGS) -c Monster.cpp
+
+Map.o: Map.cpp
+	$(CC) $(CFLAGS) -c Map.cpp
+
+Pos.o: Pos.cpp
+	$(CC) $(CFLAGS) -c Pos.cpp
 clean:
 	rm -rf $(OBJS) build ./DOCS
 
