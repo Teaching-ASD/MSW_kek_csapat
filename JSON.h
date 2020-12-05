@@ -51,7 +51,10 @@ public:
 	typedef std::list<v> list;
   
     JSON()=default;
-    explicit JSON(const std::map<std::string/**[in] this is string parameter */, std::any/**[in] this is any parameter */>& jsonData);
+    JSON(const std::map<std::string/**[in] this is string parameter */, std::any/**[in] this is any parameter */>& jsonData);
+    ~JSON();
+
+
     bool count(std::string key) const;
     
     template<typename T/**[in] this is a name of T template */>

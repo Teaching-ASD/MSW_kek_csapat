@@ -20,10 +20,13 @@ JSON::JSON(const std::map<std::string, std::any>& jsonData) : jsonData(jsonData)
 
 }
 
+JSON::~JSON() {
+    jsonData.clear();
+}
+
 bool JSON::count(std::string key) const{
     return jsonData.count(key);
 }
-
 
 
 JSON JSON::parseFromString(std::string str){
