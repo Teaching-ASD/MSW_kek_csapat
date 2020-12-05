@@ -25,12 +25,12 @@ class Hero : public Character {
     int xp = 0;
     int level = 1;
     int maxHp;
+    int defPerLev;
     int xpPerLev;
     int hpPerLev;
     int dmgPerLev;
     double cdPerLev;
-    int def;
-    int defPerLev;
+
 
 
 public:

@@ -20,12 +20,12 @@ Hero::Hero(
     int dmgPerLev,
     double cdPerLev): 
     Character(name, hp, pd, md, atksp, def),
+    maxHp(hp),
     defPerLev(defPerLev),
     xpPerLev(xpPerLev),
     hpPerLev(hpPerLev),
     dmgPerLev(dmgPerLev),
-    cdPerLev(cdPerLev),
-    maxHp(hp)
+    cdPerLev(cdPerLev)
     {}
 
 int Hero::getLevel() const {
@@ -92,8 +92,7 @@ void Hero::levelUp(){
         xp-=xpPerLev;
         maxHp += hpPerLev;
         hp=maxHp;
-        Damage pml(dmgPerLev,dmgPerLev);
-        *damage += pml;
+        *damage += dmgPerLev;
         atksp = (double) (atksp*cdPerLev);
         def+=defPerLev;
     } 
@@ -150,15 +149,16 @@ Hero* Hero::parse(std::string json){
 bool operator==(const Hero& p1, const Hero& p2)
 { 
     return (
-        p1.name==p2.name && 
-        p1.hp==p2.hp && 
-        p1.damage->physical==p2.damage->physical &&
-        p1.damage->magical==p2.damage->magical &&
-        p1.atksp==p2.atksp &&
+        p1.name == p2.name && 
+        p1.hp == p2.hp && 
+        p1.damage->physical == p2.damage->physical &&
+        p1.damage->magical == p2.damage->magical &&
+        p1.atksp == p2.atksp &&
+        p1.def == p2.def &&
         p1.cdPerLev == p2.cdPerLev &&
         p1.xpPerLev == p2.xpPerLev &&
         p1.hpPerLev == p2.hpPerLev &&
         p1.dmgPerLev == p2.dmgPerLev &&
-        p1.level == p2.level 
+        p1.level == p2.level
         );
 }
