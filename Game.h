@@ -31,10 +31,10 @@ public:
     Game();
     Game(const std::string& mapfilename);
     virtual ~Game();
-
     void run();
     void registerRenderer(Renderer* renderer);
     const Map* getMap() const;
+    const Hero* getHero() const;
 
     friend bool operator==(const Game& game1, const Game& game2);
 

@@ -22,6 +22,11 @@ const Map* Game::getMap() const {
     return gameMap;
 }
 
+const Hero* Game::getHero() const {
+    return gameHero;
+}
+
+
 void Game::registerRenderer(Renderer* renderer) {
     renderers.push_back(renderer);
 }
@@ -189,12 +194,11 @@ void Game::run() {
         }
         move();
     }
-
     std::cout << (gameHero->isAlive() ? gameHero->getName() + " clear the map." : "The hero died.") << std::endl;
     
 }
 
-
 bool operator==(const Game& game1, const Game& game2){
     return *game1.gameMap==*game2.gameMap;
 }
+

@@ -73,8 +73,8 @@ TEST_F(JsonTest, get) {
 
 TEST(HeroTest, ObjectEqualJson){
 
-    Hero hero1 ("Prince Aidan of Khanduras",30, 3, 2, 1.1, 2, 1, 20, 5, 1, 0.9);
-    Hero* hero2 = Hero::parse("../Units/Dark_Wanderer.json");
+    Hero hero1 ("Prince Aidan of Khanduras",30, 3, 2, 1.1, 2, 1, 20, 5, 1, 0.9,2,1);
+    Hero* hero2 = Hero::parse("../Dark_Wanderer.json");
     
     EXPECT_EQ(hero1,*hero2);
 

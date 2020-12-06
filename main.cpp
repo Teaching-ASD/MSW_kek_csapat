@@ -7,9 +7,11 @@
 #include <iterator>
 #include <vector>
 #include <list>
+#include <fstream>
 
 #include "PreparedGame.h"
 #include "ObserverTextRenderer.h"
+#include "HeroTextRenderer.h"
 
 
 
@@ -33,9 +35,12 @@ int main(int argc, char** argv){
     if (argc != 2) bad_exit(1);
     if (!std::filesystem::exists(argv[1])) bad_exit(2);
 
-    try { 
+    std::ofstream file("log.txt");
+
+    try {
         PreparedGame pg(argv[1]);
-        pg.registerRenderer(new ObserverTextRenderer());
+        pg.registerRenderer(new ObserverTextRenderer(file));
+        pg.registerRenderer(new HeroTextRenderer());
         pg.run();
     } 
     catch (const std::exception& ex ){
