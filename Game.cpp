@@ -9,7 +9,7 @@ Game::Game(){
 }
 
 
-Game::Game(const std::string& mapfilename) : gameMap(new Map(mapfilename)){
+Game::Game(const std::string& mapfilename) : gameMap(new MarkedMap(mapfilename)){
     Game();
 }
 
@@ -18,7 +18,7 @@ Game::~Game(){
    delete moveBlock;
 }
 
-void Game::setMap(Map* map){
+void Game::setMap(MarkedMap* map){
 
     if(isRun) 
         throw Game::AlreadyStartedException("You can\'t initialize map after game started.");
@@ -116,7 +116,8 @@ void Game::move(){
 
     if(isWall) return;
 
-    bool isMonster = Map::type::Monster == blockType ||  Map::type::Monsters == blockType;
+    bool isMonster = Map::type::Monster1 == blockType ||  Map::type::Monster2 == blockType ||
+    blockType == Map::type::Monster3;
 
     if(isMonster) fight();
 
@@ -145,6 +146,7 @@ void Game::fight(){
         if(!enemy->isAlive()) {
             auto it = std::find(gameMonsters.begin(), gameMonsters.end(), enemy);
             if (it != gameMonsters.end()) gameMonsters.erase(it);
+            delete enemy;
         }
         enemy=findeMonster();
     }
@@ -211,12 +213,11 @@ void Game::print() const {
             case Map::type::Hero:
                 std::cout<<hero;
                 break;
-            case Map::type::Monster:
+            case Map::type::Monster1:
+            case Map::type::Monster2: 
+            case Map::type::Monster3:
                 std::cout<<monster;
                 std::cout<<Free;
-                break;
-            case Map::type::Monsters:
-                std::cout<<monsters;
                 break;
             default:
                 break;

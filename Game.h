@@ -3,7 +3,7 @@
 
 #include <string>
 #include <map>
-#include "Map.h"
+#include "MarkedMap.h"
 #include "Monster.h"
 #include "Hero.h"
 #include "JSON.h"
@@ -12,11 +12,11 @@
 
 class Game {
 
-    Map* gameMap=nullptr;
+protected:
+    MarkedMap* gameMap=nullptr;
     Hero* gameHero=nullptr;
     std::vector<Monster*> gameMonsters;
     JSON commands;
-    JSON unicodes;
     std::string command="";
     Pos* moveBlock=nullptr;
     bool isRun=false;
@@ -36,14 +36,9 @@ class Game {
 public:
     Game();
     Game(const std::string& mapfilename);
-    ~Game();
-    void setMap(Map* map);
-    void putHero(Hero* hero, int x, int y);
-    void putMonster(Monster* monster, int x, int y);
+    virtual ~Game();
     void run();
-    void print()const;
-
-
+    
     friend bool operator==(const Game& game1, const Game& game2);
 
     class OccupiedException : virtual public std::runtime_error {
@@ -76,13 +71,15 @@ public:
 		    explicit MonsterAlreadyContains(const std::string& msg) : std::runtime_error("This monster already contains: " + msg) {}
 	};
 
-private:
-    
+protected:
     Monster* findeMonster();
     bool inputCommand();
     void move();
     void fight();
-
+    void setMap(MarkedMap* map);
+    void putHero(Hero* hero, int x, int y);
+    void putMonster(Monster* monster, int x, int y);
+    void print()const;
 
 };
 
