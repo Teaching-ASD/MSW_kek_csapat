@@ -1,0 +1,7 @@
+{
+    "map" : "./Maps/MarkedMap2.txt",
+    "hero" : "./Units/Dark_Wanderer.json",
+    "monster-1" : "./Units/Fallen.json",
+    "monster-2" : "./Units/Zombie.json",
+    "monster-3" : "./Units/Blood_Raven.json"
+}
