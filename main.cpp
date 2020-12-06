@@ -13,6 +13,7 @@
 #include "ObserverTextRenderer.h"
 #include "HeroTextRenderer.h"
 #include "CharacterSVGRenderer.h"
+#include "ObserverSVGRenderer.h"
 
 
 
@@ -43,6 +44,7 @@ int main(int argc, char** argv){
         pg.registerRenderer(new ObserverTextRenderer(file));
         pg.registerRenderer(new HeroTextRenderer());
         pg.registerRenderer(new CharacterSVGRenderer("pretty.svg"));
+        pg.registerRenderer(new ObserverSVGRenderer("Observer.svg"));
         pg.run();
     } 
     catch (const std::exception& ex ){
