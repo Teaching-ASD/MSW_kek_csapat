@@ -1,4 +1,5 @@
 <map id="SVGRenderer" name="SVGRenderer">
 <area shape="rect" id="node3" href="$classCharacterSVGRenderer.html" title="CharacterSVGRenderer" alt="" coords="5,155,165,181"/>
-<area shape="rect" id="node2" href="$classRenderer.html" title="Renderer" alt="" coords="48,5,123,32"/>
+<area shape="rect" id="node4" href="$classObserverSVGRenderer.html" title="ObserverSVGRenderer" alt="" coords="190,155,346,181"/>
+<area shape="rect" id="node2" href="$classRenderer.html" title="Renderer" alt="" coords="139,5,213,32"/>
 </map>
