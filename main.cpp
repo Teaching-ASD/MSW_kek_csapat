@@ -9,6 +9,7 @@
 #include <list>
 
 #include "PreparedGame.h"
+#include "ObserverTextRenderer.h"
 
 
 
@@ -34,6 +35,7 @@ int main(int argc, char** argv){
 
     try { 
         PreparedGame pg(argv[1]);
+        pg.registerRenderer(new ObserverTextRenderer());
         pg.run();
     } 
     catch (const std::exception& ex ){
