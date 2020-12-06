@@ -11,8 +11,9 @@ class PreparedGame : public Game {
 
 public:
     PreparedGame(const std::string& filename);
-    void storeAllMonster(const std::string& monsterType, char monsterChar);
     ~PreparedGame();
+private:
+    void storeAllMonster(const std::string& monsterType, char monsterChar, const MarkedMap* mMap);
 
 };
 
