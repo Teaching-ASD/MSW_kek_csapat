@@ -34,7 +34,7 @@ public:
     int pd,
     int md,
     double atksp,
-    int def) : Character(name, hp, pd, md, atksp, def){}
+    int def, std::string& texture) : Character(name, hp, pd, md, atksp, def, texture){}
 
     static Monster* parse(const std::string& json/**< [in] Name of the json */);
 

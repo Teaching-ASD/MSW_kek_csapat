@@ -3,5 +3,7 @@
     "hero" : "./Units/Dark_Wanderer.json",
     "monster-1" : "./Units/Fallen.json",
     "monster-2" : "./Units/Zombie.json",
-    "monster-3" : "./Units/Blood_Raven.json"
+    "monster-3" : "./Units/Blood_Raven.json",
+    "wall_texture" : "./SVG/wall.svg",
+    "free_texture" : "./SVG/free.svg"
 }

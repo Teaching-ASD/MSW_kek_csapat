@@ -43,6 +43,7 @@ public:
     int md,
     double atksp/**[in] this is a cooldown parameter*/,
     int def,
+    std::string& texture,
     int defPerLev,
     int xpPerLev/**[in] this is a xp/level parameter*/,
     int hpPerLev/**[in] this is a hp/level parameter*/,

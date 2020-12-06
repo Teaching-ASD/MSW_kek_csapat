@@ -11,5 +11,6 @@
     "defense" : 2,
     "defense_bonus_per_level" : 1,
     "light_radius" : 2,
-    "light_radius_per_level" : 1
+    "light_radius_per_level" : 1,
+    "texture" : "./GameData/SVG/Dark_Wanderer.svg"
 }

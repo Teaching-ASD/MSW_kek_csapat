@@ -3,28 +3,28 @@
 
 PreparedGame::PreparedGame(const std::string& filename){
 
-    JSON json = JSON::parseFromFile(filename);
+    data = JSON::parseFromFile(filename);
     
-    std::string jsonFile = json.get<std::string>("map");
+    std::string jsonFile = data.get<std::string>("map");
     gameMap = new MarkedMap(jsonFile);
     MarkedMap* markedMap = static_cast<MarkedMap*>(gameMap);
     if(markedMap==nullptr) throw Map::WrongIndexException("Wrong map type.");
 
-    jsonFile = json.get<std::string>("hero");
+    jsonFile = data.get<std::string>("hero");
     gameHero = Hero::parse(jsonFile);
+    CharacterTextures[gameHero->getName()] = gameHero->getTexture();
     Pos pos= markedMap->getHeroPosition();
     if(pos.isEmpty()) throw Game::NotInitializedException("Hero is not initialized!");
     gameHero->setPosition(pos.getX(), pos.getY());    
 
-    std::string monster = json.get<std::string>("monster-1");
+    std::string monster = data.get<std::string>("monster-1");
     storeAllMonster(monster,'1', markedMap);
 
-    monster = json.get<std::string>("monster-2");
+    monster = data.get<std::string>("monster-2");
     storeAllMonster(monster,'2', markedMap);
 
-    monster = json.get<std::string>("monster-3");
+    monster = data.get<std::string>("monster-3");
     storeAllMonster(monster,'3', markedMap);
-
     
 }
 
@@ -42,7 +42,9 @@ void PreparedGame::storeAllMonster(const std::string& monsterType, char monsterC
     std::list<Pos> monsterPos = mMap->getMonsterPositions(monsterChar);
 
     for(const auto& pos : monsterPos) {
-        gameMonsters.push_back(Monster::parse(monsterType));
+        Monster* monster = Monster::parse(monsterType);
+        CharacterTextures[monster->getName()] = monster->getTexture();
+        gameMonsters.push_back(monster);
         gameMonsters.back()->setPosition(pos.getX(),pos.getY());
     }
 }

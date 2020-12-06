@@ -2,13 +2,14 @@
 
 
 
-Character::Character(const std::string& name, int hp,int pd, int md, double atksp, int def) : 
+Character::Character(const std::string& name, int hp,int pd, int md, double atksp, int def, std::string& texture) : 
 name(name), 
 hp(hp), 
 atksp(atksp),
 def(def), 
 position(new Pos),
-damage(new Damage(pd, md))
+damage(new Damage(pd, md)),
+texture(texture)
 {
 }
 
@@ -77,4 +78,9 @@ int Character::getMagicalDamage() const {
 
 int Character::getDef() const {
     return def;
+}
+
+
+std::string Character::getTexture() const{
+    return texture;
 }

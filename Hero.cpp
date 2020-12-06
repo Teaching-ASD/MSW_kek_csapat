@@ -14,6 +14,7 @@ Hero::Hero(
     int md, 
     double atksp,
     int def,
+    std::string& texture,
     int defPerLev,
     int xpPerLev,
     int hpPerLev,
@@ -21,7 +22,7 @@ Hero::Hero(
     double cdPerLev,
     int lightRadius,
     int lightRadPerLev): 
-    Character(name, hp, pd, md, atksp, def),
+    Character(name, hp, pd, md, atksp, def, texture),
     maxHp(hp),
     defPerLev(defPerLev),
     xpPerLev(xpPerLev),
@@ -112,11 +113,14 @@ Hero* Hero::parse(std::string json){
    
     Damage d;
     int lightRadPerLev;
+    std::string texture;
 
     if(jdm.count("damage")) d.physical=jdm.get<int>("damage");
     if(jdm.count("magical-damage")) d.magical=jdm.get<int>("magical-damage");
     if(jdm.count("light_radius_per_level")) lightRadPerLev = jdm.get<int>("light_radius_per_level");
     else lightRadPerLev=1;
+    if(jdm.count("texture")) texture = jdm.get<std::string>("texture");
+    else texture = "./GameData/SVG/unknow.svg";
 
     std::string name = jdm.get<std::string>("name");
     int hp = jdm.get<int>("base_health_points");
@@ -128,7 +132,7 @@ Hero* Hero::parse(std::string json){
     int def = jdm.get<int>("defense");
     int defPerLev = jdm.get<int>("defense_bonus_per_level");
     int lightRadius =jdm.get<int>("light_radius");
-    Hero* player = new Hero(name, hp,d.physical,d.magical, atksp, def, defPerLev,  xpPerLev, hpPerLev, dmgPerLev, cdPerLev, lightRadius, lightRadPerLev);
+    Hero* player = new Hero(name, hp,d.physical,d.magical, atksp, def, texture, defPerLev,  xpPerLev, hpPerLev, dmgPerLev, cdPerLev, lightRadius, lightRadPerLev);
     return player;
 
 }

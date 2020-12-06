@@ -82,12 +82,13 @@ protected:
 
     Pos* position;
     Damage* damage;
+    std::string texture;
 
 
 public:
 
 
-	Character(const std::string& name, int hp, int pd, int md, double atksp, int def);
+	Character(const std::string& name, int hp, int pd, int md, double atksp, int def, std::string& texture);
     ~Character();
 
     ///This is a simple getters for getting the players name, hp, dmg, cooldown 
@@ -118,6 +119,7 @@ public:
     int getPositionX() const;
     int getPositionY() const;
 
+    std::string getTexture() const;
   
 
 };

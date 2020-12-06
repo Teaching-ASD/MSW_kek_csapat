@@ -19,7 +19,9 @@ protected:
     Map* gameMap=nullptr;
     Hero* gameHero=nullptr;
     std::vector<Monster*> gameMonsters;
+    std::map<std::string, std::string> CharacterTextures;
     JSON commands;
+    JSON data;
     std::string command="";
     Pos* moveBlock=nullptr;
     bool isRun=false;
@@ -35,6 +37,8 @@ public:
     void registerRenderer(Renderer* renderer);
     const Map* getMap() const;
     const Hero* getHero() const;
+    std::string getTextureFile(const std::string& texture) const;
+    std::string getCharacterTextureFile(const std::string& characterName) const;
 
     friend bool operator==(const Game& game1, const Game& game2);
 

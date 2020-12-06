@@ -12,6 +12,7 @@
 #include "PreparedGame.h"
 #include "ObserverTextRenderer.h"
 #include "HeroTextRenderer.h"
+#include "CharacterSVGRenderer.h"
 
 
 
@@ -41,6 +42,7 @@ int main(int argc, char** argv){
         PreparedGame pg(argv[1]);
         pg.registerRenderer(new ObserverTextRenderer(file));
         pg.registerRenderer(new HeroTextRenderer());
+        pg.registerRenderer(new CharacterSVGRenderer("pretty.svg"));
         pg.run();
     } 
     catch (const std::exception& ex ){

@@ -27,6 +27,16 @@ const Hero* Game::getHero() const {
 }
 
 
+std::string Game::getTextureFile(const std::string& texture) const{
+    if(!data.count(texture)) return "./GameData/SVG/unknow.svg";
+    return data.get<std::string>(texture);
+}
+
+
+std::string Game::getCharacterTextureFile(const std::string& characterName) const {
+    return CharacterTextures.at(characterName);
+}
+
 void Game::registerRenderer(Renderer* renderer) {
     renderers.push_back(renderer);
 }
