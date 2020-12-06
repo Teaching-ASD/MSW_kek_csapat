@@ -1,5 +1,7 @@
 <map id="Renderer" name="Renderer">
-<area shape="rect" id="node2" href="$classTextRenderer.html" title="TextRenderer" alt="" coords="102,80,203,107"/>
-<area shape="rect" id="node3" href="$classHeroTextRenderer.html" title="HeroTextRenderer" alt="" coords="5,155,135,181"/>
-<area shape="rect" id="node4" href="$classObserverTextRenderer.html" title="ObserverTextRenderer" alt="" coords="159,155,314,181"/>
+<area shape="rect" id="node2" href="$classSVGRenderer.html" title="SVGRenderer" alt="" coords="55,80,158,107"/>
+<area shape="rect" id="node4" href="$classTextRenderer.html" title="TextRenderer" alt="" coords="204,80,305,107"/>
+<area shape="rect" id="node3" href="$classCharacterSVGRenderer.html" title="CharacterSVGRenderer" alt="" coords="5,155,165,181"/>
+<area shape="rect" id="node5" href="$classHeroTextRenderer.html" title="HeroTextRenderer" alt="" coords="190,155,319,181"/>
+<area shape="rect" id="node6" href="$classObserverTextRenderer.html" title="ObserverTextRenderer" alt="" coords="344,155,499,181"/>
 </map>

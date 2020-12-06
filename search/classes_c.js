@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['textrenderer',['TextRenderer',['../classTextRenderer.html',1,'']]]
+  ['svgrenderer',['SVGRenderer',['../classSVGRenderer.html',1,'']]]
 ];

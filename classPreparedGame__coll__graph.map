@@ -1,5 +1,5 @@
 <map id="PreparedGame" name="PreparedGame">
-<area shape="rect" id="node2" href="$classGame.html" title="Game" alt="" coords="141,273,199,300"/>
+<area shape="rect" id="node2" href="$classGame.html" title="Game" alt="" coords="141,288,199,315"/>
 <area shape="rect" id="node3" href="$classMap.html" title="Map" alt="" coords="5,184,52,211"/>
 <area shape="rect" id="node4" href="$classJSON.html" title="JSON" alt="" coords="91,184,150,211"/>
 <area shape="rect" id="node5" href="$classHero.html" title="Hero class. " alt="" coords="195,184,246,211"/>

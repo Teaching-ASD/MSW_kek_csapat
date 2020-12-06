@@ -80,7 +80,7 @@ Collaboration diagram for PreparedGame:</div>
 <div class="dyncontent">
 <div class="center"><img src="classPreparedGame__coll__graph.png" border="0" usemap="#PreparedGame_coll__map" alt="Collaboration graph"/></div>
 <map name="PreparedGame_coll__map" id="PreparedGame_coll__map">
-<area shape="rect" id="node2" href="classGame.html" title="Game" alt="" coords="141,273,199,300"/>
+<area shape="rect" id="node2" href="classGame.html" title="Game" alt="" coords="141,288,199,315"/>
 <area shape="rect" id="node3" href="classMap.html" title="Map" alt="" coords="5,184,52,211"/>
 <area shape="rect" id="node4" href="classJSON.html" title="JSON" alt="" coords="91,184,150,211"/>
 <area shape="rect" id="node5" href="classHero.html" title="Hero class. " alt="" coords="195,184,246,211"/>
@@ -111,6 +111,12 @@ const <a class="el" href="classMap.html">Map</a> *&#160;</td><td class="memItemR
 <tr class="memitem:ab12c92cac8a9c657625a8de9947401a7 inherit pub_methods_classGame"><td class="memItemLeft" align="right" valign="top"><a id="ab12c92cac8a9c657625a8de9947401a7"></a>
 const <a class="el" href="classHero.html">Hero</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getHero</b> () const</td></tr>
 <tr class="separator:ab12c92cac8a9c657625a8de9947401a7 inherit pub_methods_classGame"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bf6bc8cf1410d0f6f686e408f25d08b inherit pub_methods_classGame"><td class="memItemLeft" align="right" valign="top"><a id="a4bf6bc8cf1410d0f6f686e408f25d08b"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getTextureFile</b> (const std::string &amp;texture) const</td></tr>
+<tr class="separator:a4bf6bc8cf1410d0f6f686e408f25d08b inherit pub_methods_classGame"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a588df033cac831ad1fbfa701505760cc inherit pub_methods_classGame"><td class="memItemLeft" align="right" valign="top"><a id="a588df033cac831ad1fbfa701505760cc"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getCharacterTextureFile</b> (const std::string &amp;characterName) const</td></tr>
+<tr class="separator:a588df033cac831ad1fbfa701505760cc inherit pub_methods_classGame"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -146,9 +152,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>putMonster</b> (<a cl
 <tr class="memitem:a7a11d360fdb64caabe98935d69636684 inherit pro_attribs_classGame"><td class="memItemLeft" align="right" valign="top"><a id="a7a11d360fdb64caabe98935d69636684"></a>
 std::vector&lt; <a class="el" href="classMonster.html">Monster</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>gameMonsters</b></td></tr>
 <tr class="separator:a7a11d360fdb64caabe98935d69636684 inherit pro_attribs_classGame"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9351a7de4654ac6f544d5957f465f68 inherit pro_attribs_classGame"><td class="memItemLeft" align="right" valign="top"><a id="ae9351a7de4654ac6f544d5957f465f68"></a>
+std::map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>CharacterTextures</b></td></tr>
+<tr class="separator:ae9351a7de4654ac6f544d5957f465f68 inherit pro_attribs_classGame"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57f8d2735c30f0a24e0bc388c9c48357 inherit pro_attribs_classGame"><td class="memItemLeft" align="right" valign="top"><a id="a57f8d2735c30f0a24e0bc388c9c48357"></a>
 <a class="el" href="classJSON.html">JSON</a>&#160;</td><td class="memItemRight" valign="bottom"><b>commands</b></td></tr>
 <tr class="separator:a57f8d2735c30f0a24e0bc388c9c48357 inherit pro_attribs_classGame"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a876380d4f67856cd470a9db54654ac81 inherit pro_attribs_classGame"><td class="memItemLeft" align="right" valign="top"><a id="a876380d4f67856cd470a9db54654ac81"></a>
+<a class="el" href="classJSON.html">JSON</a>&#160;</td><td class="memItemRight" valign="bottom"><b>data</b></td></tr>
+<tr class="separator:a876380d4f67856cd470a9db54654ac81 inherit pro_attribs_classGame"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e25af59a9241f6026476a192d2b655e inherit pro_attribs_classGame"><td class="memItemLeft" align="right" valign="top"><a id="a8e25af59a9241f6026476a192d2b655e"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>command</b> =&quot;&quot;</td></tr>
 <tr class="separator:a8e25af59a9241f6026476a192d2b655e inherit pro_attribs_classGame"><td class="memSeparator" colspan="2">&#160;</td></tr>
