@@ -8,7 +8,7 @@ class TextRenderer : public Renderer {
 
 protected:
 
-    std::ostream* defaultOutput;
+    std::reference_wrapper<std::ostream> output;
 
     const std::string hero = "\u251C\u2524";
     const std::string monster = "M";

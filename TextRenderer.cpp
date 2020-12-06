@@ -3,8 +3,8 @@
 
 
 
-TextRenderer::TextRenderer(std::ostream& customOutput) : defaultOutput(&customOutput){}
+TextRenderer::TextRenderer(std::ostream& customOutput) : output(customOutput){}
     
 void TextRenderer::setOutputStream(std::ostream& customOutput){
-    defaultOutput=&customOutput;
+    output=customOutput;
 }
