@@ -69,7 +69,10 @@ public:
     ///This is the istream parser
     static JSON parseFromIstream(std::istream& is/**[in] this is istring& parameter */);
     
-    struct ParseException {};    
+    class ParseException : virtual public std::runtime_error {
+		public:
+		    explicit ParseException() : std::runtime_error("JSON parsing error.") {}
+	};
 
 private:
     static JSON parser(std::string json/**[in] this is a string parameter */);
@@ -85,7 +88,7 @@ inline T JSON::get(std::string key) const {
     try{
         return std::any_cast<T>(jsonData.at(key));
     }
-    catch(std::bad_any_cast& bc){
+    catch(const std::exception& ex){
         throw JSON::ParseException();
     }
 }
