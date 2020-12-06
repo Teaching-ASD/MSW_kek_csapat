@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wrongindexexception',['WrongIndexException',['../classMap_1_1WrongIndexException.html',1,'Map']]]
+  ['sufferdamage',['sufferDamage',['../classCharacter.html#afa437bb9160a925da5009857da63c356',1,'Character']]]
 ];

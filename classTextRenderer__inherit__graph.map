@@ -1,0 +1,5 @@
+<map id="TextRenderer" name="TextRenderer">
+<area shape="rect" id="node3" href="$classHeroTextRenderer.html" title="HeroTextRenderer" alt="" coords="5,155,135,181"/>
+<area shape="rect" id="node4" href="$classObserverTextRenderer.html" title="ObserverTextRenderer" alt="" coords="159,155,314,181"/>
+<area shape="rect" id="node2" href="$classRenderer.html" title="Renderer" alt="" coords="115,5,190,32"/>
+</map>
