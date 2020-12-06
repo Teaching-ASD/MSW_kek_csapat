@@ -9,5 +9,7 @@
     "damage_bonus_per_level" : 1,
     "cooldown_multiplier_per_level": 0.9,
     "defense" : 2,
-    "defense_bonus_per_level" : 1
+    "defense_bonus_per_level" : 1,
+    "light_radius" : 2,
+    "light_radius_per_level" : 1
 }
