@@ -9,6 +9,8 @@ MarkedMap::MarkedMap(const std::string& filename) : Map(filename){
 
 }
 
+MarkedMap::~MarkedMap(){}
+
 Pos MarkedMap::getHeroPosition() const {
     Pos pos;
     for(std::size_t row=0; row<storedGameMap.size(); row++){
@@ -35,6 +37,5 @@ std::list<Pos> MarkedMap::getMonsterPositions(char c) const {
     }
     return monsters;
 }
-
 
 

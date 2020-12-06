@@ -7,11 +7,13 @@
 
 class MarkedMap : public Map {
 
+
 public:
     MarkedMap();
     MarkedMap(const std::string& filename);
+    ~MarkedMap();
     Pos getHeroPosition() const;
-    std::list<Pos> getMonsterPositions(char c) const;    
+    std::list<Pos> getMonsterPositions(char c) const; 
 };
 
 
