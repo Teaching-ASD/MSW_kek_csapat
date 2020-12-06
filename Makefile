@@ -63,4 +63,4 @@ creategoogletest:
 unittest: creategoogletest
 	$ (cd $(TESTFLDR) && $(UNITTEST))
 
-test: unittest
+test: 
