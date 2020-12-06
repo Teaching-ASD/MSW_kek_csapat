@@ -71,7 +71,7 @@ TEST_F(JsonTest, get) {
 
 TEST(HeroTest, ObjectEqualJson){
 
-    Hero hero1 ("Prince Aidan of Khanduras",30, 3, 2, 1.1, 2, 1, 20, 5, 1, 0.9);
+    Hero hero1 ("Prince Aidan of Khanduras",30, 3, 2, 1.1, 2, 1, 20, 5, 1, 0.9,2,1);
     Hero* hero2 = Hero::parse("../Dark_Wanderer.json");
     
     EXPECT_EQ(hero1,*hero2);
@@ -138,7 +138,7 @@ class GameTest : public ::testing::Test {
         std::vector<Monster*> monsters;
         void SetUp() override {
             game = new Game();
-            hero = new Hero("Prince Aidan of Khanduras",30, 2, 2, 1.1,2,1,20,5, 1, 0.9);
+            hero = new Hero("Prince Aidan of Khanduras",30, 2, 2, 1.1,2,1,20,5, 1, 0.9,2,1);
             monsters.push_back(new Monster("Zombie", 10, 1,0,2.8, 1));
             monsters.push_back(new Monster("Zombie", 10, 1, 1, 2.8, 1));
             monsters.push_back(new Monster("Fallen", 4, 2,1, 1.6, 2));
@@ -169,7 +169,7 @@ TEST_F(GameTest, setMap){
 
     Game testGame;
     Map* testMap = new Map("../Maps/Map1.txt");
-    Hero* testHero = new Hero("Prince Aidan of Khanduras",30, 2,3, 1.1,3,1,20,5, 1, 0.9);
+    Hero* testHero = new Hero("Prince Aidan of Khanduras",30, 2,3, 1.1,3,1,20,5, 1, 0.9,2,1);
     Monster* testMonster= new Monster("Zombie", 10, 1, 0, 2.8, 1);
 
     testGame.setMap(testMap);
