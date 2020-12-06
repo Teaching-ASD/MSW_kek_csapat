@@ -7,26 +7,8 @@
 
 Monster* Monster::parse(const std::string& json){
 
-   JSON jdm = JSON::parseFromFile(json); 
+    JSON jdm = JSON::parseFromFile(json); 
 
-   std::vector<std::string> PlayerData {
-    "name",
-    "health_points",
-    "attack_cooldown",
-    "defense"
-   };
-
-
-    std::vector<std::string>::size_type i;
-   for (i = 0; i < PlayerData.size(); i++)
-   {
-
-        if (!jdm.count(PlayerData.at(i)) ) {
-            throw JSON::ParseException();
-        }
-    }
-
-    
     Damage d;
 
     if(jdm.count("damage")) d.physical=jdm.get<int>("damage");
@@ -41,3 +23,4 @@ Monster* Monster::parse(const std::string& json){
 
     return monster;
 }
+

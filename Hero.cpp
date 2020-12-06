@@ -100,29 +100,8 @@ void Hero::levelUp(){
 
 Hero* Hero::parse(std::string json){
 
-   JSON jdm = JSON::parseFromFile(json);
-         
-   std::vector<std::string> PlayerData {
-    "name",
-    "base_health_points",
-    "base_attack_cooldown",
-    "experience_per_level",
-    "health_point_bonus_per_level",
-    "damage_bonus_per_level",
-    "cooldown_multiplier_per_level",
-    "defense",
-    "defense_bonus_per_level", 
-   };
-
-
-   std::vector<std::string>::size_type i;
-   for (i = 0; i < PlayerData.size(); i++)
-   {
-        if (!jdm.count(PlayerData.at(i)) ) {
-            throw JSON::ParseException();
-        }
-    }
-
+    JSON jdm = JSON::parseFromFile(json);
+   
     Damage d;
 
     if(jdm.count("damage")) d.physical=jdm.get<int>("damage");
