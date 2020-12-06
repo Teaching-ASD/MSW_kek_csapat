@@ -28,3 +28,6 @@ callgrind.*
 #Map
 !Maps/*
 
+#SVG
+pretty.svg
+Observer.svg
