@@ -22,7 +22,7 @@ class JsonTest : public ::testing::Test {
         
         scenario = JSON::parseFromFile("../Scenarios/scenario1.json");
         
-        std::ifstream heroFile("../Dark_Wanderer.json");
+        std::ifstream heroFile("../Units/Dark_Wanderer.json");
         hero = JSON::parseFromIstream(heroFile);
         
         std::string mstring ("{\"health_points\" : 10, \"damage\" : 1, \"attack_cooldown\" : 2.8, \"race\"\n\n : \"undead\", \"name\"              :           \"Zombie\"}");
@@ -74,7 +74,7 @@ TEST_F(JsonTest, get) {
 TEST(HeroTest, ObjectEqualJson){
 
     Hero hero1 ("Prince Aidan of Khanduras",30, 3, 2, 1.1, 2, 1, 20, 5, 1, 0.9);
-    Hero* hero2 = Hero::parse("../Dark_Wanderer.json");
+    Hero* hero2 = Hero::parse("../Units/Dark_Wanderer.json");
     
     EXPECT_EQ(hero1,*hero2);
 
@@ -131,89 +131,6 @@ TEST_F(MapTest, Exception){
 }
 
 
-
-class GameTest : public ::testing::Test {
-    protected:
-        Game* game;
-        Hero* hero;
-        Map* map;
-        std::vector<Monster*> monsters;
-        void SetUp() override {
-            game = new Game();
-            hero = new Hero("Prince Aidan of Khanduras",30, 2, 2, 1.1,2,1,20,5, 1, 0.9);
-            monsters.push_back(new Monster("Zombie", 10, 1,0,2.8, 1));
-            monsters.push_back(new Monster("Zombie", 10, 1, 1, 2.8, 1));
-            monsters.push_back(new Monster("Fallen", 4, 2,1, 1.6, 2));
-            
-            
-            ASSERT_THROW(game->putHero(hero,1,1), Map::WrongIndexException);
-            ASSERT_THROW(game->putMonster(monsters[0],3,3), Map::WrongIndexException);                
-  
-
-            ASSERT_NO_THROW(map = new Map("../Maps/Map1.txt"));
-            ASSERT_NO_THROW(game->setMap(map));
-
-            ASSERT_THROW(game->putHero(hero, 4,4), Game::OccupiedException);
-            ASSERT_NO_THROW(game->putHero(hero, 5,3));
-            ASSERT_THROW(game->putHero(hero, 1,1), Game::AlreadyHasHeroException);
-
-            ASSERT_THROW(game->putMonster(monsters[0], 4,4), Game::OccupiedException);
-            ASSERT_NO_THROW(game->putMonster(monsters[0],3,3));
-            ASSERT_THROW(game->putMonster(monsters[1], 5,3), Game::OccupiedException);
- 
-        }   
-        void TearDown() override {
-           delete game;
-        }
-};
-
-TEST_F(GameTest, setMap){
-
-    Game testGame;
-    Map* testMap = new Map("../Maps/Map1.txt");
-    Hero* testHero = new Hero("Prince Aidan of Khanduras",30, 2,3, 1.1,3,1,20,5, 1, 0.9);
-    Monster* testMonster= new Monster("Zombie", 10, 1, 0, 2.8, 1);
-
-    testGame.setMap(testMap);
-
-    ASSERT_NO_THROW(testGame.putHero(testHero, 5,3));
-    ASSERT_NO_THROW(testGame.putMonster(testMonster,3,3));
-    EXPECT_EQ(*game, testGame);
-
-}
-
-
-TEST_F(GameTest, putHero){
-
-    EXPECT_EQ(map->get(5,3),Map::type::Hero);
-    
-    EXPECT_EQ(hero->getPositionX(),5);
-    EXPECT_EQ(hero->getPositionY(),3);
-
-}
-
-TEST_F(GameTest, putMonster){
-   
-    EXPECT_EQ(map->get(3,3),Map::type::Monster);
-    EXPECT_EQ(monsters[0]->getPositionX(),3);
-    EXPECT_EQ(monsters[0]->getPositionY(),3);
-
-    ASSERT_NO_THROW(game->putMonster(monsters[1],3,3));
-    ASSERT_THROW(game->putMonster(monsters[1], 3,3), Game::MonsterAlreadyContains);
-
-}
-
-TEST_F(GameTest, run){
-
-    Game rawGame;
-    ASSERT_THROW(rawGame.run(), Game::NotInitializedException);
-    Map* map1 = new Map("../Maps/Map1.txt");
-    rawGame.setMap(map1);
-    ASSERT_THROW(rawGame.run(), Game::NotInitializedException);
-
-
-}
-
 TEST(DamageTest, Operators){
     
 
@@ -269,21 +186,21 @@ protected:
     void SetUp() override {
 
         ASSERT_NO_THROW({
-            hero = Hero::parse("../Dark_Wanderer.json");
-            monsters.push_back(Monster::parse("../Zombie.json"));
-            monsters.push_back(Monster::parse("../Zombie.json"));
-            monsters.push_back(Monster::parse("../Fallen.json"));
-            monsters.push_back(Monster::parse("../Fallen.json"));
-            monsters.push_back(Monster::parse("../Fallen.json"));
-            monsters.push_back(Monster::parse("../Fallen.json"));
-            monsters.push_back(Monster::parse("../Fallen.json"));
-            monsters.push_back(Monster::parse("../Zombie.json"));
-            monsters.push_back(Monster::parse("../Zombie.json"));
-            monsters.push_back(Monster::parse("../Fallen.json"));
-            monsters.push_back(Monster::parse("../Fallen.json"));
-            monsters.push_back(Monster::parse("../Fallen.json"));
-            monsters.push_back(Monster::parse("../Fallen.json"));
-            monsters.push_back(Monster::parse("../Fallen.json"));
+            hero = Hero::parse("../Units/Dark_Wanderer.json");
+            monsters.push_back(Monster::parse("../Units/Zombie.json"));
+            monsters.push_back(Monster::parse("../Units/Zombie.json"));
+            monsters.push_back(Monster::parse("../Units/Fallen.json"));
+            monsters.push_back(Monster::parse("../Units/Fallen.json"));
+            monsters.push_back(Monster::parse("../Units/Fallen.json"));
+            monsters.push_back(Monster::parse("../Units/Fallen.json"));
+            monsters.push_back(Monster::parse("../Units/Fallen.json"));
+            monsters.push_back(Monster::parse("../Units/Zombie.json"));
+            monsters.push_back(Monster::parse("../Units/Zombie.json"));
+            monsters.push_back(Monster::parse("../Units/Fallen.json"));
+            monsters.push_back(Monster::parse("../Units/Fallen.json"));
+            monsters.push_back(Monster::parse("../Units/Fallen.json"));
+            monsters.push_back(Monster::parse("../Units/Fallen.json"));
+            monsters.push_back(Monster::parse("../Units/Fallen.json"));
         });
         
     }   
