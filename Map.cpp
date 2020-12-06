@@ -22,9 +22,10 @@ Map::Map(const std::string& filename){
             file.close();
         }
      }
-     else throw Map::FileException("file is not accessible.");
+    else throw Map::FileException("file is not accessible.");
 }
 
+Map::~Map() {}
 
 Map::type Map::get(int x, int y) const {
     try{

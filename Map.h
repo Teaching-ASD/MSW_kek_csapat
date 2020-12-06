@@ -19,7 +19,7 @@ public:
 		Monster='m',
 		Monster1 = '1',
 		Monster2 = '2',
-		Monster3 = '3',
+		Monster3 = '3'
 	}type;
 
 protected:
@@ -29,6 +29,7 @@ protected:
 public:
 	Map();
     Map(const std::string& filename);
+	virtual ~Map();
 	virtual Map::type get(int x, int y)const;
 	std::size_t getWidth() const;
 	std::size_t getHeight() const;
