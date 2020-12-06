@@ -8,37 +8,34 @@
 #include "Hero.h"
 #include "JSON.h"
 #include "Pos.h"
+#include "Renderer.h"
+
+class Renderer;
 
 
 class Game {
 
 protected:
-    MarkedMap* gameMap=nullptr;
+    Map* gameMap=nullptr;
     Hero* gameHero=nullptr;
     std::vector<Monster*> gameMonsters;
     JSON commands;
     std::string command="";
     Pos* moveBlock=nullptr;
     bool isRun=false;
+    std::vector<Renderer*> renderers;
     
-    const std::string hero = "\u251C\u2524";
-    const std::string monster = "M";
-    const std::string monsters = "MM";
-    const std::string Free = "\u2591";
-    const std::string Wall = "\u2588";
-    const std::string left_TopCorner = "\u2554";
-    const std::string right_TopCorner = "\u2557";
-    const std::string topAndBotFrame = "\u2550";
-    const std::string leftAndRightFrame = "\u2551";
-    const std::string left_BotCorner = "\u255A";
-    const std::string right_BotCorner ="\u255D";
+
 
 public:
     Game();
     Game(const std::string& mapfilename);
     virtual ~Game();
+
     void run();
-    
+    void registerRenderer(Renderer* renderer);
+    const Map* getMap() const;
+
     friend bool operator==(const Game& game1, const Game& game2);
 
     class OccupiedException : virtual public std::runtime_error {
@@ -76,10 +73,10 @@ protected:
     bool inputCommand();
     void move();
     void fight();
-    void setMap(MarkedMap* map);
+    void setMap(Map* map);
     void putHero(Hero* hero, int x, int y);
     void putMonster(Monster* monster, int x, int y);
-    void print()const;
+
 
 };
 

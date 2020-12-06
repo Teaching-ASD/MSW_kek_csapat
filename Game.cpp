@@ -18,7 +18,16 @@ Game::~Game(){
    delete moveBlock;
 }
 
-void Game::setMap(MarkedMap* map){
+const Map* Game::getMap() const {
+    return gameMap;
+}
+
+void Game::registerRenderer(Renderer* renderer) {
+    renderers.push_back(renderer);
+}
+
+
+void Game::setMap(Map* map){
 
     if(isRun) 
         throw Game::AlreadyStartedException("You can\'t initialize map after game started.");
@@ -175,7 +184,9 @@ void Game::run() {
     isRun = true;
 
     while (gameHero->isAlive() && !gameMonsters.empty()) {
-        print();
+        for(const auto& renderer : renderers){
+            renderer->render(*this);
+        }
         move();
     }
 
@@ -183,67 +194,6 @@ void Game::run() {
     
 }
 
-void Game::print() const {
-    
-    std::size_t height = gameMap->getHeight();
-    std::cout<<left_TopCorner;
-    std::size_t width=gameMap->getWidth();
-    for(std::size_t i=0;i<width*2;i++)
-    {
-        std::cout<<topAndBotFrame;
-    }
-    std::cout<<right_TopCorner;
-    std::cout<<std::endl;
-    for(std::size_t r =0; r<height; r++){
-        
-        std::size_t lenght = gameMap->getRowLenght(r);
-        std::cout<<leftAndRightFrame;
-        for(std::size_t c =0; c<lenght; c++){
-            
-            switch(gameMap->get(r, c))
-            {
-            case Map::type::Free:
-                std::cout<<Free;
-                std::cout<<Free;
-                break;
-            case Map::type::Wall:
-                std::cout<<Wall;
-                std::cout<<Wall;
-                break;
-            case Map::type::Hero:
-                std::cout<<hero;
-                break;
-            case Map::type::Monster1:
-            case Map::type::Monster2: 
-            case Map::type::Monster3:
-                std::cout<<monster;
-                std::cout<<Free;
-                break;
-            default:
-                break;
-            }
-            
-        }
-
-        for (std::size_t i = lenght; i < width; i++)
-        {
-            std::cout<<Wall;
-            std::cout<<Wall;
-        }
-        std::cout<<leftAndRightFrame;
-        std::cout << std::endl;
-    }
-
-    std::cout<<left_BotCorner;
-
-    for (std::size_t i= 0; i < width*2 ;i++)
-    {
-        std::cout<<topAndBotFrame;
-    }
-
-    std::cout<<right_BotCorner;
-    std::cout << std::endl;
-}
 
 bool operator==(const Game& game1, const Game& game2){
     return *game1.gameMap==*game2.gameMap;
