@@ -173,15 +173,17 @@ void Game::run() {
     isRun = true;
 
     while (gameHero->isAlive() && !gameMonsters.empty()) {
-        print();
+        
+        printRadius();
         move();
+      
     }
-
+    printMap();
     std::cout << (gameHero->isAlive() ? gameHero->getName() + " clear the map." : "The hero died.") << std::endl;
     
 }
 
-void Game::print() const {
+void Game::printMap() const {   
     
     std::size_t height = gameMap->getHeight();
     std::cout<<left_TopCorner;
@@ -246,4 +248,106 @@ void Game::print() const {
 
 bool operator==(const Game& game1, const Game& game2){
     return *game1.gameMap==*game2.gameMap;
+}
+
+void Game::printRadius() const{
+    //ki kell számolni a maxot(ez a felső és alsó kerethossz)
+
+    //kiiratást rádiusz hosszára kell korlátozni.
+    int height = gameMap->getHeight();
+    
+    int width=gameMap->getWidth();
+    int lr=gameHero->getLightRadius();
+    int MaxFrame=0;
+    int X=gameHero->getPositionX();
+    int Y=gameHero->getPositionY();
+   
+    for (int i=0;i<lr*2+1;i++){
+
+        if(Y-lr+i>=0&&width>Y-lr+i){
+            MaxFrame++;
+        }
+    }
+    
+    std::cout<<left_TopCorner;
+    for(int i=0;i<MaxFrame*2;i++)
+    {
+        std::cout<<topAndBotFrame;
+    }
+    std::cout<<right_TopCorner;
+    std::cout<<std::endl;
+    bool write = true;
+    int r;
+    int c;
+    for(r=0; r<lr*2+1; r++){
+
+        if(write && (X-lr+r)<height){
+          
+             std::cout<<leftAndRightFrame;
+
+        }
+        try{
+        for(c = 0; c<lr*2+1; c++){
+            
+            if(X-lr+r>=0 && Y-lr+c>=0 && X-lr+r<height && Y-lr+c<width){
+                write=true;
+                switch(gameMap->get(X-lr+r, Y-lr+c))
+                {
+                case Map::type::Free:
+                    std::cout<<Free;
+                    std::cout<<Free;
+                    break;
+                case Map::type::Wall:
+                    std::cout<<Wall;
+                    std::cout<<Wall;
+                    break;
+                case Map::type::Hero:
+                    std::cout<<hero;
+                    break;
+                case Map::type::Monster:
+                    std::cout<<monster;
+                    std::cout<<Free;
+                    break;
+                case Map::type::Monsters:
+                    std::cout<<monsters;
+                    break;
+                default:
+                    break;
+                }
+            }else if(Y-lr+c<width){
+                write=false;
+            }
+        }
+
+        }catch(Map::WrongIndexException &e){
+
+                for (int i = 0; (Y-lr)+i+c <width; i++)
+                {
+                    if((Y-lr)+i+c <= Y+lr){
+                        std::cout<<Wall;
+                        std::cout<<Wall;
+                    }
+           
+                }  
+        }
+
+        if (write && X-lr+r<height){
+            write = true;
+            std::cout<<leftAndRightFrame;
+            std::cout << std::endl;
+        }
+
+    }
+
+    std::cout<<left_BotCorner;
+    
+    for (int i= 0; i < MaxFrame*2 ;i++)
+    {
+        std::cout<<topAndBotFrame;
+    }
+
+    std::cout<<right_BotCorner;
+    std::cout<< std::endl;
+    std::cout<<Y<<std::endl;
+
 }

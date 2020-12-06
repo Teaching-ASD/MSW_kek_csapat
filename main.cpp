@@ -67,10 +67,10 @@ int main(int argc, char** argv){
         game.putMonster(monsters[0],2,1);
         game.putMonster(monsters[1],3,3);
         game.putMonster(monsters[2],5,3);
-        game.putMonster(monsters[3],5,3);
+        game.putMonster(monsters[3],5,1);
         game.putMonster(monsters[4],5,4);
-        game.putMonster(monsters[5],5,6);
-        game.putMonster(monsters[6],5,6);
+        game.putMonster(monsters[5],5,5);
+        game.putMonster(monsters[6],5,2);
         game.putMonster(monsters[7],5,6);
 
         game.run();

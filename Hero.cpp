@@ -18,14 +18,18 @@ Hero::Hero(
     int xpPerLev,
     int hpPerLev,
     int dmgPerLev,
-    double cdPerLev): 
+    double cdPerLev,
+    int lightRadius,
+    int lightRadPerLev): 
     Character(name, hp, pd, md, atksp, def),
     maxHp(hp),
     defPerLev(defPerLev),
     xpPerLev(xpPerLev),
     hpPerLev(hpPerLev),
     dmgPerLev(dmgPerLev),
-    cdPerLev(cdPerLev)
+    cdPerLev(cdPerLev),
+    lightRadius(lightRadius),
+    lightRadPerLev(lightRadPerLev)
     {}
 
 int Hero::getLevel() const {
@@ -34,6 +38,9 @@ int Hero::getLevel() const {
     
 int Hero::getMaxHealthPoints() const{
     return maxHp;
+}
+int Hero::getLightRadius() const{
+    return lightRadius;
 }
     
 void Hero::fightTilDeath(Monster* enemy){
@@ -95,6 +102,7 @@ void Hero::levelUp(){
         *damage += dmgPerLev;
         atksp = (double) (atksp*cdPerLev);
         def+=defPerLev;
+        lightRadius+=lightRadPerLev;
     } 
 }
 
@@ -112,6 +120,8 @@ Hero* Hero::parse(std::string json){
     "cooldown_multiplier_per_level",
     "defense",
     "defense_bonus_per_level", 
+    "light_radius",
+    "light_radius_per_level",
    };
 
 
@@ -124,10 +134,12 @@ Hero* Hero::parse(std::string json){
     }
 
     Damage d;
+    int lightRadPerLev;
 
     if(jdm.count("damage")) d.physical=jdm.get<int>("damage");
     if(jdm.count("magical-damage")) d.magical=jdm.get<int>("magical-damage");
-
+    if(jdm.count("light_radius_per_level")) lightRadPerLev = jdm.get<int>("light_radius_per_level");
+    else lightRadPerLev=1;
 
     std::string name = jdm.get<std::string>("name");
     int hp = jdm.get<int>("base_health_points");
@@ -138,8 +150,8 @@ Hero* Hero::parse(std::string json){
     double cdPerLev = jdm.get<double>("cooldown_multiplier_per_level");
     int def = jdm.get<int>("defense");
     int defPerLev = jdm.get<int>("defense_bonus_per_level");
-
-    Hero* player = new Hero(name, hp,d.physical,d.magical, atksp, def, defPerLev,  xpPerLev, hpPerLev, dmgPerLev, cdPerLev);
+    int lightRadius =jdm.get<int>("light_radius");
+    Hero* player = new Hero(name, hp,d.physical,d.magical, atksp, def, defPerLev,  xpPerLev, hpPerLev, dmgPerLev, cdPerLev, lightRadius, lightRadPerLev);
     return player;
 
 }
@@ -159,6 +171,6 @@ bool operator==(const Hero& p1, const Hero& p2)
         p1.xpPerLev == p2.xpPerLev &&
         p1.hpPerLev == p2.hpPerLev &&
         p1.dmgPerLev == p2.dmgPerLev &&
-        p1.level == p2.level
-        );
+        p1.level == p2.level &&
+        p1.lightRadius == p2.lightRadius);
 }

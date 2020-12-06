@@ -41,7 +41,8 @@ public:
     void putHero(Hero* hero, int x, int y);
     void putMonster(Monster* monster, int x, int y);
     void run();
-    void print()const;
+    void printMap()const;
+    void printRadius()const;
 
 
     friend bool operator==(const Game& game1, const Game& game2);

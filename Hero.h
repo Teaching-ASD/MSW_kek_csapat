@@ -30,7 +30,8 @@ class Hero : public Character {
     int hpPerLev;
     int dmgPerLev;
     double cdPerLev;
-
+    int lightRadius;
+    int lightRadPerLev;
 
 
 public:
@@ -46,7 +47,9 @@ public:
     int xpPerLev/**[in] this is a xp/level parameter*/,
     int hpPerLev/**[in] this is a hp/level parameter*/,
     int dmgPerLev/**[in] this is a damage/level parameter*/,
-    double cdPerLev/**[in] this is a cooldown/level parameter*/);
+    double cdPerLev/**[in] this is a cooldown/level parameter*/,
+    int lightRadius,
+    int lightRadPerLev);
 
   
 
@@ -66,7 +69,7 @@ public:
     /**
     * \return The Character max health points.
     */
-
+    int getLightRadius() const;
 private:
     void levelUp();///< This is levelUp method. While players fight with each other and when someone win, they can lvl up.
 
