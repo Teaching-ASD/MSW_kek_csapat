@@ -30,7 +30,7 @@ public:
 	Map();
     Map(const std::string& filename);
 	virtual ~Map();
-	virtual Map::type get(int x, int y)const;
+	Map::type get(int x, int y)const;
 	std::size_t getWidth() const;
 	std::size_t getHeight() const;
 	std::size_t getRowLenght(int r)const;
