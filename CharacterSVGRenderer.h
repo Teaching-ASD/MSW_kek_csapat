@@ -6,7 +6,7 @@
 class CharacterSVGRenderer : public SVGRenderer {
 
 public:
-    CharacterSVGRenderer(const std::string& filename);
+    CharacterSVGRenderer(std::string& filename);
     void render(const Game&) const override;
 
 };

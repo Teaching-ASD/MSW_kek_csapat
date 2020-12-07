@@ -2,7 +2,7 @@
 #include <fstream>
 
 
-ObserverSVGRenderer::ObserverSVGRenderer(const std::string& filename) : SVGRenderer(filename){
+ObserverSVGRenderer::ObserverSVGRenderer(std::string& filename) : SVGRenderer(filename){
 
 }
 
@@ -62,9 +62,10 @@ void ObserverSVGRenderer::render(const Game& game) const {
                
      
             file << "<br/>";
-        }
+    }
         
     file << "</svg>\n";
+    file.close();
         
 }
   

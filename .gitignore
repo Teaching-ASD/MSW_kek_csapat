@@ -29,5 +29,5 @@ callgrind.*
 !Maps/*
 
 #SVG
-pretty.svg
-Observer.svg
+*svg
+!GameData/SVG*

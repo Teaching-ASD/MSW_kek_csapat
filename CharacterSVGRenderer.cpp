@@ -2,7 +2,7 @@
 #include <fstream>
 
 
-CharacterSVGRenderer::CharacterSVGRenderer(const std::string& filename) : SVGRenderer(filename){
+CharacterSVGRenderer::CharacterSVGRenderer(std::string& filename) : SVGRenderer(filename){
 
 }
 
@@ -41,20 +41,19 @@ void CharacterSVGRenderer::render(const Game& game) const {
     int c;
     for(r=0; r<lr*2+1; r++){
         for(c = 0; c<lr*2+1; c++){
-            
+
             if(X-lr+r>=0 && Y-lr+c>=0 && X-lr+r<height && Y-lr+c<width){
                 int R = X-lr+r;
                 int C = Y-lr+c;
                 std::string stringR = std::to_string(C*10);
                 std::string stringC = std::to_string(R*10);
+                try{
                 switch(gameMap->get(R,C))
                 {
                 case Map::type::Free:
                     file << "<image x=\'" + stringR + "\' y=\'" + stringC +"\' width = '10' height = '10' href = \""+ freeHref + "\"/>";
-                    file << "<image x=\'" + stringR + "\' y=\'" + stringC +"\' width = '10' height = '10' href = \""+ freeHref + "\"/>";
                     break;
                 case Map::type::Wall:
-                    file << "<image x=\'" + stringR + "\' y=\'" + stringC +"\' width = '10' height = '10' href = \""+ wallHref + "\"/>";
                     file << "<image x=\'" + stringR + "\' y=\'" + stringC +"\' width = '10' height = '10' href = \""+ wallHref + "\"/>";
                     break;
                 case Map::type::Hero:
@@ -72,10 +71,18 @@ void CharacterSVGRenderer::render(const Game& game) const {
                 default:
                     break;
                 }
+                }
+                catch(Map::WrongIndexException &e){
+
+                for (int i = 0; (Y-lr)+i+c <width; i++)
+                {
+                    if((Y-lr)+i+c <= Y+lr)  file << "<image x=\'" + stringR + "\' y=\'" +  stringC +"\' width = '10' height = '10' href = \""+ wallHref + "\"/>";
+                } 
             }
         }
-
-        file << "<br/>";
+    }
+     file << "<br/>";
     }
     file << "</svg>\n";
+    file.close();
 }

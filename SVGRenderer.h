@@ -7,9 +7,9 @@
 class SVGRenderer : public Renderer {
 
 protected:
-    const std::string& filename;
+     std::string& filename;
 public:
-    SVGRenderer(const std::string& filename) : filename(filename) {}
+    SVGRenderer(std::string& filename) : filename(filename) {}
 
 };
 

@@ -38,13 +38,15 @@ int main(int argc, char** argv){
     if (!std::filesystem::exists(argv[1])) bad_exit(2);
 
     std::ofstream file("log.txt");
+    std::string SVGFile1 = "Character.svg";
+    std::string SVGFile2 = "Observer.svg";
 
     try {
         PreparedGame pg(argv[1]);
         pg.registerRenderer(new ObserverTextRenderer(file));
         pg.registerRenderer(new HeroTextRenderer());
-        pg.registerRenderer(new CharacterSVGRenderer("pretty.svg"));
-        pg.registerRenderer(new ObserverSVGRenderer("Observer.svg"));
+        pg.registerRenderer(new CharacterSVGRenderer(SVGFile1));
+        pg.registerRenderer(new ObserverSVGRenderer(SVGFile2));
         pg.run();
     } 
     catch (const std::exception& ex ){
