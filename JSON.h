@@ -20,18 +20,41 @@
 #include <any>
 #include <string>
 #include <regex>
+#include <variant>
+#include <list>
+
 
 
 class JSON
 {    
-    
+
+
+    enum class Regex_Type {
+        jsonObject,
+        jsonIntReg,
+        jsonFloatReg,
+        jsonStringReg,
+        jsonList,
+        IntReg,
+        FloatReg,
+        StringReg     
+    };
+
+    static const std::map<Regex_Type, std::regex> regmap;
+    static std::smatch matches;
+  
     std::map<std::string, std::any> jsonData;
-    enum Regex_Type {intr, stringr, floatr};
 
 public:
+
+    typedef std::variant<int, double, std::string> v;
+	typedef std::list<v> list;
   
     JSON()=default;
-    explicit JSON(const std::map<std::string/**[in] this is string parameter */, std::any/**[in] this is any parameter */>& jsonData);
+    JSON(const std::map<std::string/**[in] this is string parameter */, std::any/**[in] this is any parameter */>& jsonData);
+    ~JSON();
+
+
     bool count(std::string key) const;
     
     template<typename T/**[in] this is a name of T template */>
@@ -46,25 +69,26 @@ public:
     ///This is the istream parser
     static JSON parseFromIstream(std::istream& is/**[in] this is istring& parameter */);
     
-    struct ParseException : public std::exception {};    
+    class ParseException : virtual public std::runtime_error {
+		public:
+		    explicit ParseException() : std::runtime_error("JSON parsing error.") {}
+	};
 
 private:
     static JSON parser(std::string json/**[in] this is a string parameter */);
-    static void regexParser(std::smatch matches, std::string s, std::map<std::string, std::any>& jdm, std::regex reg, Regex_Type rt);///<This regexParser extract date from json format. 
-
+    static void regexParser(std::string s, std::map<std::string, std::any>& jdm, Regex_Type rt ,std::regex reg);///<This regexParser extract date from json format. 
+    static std::string findeJsonObject(std::string json);
+    static void makeJsonList(std::map<std::string, std::any>& jdm, std::string key, std::string value);
 };
 
 
 template<typename T>
 inline T JSON::get(std::string key) const {
 
-    T value;
-
     try{
-        value = std::any_cast<T>(jsonData.at(key));
-        return value;
+        return std::any_cast<T>(jsonData.at(key));
     }
-    catch(std::bad_any_cast& bc){
+    catch(const std::exception& ex){
         throw JSON::ParseException();
     }
 }

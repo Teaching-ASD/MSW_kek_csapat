@@ -4,6 +4,10 @@
 
     "name" : "Zombie",
     "health_points" : 10, 
-    "damage" : 1, "attack_cooldown" : 2.8,
-    "race" : "undead"
+    "damage" : 2,
+    "magical-damage" : 1, 
+    "attack_cooldown" : 2.8,
+    "defense" : 1,
+    "race" : "undead",
+    "texture" : "./GameData/SVG/Zombie.svg"
 }

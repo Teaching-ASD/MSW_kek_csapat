@@ -25,10 +25,13 @@ class Hero : public Character {
     int xp = 0;
     int level = 1;
     int maxHp;
+    int defPerLev;
     int xpPerLev;
     int hpPerLev;
     int dmgPerLev;
     double cdPerLev;
+    int lightRadius;
+    int lightRadPerLev;
 
 
 public:
@@ -36,21 +39,28 @@ public:
     Hero(
     const std::string& name /**[in] this is a name parameter*/, 
     int hp/**[in] this is a hp parameter*/, 
-    int dmg/**[in] this is a dmg parameter*/, 
+    int pd,
+    int md,
     double atksp/**[in] this is a cooldown parameter*/,
+    int def,
+    std::string& texture,
+    int defPerLev,
     int xpPerLev/**[in] this is a xp/level parameter*/,
     int hpPerLev/**[in] this is a hp/level parameter*/,
     int dmgPerLev/**[in] this is a damage/level parameter*/,
-    double cdPerLev/**[in] this is a cooldown/level parameter*/);
+    double cdPerLev/**[in] this is a cooldown/level parameter*/,
+    int lightRadius,
+    int lightRadPerLev);
 
+  
 
     void increaseXP(int diff/**< [in] This is the number how many xp get player */);///<Hero increase xp while attack the another player.
 
     friend bool operator==(const Hero& p1/**[in] this is First Hero reference*/, const Hero& p2/**[in] this is Secound Hero reference*/); ///<Comparsion operator.
 
-    void fightTilDeath(Monster& enemy/**< [in] The p2 as combat parameter */);
+    void fightTilDeath(Monster* enemy/**< [in] The p2 as combat parameter */);
     
-    static Hero parse(std::string json/**< [in] Name of the json */);
+    static Hero* parse(std::string json/**< [in] Name of the json */);
 
     int getLevel() const;
     /**
@@ -60,7 +70,7 @@ public:
     /**
     * \return The Character max health points.
     */
-
+    int getLightRadius() const;
 private:
     void levelUp();///< This is levelUp method. While players fight with each other and when someone win, they can lvl up.
 

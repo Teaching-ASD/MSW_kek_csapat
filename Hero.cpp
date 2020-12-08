@@ -10,19 +10,28 @@
 Hero::Hero(
     const std::string& name, 
     int hp, 
-    int dmg, 
+    int pd,
+    int md, 
     double atksp,
+    int def,
+    std::string& texture,
+    int defPerLev,
     int xpPerLev,
     int hpPerLev,
     int dmgPerLev,
-    double cdPerLev): 
-    Character(name, hp, dmg, atksp),
+    double cdPerLev,
+    int lightRadius,
+    int lightRadPerLev): 
+    Character(name, hp, pd, md, atksp, def, texture),
+    maxHp(hp),
+    defPerLev(defPerLev),
     xpPerLev(xpPerLev),
     hpPerLev(hpPerLev),
     dmgPerLev(dmgPerLev),
-    cdPerLev(cdPerLev) {
-        maxHp=hp;
-    }
+    cdPerLev(cdPerLev),
+    lightRadius(lightRadius),
+    lightRadPerLev(lightRadPerLev)
+    {}
 
 int Hero::getLevel() const {
     return level;
@@ -31,40 +40,43 @@ int Hero::getLevel() const {
 int Hero::getMaxHealthPoints() const{
     return maxHp;
 }
+int Hero::getLightRadius() const{
+    return lightRadius;
+}
     
-void Hero::fightTilDeath(Monster& enemy){
+void Hero::fightTilDeath(Monster* enemy){
 
-        int diff = enemy.sufferDammage(*this);
+        int diff = enemy->sufferDamage(*this);
         increaseXP(diff);
 
-        if(!enemy.isAlive()) {return;}
+        if(!enemy->isAlive()) {return;}
     
-        sufferDammage(enemy);  
+        sufferDamage(*enemy);  
 
         double CD1 = atksp;
-        double CD2 = enemy.getAttackCoolDown();
+        double CD2 = enemy->getAttackCoolDown();
 
-    while(isAlive() && enemy.isAlive()){
+    while(isAlive() && enemy->isAlive()){
         if(CD1==CD2){
 
-            diff = enemy.sufferDammage(*this);
+            diff = enemy->sufferDamage(*this);
             increaseXP(diff);
             
-            sufferDammage(enemy);
+            sufferDamage(*enemy);
 
             CD1=atksp;
-            CD2=enemy.getAttackCoolDown();          
+            CD2=enemy->getAttackCoolDown();          
         }
         else if(CD1<CD2){   
-            diff = enemy.sufferDammage(*this);
+            diff = enemy->sufferDamage(*this);
             increaseXP(diff);
             CD1=atksp;
             CD2-=CD1;
         }
         else if(CD2<CD1){
             CD1-=CD2;        
-            sufferDammage(enemy);
-            CD2=enemy.getAttackCoolDown();
+            sufferDamage(*enemy);
+            CD2=enemy->getAttackCoolDown();
         }
         
     }
@@ -88,46 +100,39 @@ void Hero::levelUp(){
         xp-=xpPerLev;
         maxHp += hpPerLev;
         hp=maxHp;
-        dmg += dmgPerLev;
+        *damage += dmgPerLev;
         atksp = (double) (atksp*cdPerLev);
+        def+=defPerLev;
+        lightRadius+=lightRadPerLev;
     } 
 }
 
-Hero Hero::parse(std::string json){
+Hero* Hero::parse(std::string json){
 
-   JSON jdm = JSON::parseFromFile(json);
-         
-   std::vector<std::string> PlayerData {
-    "name",
-    "base_health_points",
-    "base_damage",
-    "base_attack_cooldown",
-    "experience_per_level",
-    "health_point_bonus_per_level",
-    "damage_bonus_per_level",
-    "cooldown_multiplier_per_level"
-   };
+    JSON jdm = JSON::parseFromFile(json);
+   
+    Damage d;
+    int lightRadPerLev;
+    std::string texture;
 
-
-   std::vector<std::string>::size_type i;
-   for (i = 0; i < PlayerData.size(); i++)
-   {
-        if (!jdm.count(PlayerData.at(i)) ) {
-            throw JSON::ParseException();
-        }
-    }
+    if(jdm.count("damage")) d.physical=jdm.get<int>("damage");
+    if(jdm.count("magical-damage")) d.magical=jdm.get<int>("magical-damage");
+    if(jdm.count("light_radius_per_level")) lightRadPerLev = jdm.get<int>("light_radius_per_level");
+    else lightRadPerLev=1;
+    if(jdm.count("texture")) texture = jdm.get<std::string>("texture");
+    else texture = "./GameData/SVG/unknow.svg";
 
     std::string name = jdm.get<std::string>("name");
     int hp = jdm.get<int>("base_health_points");
-    int dmg = jdm.get<int>("base_damage");
     double atksp= jdm.get<double>("base_attack_cooldown");
     int xpPerLev = jdm.get<int>("experience_per_level");
     int hpPerLev = jdm.get<int>("health_point_bonus_per_level");
     int dmgPerLev = jdm.get<int>("damage_bonus_per_level");
     double cdPerLev = jdm.get<double>("cooldown_multiplier_per_level");
-
-
-    Hero player(name, hp, dmg, atksp, xpPerLev, hpPerLev, dmgPerLev, cdPerLev);
+    int def = jdm.get<int>("defense");
+    int defPerLev = jdm.get<int>("defense_bonus_per_level");
+    int lightRadius =jdm.get<int>("light_radius");
+    Hero* player = new Hero(name, hp,d.physical,d.magical, atksp, def, texture, defPerLev,  xpPerLev, hpPerLev, dmgPerLev, cdPerLev, lightRadius, lightRadPerLev);
     return player;
 
 }
@@ -137,14 +142,16 @@ Hero Hero::parse(std::string json){
 bool operator==(const Hero& p1, const Hero& p2)
 { 
     return (
-        p1.name==p2.name && 
-        p1.hp==p2.hp && 
-        p1.dmg==p2.dmg &&
-        p1.atksp==p2.atksp &&
+        p1.name == p2.name && 
+        p1.hp == p2.hp && 
+        p1.damage->physical == p2.damage->physical &&
+        p1.damage->magical == p2.damage->magical &&
+        p1.atksp == p2.atksp &&
+        p1.def == p2.def &&
         p1.cdPerLev == p2.cdPerLev &&
         p1.xpPerLev == p2.xpPerLev &&
         p1.hpPerLev == p2.hpPerLev &&
         p1.dmgPerLev == p2.dmgPerLev &&
-        p1.level == p2.level 
-        );
+        p1.level == p2.level &&
+        p1.lightRadius == p2.lightRadius);
 }

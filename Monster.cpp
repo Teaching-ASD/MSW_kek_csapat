@@ -3,32 +3,28 @@
 #include <vector>
 #include <stdexcept>
 
-Monster Monster::parse(const std::string& json){
-
-   JSON jdm = JSON::parseFromFile(json); 
-
-   std::vector<std::string> PlayerData {
-    "name",
-    "health_points",
-    "damage",
-    "attack_cooldown",
-   };
 
 
-    std::vector<std::string>::size_type i;
-   for (i = 0; i < PlayerData.size(); i++)
-   {
-        if (!jdm.count(PlayerData.at(i)) ) {
-            throw JSON::ParseException();
-        }
-    }
+Monster* Monster::parse(const std::string& json){
+
+    JSON jdm = JSON::parseFromFile(json); 
+
+    Damage d;
+    std::string texture;
+
+    if(jdm.count("damage")) d.physical=jdm.get<int>("damage");
+    if(jdm.count("magical-damage")) d.magical=jdm.get<int>("magical-damage");
+    if(jdm.count("texture")) texture = jdm.get<std::string>("texture");
+    else texture = "./GameData/SVG/unknow.svg";
 
     std::string name = jdm.get<std::string>("name");
     int hp = jdm.get<int>("health_points");
-    int dmg = jdm.get<int>("damage");
     double atksp = jdm.get<double>("attack_cooldown");
+    int def = jdm.get<int>("defense");
+ 
     
-    Monster monster(name, hp, dmg, atksp);
+    Monster* monster = new Monster(name, hp, d.physical, d.magical, atksp, def,texture);
 
     return monster;
 }
+

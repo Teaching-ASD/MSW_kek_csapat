@@ -31,10 +31,12 @@ public:
 
     const std::string& name,///< This is the player name this is string variable
     int hp, ///< This is the player hp this is int variable
-    int dmg, ///< This is the player dmg this is int variable
-    double atksp) : Character(name, hp, dmg, atksp){}
+    int pd,
+    int md,
+    double atksp,
+    int def, std::string& texture) : Character(name, hp, pd, md, atksp, def, texture){}
 
-    static Monster parse(const std::string& json/**< [in] Name of the json */);
+    static Monster* parse(const std::string& json/**< [in] Name of the json */);
 
   
 };

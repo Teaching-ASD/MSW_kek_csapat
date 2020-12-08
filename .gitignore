@@ -10,14 +10,24 @@ bin/
 
 #Unitest
 CMakeFiles/
-
 *.txt
+*.cmake
+Makefile
+
 #Makefile
 *.o
 build
 runTests
 !CMakeLists.txt
 
+
 #CA
 callgrind.*
 
+
+#Map
+!Maps/*
+
+#SVG
+pretty.svg
+Observer.svg

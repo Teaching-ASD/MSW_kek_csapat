@@ -1,8 +1,7 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8.12)
 
 project(MOSZE_TEST)
 
-# For old gcc and cmake only
 macro(use_cxx11)
   if (CMAKE_VERSION VERSION_LESS "3.1")
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
@@ -14,9 +13,11 @@ macro(use_cxx11)
 endmacro(use_cxx11)
 use_cxx11()
 
+
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
 add_executable(runTests RpgTest.cpp)
+set(CMAKE_CXX_COMPILER "g++-9")
 target_compile_features(runTests PRIVATE cxx_std_17)
 target_link_libraries(runTests ${GTEST_LIBRARIES} pthread)

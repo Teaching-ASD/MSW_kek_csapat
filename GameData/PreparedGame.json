@@ -1,0 +1,9 @@
+{
+    "map" : "./Maps/MarkedMap.txt",
+    "hero" : "./Units/Dark_Wanderer.json",
+    "monster-1" : "./Units/Fallen.json",
+    "monster-2" : "./Units/Zombie.json",
+    "monster-3" : "./Units/Blood_Raven.json",
+    "wall_texture" : "./GameData/SVG/wall.svg",
+    "free_texture" : "./GameData/SVG/free.svg"
+}

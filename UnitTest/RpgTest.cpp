@@ -2,17 +2,13 @@
 #include "../Hero.cpp"
 #include "../Monster.cpp"
 #include "../Character.cpp"
+#include "../Map.cpp"
+#include "../Game.cpp"
+#include "../Pos.cpp"
+#include "../MarkedMap.cpp"
 #include<gtest/gtest.h>
 #include <fstream>
-
-// 1. ha whitespace-eket noveljuk 
-// 2. kulcsok sorrendjet megvaltoztatjuk, akkor ugyanazt a strukturat adja vissza.
-// 3. Character és Hero alapvető függvényinek tesztje
-    // 4. getterek setterek jók-e
-    // 5. Két hero egyenlő-e
-    // 6. Exceptionoket dobnak-e ha kell
-    // 7. levelup harc 
-//8. Teljes teszt
+#include <list>
 
 
 class JsonTest : public ::testing::Test {
@@ -26,7 +22,7 @@ class JsonTest : public ::testing::Test {
         
         scenario = JSON::parseFromFile("../Scenarios/scenario1.json");
         
-        std::ifstream heroFile("../Dark_Wanderer.json");
+        std::ifstream heroFile("../Units/Dark_Wanderer.json");
         hero = JSON::parseFromIstream(heroFile);
         
         std::string mstring ("{\"health_points\" : 10, \"damage\" : 1, \"attack_cooldown\" : 2.8, \"race\"\n\n : \"undead\", \"name\"              :           \"Zombie\"}");
@@ -36,7 +32,6 @@ class JsonTest : public ::testing::Test {
     }
 
 };
-
 
 TEST_F(JsonTest, count) {
 
@@ -78,10 +73,201 @@ TEST_F(JsonTest, get) {
 
 TEST(HeroTest, ObjectEqualJson){
 
-    Hero hero1 ("Prince Aidan of Khanduras",30, 3, 1.1, 20, 5, 1, 0.9);
-    Hero hero2 = Hero::parse("../Dark_Wanderer.json");
+    Hero hero1 ("Prince Aidan of Khanduras",30, 3, 2, 1.1, 2, 1, 20, 5, 1, 0.9,2,1);
+    Hero* hero2 = Hero::parse("../Dark_Wanderer.json");
+    
+    EXPECT_EQ(hero1,*hero2);
 
-    EXPECT_EQ(hero1,hero2);
+    delete hero2;
+
+}
+
+
+
+class MapTest : public ::testing::Test {
+    protected:
+        Map* map;
+        void SetUp() override {
+             ASSERT_NO_THROW(map = new Map("../Maps/Map1.txt"));
+        }   
+        void TearDown() override {
+            delete map;
+        }
+};
+
+TEST_F(MapTest, MapInitialization){
+
+    Map testMap("../Maps/Map1.txt");
+
+    ASSERT_EQ(*map, testMap);
+
+    EXPECT_EQ(testMap.getHeight(), 7);
+    EXPECT_EQ(testMap.getWidth(), 14);
+}
+
+TEST_F(MapTest, getMap){
+
+    EXPECT_EQ(map->get(0,13),Map::type::Wall);
+    EXPECT_EQ(map->get(0,3),Map::type::Wall);
+    EXPECT_EQ(map->get(1,1),Map::type::Free);
+
+}
+
+TEST_F(MapTest, setMap){
+
+    EXPECT_EQ(map->get(1,1),Map::type::Free);
+    map->setBlock(Map::type::Hero, 1,1);
+    EXPECT_EQ(map->get(1,1),Map::type::Hero);
+
+}
+
+TEST_F(MapTest, Exception){
+
+    ASSERT_NO_THROW(map->get(0,13));
+    ASSERT_NO_THROW(map->setBlock(Map::type::Free,1,1));
+    
+    ASSERT_THROW(map->get(20,30), Map::WrongIndexException);
+    ASSERT_THROW(map->setBlock(Map::type::Monster,50,80), Map::WrongIndexException);
+}
+
+
+TEST(DamageTest, Operators){
+    
+
+    Character::Damage dmg (1,1);
+
+    dmg+=10; 
+
+    EXPECT_EQ(dmg.physical, 11);
+    EXPECT_EQ(dmg.magical, 11);
+
+    dmg*=2;
+
+    EXPECT_EQ(dmg.physical, 22);
+    EXPECT_EQ(dmg.magical, 22);
+
+    dmg=dmg+10;
+
+    EXPECT_EQ(dmg.physical, 32);
+    EXPECT_EQ(dmg.magical, 32);
+
+    Character::Damage addDmg(2,2);
+
+    dmg+=addDmg;
+
+    EXPECT_EQ(dmg.physical, 34);
+    EXPECT_EQ(dmg.magical, 34);
+
+    dmg*=addDmg;
+
+    EXPECT_EQ(dmg.physical, 68);
+    EXPECT_EQ(dmg.magical, 68);
+
+    dmg=dmg+addDmg;
+
+    EXPECT_EQ(dmg.physical, 70);
+    EXPECT_EQ(dmg.magical, 70);
+
+
+    Character::Damage* pointerDmg = new Character::Damage(1,1);
+
+    *pointerDmg+=10;
+
+    EXPECT_EQ(pointerDmg->physical, 11);
+    EXPECT_EQ(pointerDmg->magical, 11);
+
+}
+
+class Fight : public ::testing::Test {
+
+protected:
+    Hero*  hero;
+    std::vector<Monster*> monsters;
+    void SetUp() override {
+
+        ASSERT_NO_THROW({
+            hero = Hero::parse("../Units/Dark_Wanderer.json");
+            monsters.push_back(Monster::parse("../Units/Zombie.json"));
+            monsters.push_back(Monster::parse("../Units/Zombie.json"));
+            monsters.push_back(Monster::parse("../Units/Fallen.json"));
+            monsters.push_back(Monster::parse("../Units/Fallen.json"));
+            monsters.push_back(Monster::parse("../Units/Fallen.json"));
+            monsters.push_back(Monster::parse("../Units/Fallen.json"));
+            monsters.push_back(Monster::parse("../Units/Fallen.json"));
+            monsters.push_back(Monster::parse("../Units/Zombie.json"));
+            monsters.push_back(Monster::parse("../Units/Zombie.json"));
+            monsters.push_back(Monster::parse("../Units/Fallen.json"));
+            monsters.push_back(Monster::parse("../Units/Fallen.json"));
+            monsters.push_back(Monster::parse("../Units/Fallen.json"));
+            monsters.push_back(Monster::parse("../Units/Fallen.json"));
+            monsters.push_back(Monster::parse("../Units/Fallen.json"));
+        });
+        
+    }   
+    void TearDown() override {
+        delete hero;
+        for(auto& monster : monsters){
+            delete monster;
+        }
+    }
+};
+
+TEST_F(Fight, DefenseAndMagic){
+
+
+    EXPECT_EQ(hero->getPhysicalDamage(), 3);
+    EXPECT_EQ(hero->getMagicalDamage(), 2);
+    EXPECT_EQ(hero->getDef(), 2);
+
+    EXPECT_EQ(monsters[0]->getPhysicalDamage(), 2);
+    EXPECT_EQ(monsters[0]->getMagicalDamage(), 1);
+
+    hero->sufferDamage(*monsters[0]);
+
+    EXPECT_EQ(hero->getHealthPoints(), 29);
+
+    monsters[0]->sufferDamage(*hero);
+
+    EXPECT_EQ(monsters[0]->getHealthPoints(), 6);
+
+    for(auto monster : monsters){
+        while(monster->isAlive()){
+            int diff = monster->sufferDamage(*hero);
+            hero->increaseXP(diff);
+        }
+    }
+
+    EXPECT_EQ(hero->getPhysicalDamage(), 6);
+    EXPECT_EQ(hero->getMagicalDamage(), 5);
+    EXPECT_EQ(hero->getDef(), 5);
+    EXPECT_EQ(hero->getLevel(), 4);
+
+}
+
+
+TEST(MarkedMap, functionTest){
+
+    MarkedMap  markedMap("../Maps/MarkedMap.txt");
+
+    EXPECT_EQ(markedMap.get(0,13),Map::type::Wall);
+    EXPECT_EQ(markedMap.get(0,3),Map::type::Wall);
+    EXPECT_EQ(markedMap.get(1,1),Map::type::Free);
+    EXPECT_EQ(markedMap.get(1,2),Map::type::Hero);
+    EXPECT_EQ(markedMap.get(3,2),Map::type::Monster1);
+    EXPECT_EQ(markedMap.get(3,3),Map::type::Monster2);
+
+    Pos pos = markedMap.getHeroPosition();
+    
+    EXPECT_EQ(pos.getX(),1);
+    EXPECT_EQ(pos.getY(),2);     
+
+    std::list<Pos> monsters = markedMap.getMonsterPositions('1');
+    
+    EXPECT_EQ(monsters.size(),3);
+
+    EXPECT_EQ(monsters.back().getX(),5);
+    EXPECT_EQ(monsters.back().getY(),6);
+
 
 }
 
